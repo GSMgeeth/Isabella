@@ -138,6 +138,8 @@ namespace Isabella
         private void Isabella_Load(object sender, EventArgs e)
         {
             receivedBagDataGridView.DataSource = getReceivedBags();
+
+            receivedBagDataGridView.Columns[0].Visible = false;
         }
 
         private System.Data.DataTable getReceivedBags()
@@ -156,6 +158,10 @@ namespace Isabella
             string tmp = receivedBagDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString();
             
             receivedItemDataGridView.DataSource = getReceivedItems(Int32.Parse(tmp));
+
+            receivedItemDataGridView.RowHeadersVisible = false;
+            receivedItemDataGridView.Columns[0].Visible = false;
+            receivedItemDataGridView.Columns[1].Visible = false;
         }
 
         private System.Data.DataTable getReceivedItems(int bag_id)
