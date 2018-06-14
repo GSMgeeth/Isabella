@@ -153,20 +153,18 @@ namespace Isabella
 
         private void receivedBagDataGridView_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            //receivedBagDataGridView.
-            //receivedItemDataGridView.DataSource = getReceivedItems();
-            string tmp = receivedBagDataGridView.Rows[e.RowIndex].Cells[1].Value.ToString();
-
-            label3.Text = tmp;
+            string tmp = receivedBagDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString();
+            
+            receivedItemDataGridView.DataSource = getReceivedItems(Int32.Parse(tmp));
         }
 
-        private System.Data.DataTable getReceivedItems()
+        private System.Data.DataTable getReceivedItems(int bag_id)
         {
             System.Data.DataTable table = new System.Data.DataTable();
 
-            //MySqlDataReader reader = DBConnection.getData("select * from item where bag_id=");
+            MySqlDataReader reader = DBConnection.getData("select * from item where bag_id=" + bag_id);
 
-            //table.Load(reader);
+            table.Load(reader);
 
             return table;
         }
