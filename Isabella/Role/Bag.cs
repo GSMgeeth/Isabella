@@ -14,7 +14,7 @@ namespace Isabella.Role
         private bool issued;
         private Department dept;
 
-        Item[] items;
+        private Item[] items;
 
         public Bag(DateTime date, int qty, Department dept)
         {
@@ -53,6 +53,51 @@ namespace Isabella.Role
         public int getBag_id()
         {
             return bag_id;
+        }
+
+        public void setDate(DateTime date)
+        {
+            this.date = date;
+        }
+
+        public DateTime getDate()
+        {
+            return date;
+        }
+
+        public void setQty(int qty)
+        {
+            this.qty = qty;
+        }
+
+        public int getQty()
+        {
+            return qty;
+        }
+
+        public void setDept(Department dept)
+        {
+            this.dept = dept;
+        }
+
+        public Department getDept()
+        {
+            return dept;
+        }
+
+        public Item[] getItems()
+        {
+            return items;
+        }
+
+        public void issue()
+        {
+            issued = true;
+        }
+
+        public bool isIssued()
+        {
+            return issued;
         }
     }
 }

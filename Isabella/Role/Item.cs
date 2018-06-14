@@ -18,5 +18,35 @@ namespace Isabella.Role
             this.size = size;
             this.article = article;
         }
+
+        public void setColor(string color)
+        {
+            this.color = color;
+        }
+
+        public string getColor()
+        {
+            return color;
+        }
+
+        public void setSize(string size)
+        {
+            this.size = size;
+        }
+
+        public string getSize()
+        {
+            return size;
+        }
+
+        public void setArticle(string article)
+        {
+            this.article = article;
+        }
+
+        public string getArticle()
+        {
+            return article;
+        }
     }
 }

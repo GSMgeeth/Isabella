@@ -11,6 +11,11 @@ namespace Isabella.Role
         int deptNo;
         string deptName;
 
+        public Department(int deptNo)
+        {
+            this.deptNo = deptNo;
+        }
+
         public Department(int deptNo, string deptName)
         {
             this.deptNo = deptNo;

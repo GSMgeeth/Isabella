@@ -49,6 +49,7 @@ namespace Isabella
 
         private void AddFileButton_Click(object sender, EventArgs e)
         {
+            openFileDialog1.Filter = "Excel Workbook|*.xlsx";
             openFileDialog1.ShowDialog();
         }
 
@@ -71,8 +72,22 @@ namespace Isabella
                 string date = ws.Cells[1, 2].Value2.ToString();
                 double qty = ws.Cells[1, 3].Value2;
 
-                DataTextBox.Text = "Bag deptNo : " + deptNo + "\nBag sent date : " + date + "\nQuantity : " + qty + "\n";
+                string day = date.Substring(1, date.IndexOf('/') - 1);
+                string tmpMonth = date.Substring(date.IndexOf('/') + 1);
+                string month = tmpMonth.Substring(0, tmpMonth.IndexOf('/'));
+                string year = tmpMonth.Substring((tmpMonth.IndexOf('/') + 1), 4);
 
+                DateTime d = new DateTime(Int32.Parse(year), Int32.Parse(month), Int32.Parse(day));
+                int q = (int)qty;
+                Department dept = new Department((int)deptNo);
+
+                Bag bag = new Bag(d, q, dept);
+
+                DataTextBox.Text = "Bag deptNo : " + deptNo + "\nBag sent date : " + date + "\nQuantity : " + qty + "\n";
+                DataTextBox.AppendText("\nyear : " + year + "  " + d.Year);
+                DataTextBox.AppendText("\nmonth : " + month + "  " + d.Month);
+                DataTextBox.AppendText("\nday : " + day + "  " + d.Day + "\n\n");
+                
                 for (int i = 0; i < (int)qty; i++)
                 {
                     string color = ws.Cells[(i + 2), 1].Value2;
@@ -82,34 +97,32 @@ namespace Isabella
                     string tmp = "\nItem " + (i + 1) + " : " + color + " " + size + " " + article;
 
                     DataTextBox.AppendText(tmp);
+
+                    bag.addItem(i, color, size, article);
                 }
-
-                MySqlDataReader reader = null;
-                string tmp2;
-
+                
                 try
                 {
-                    reader = DBConnection.getData("select * from department");
+                    MySqlDataReader reader = DBConnection.getData("select * from department");
 
                     while (reader.Read())
                     {
                         int dNo = reader.GetInt32("deptNo");
                         string deptName = reader.GetString("deptName");
 
-                        tmp2 = "\nDept : " + dNo + " " + deptName;
+                        string tmp2 = "\nDept : " + dNo + " " + deptName;
 
                         DataTextBox.AppendText(tmp2);
                     }
 
                     reader.Close();
 
-                    //Department dept = new Department(4, "Knitting");
-
-                    //Database.saveDepartment(dept);
+                    Database.saveBag(bag);
                 }
                 catch (Exception exc)
                 {
                     DataTextBox.AppendText("\n" + exc.Message);
+                    DataTextBox.AppendText("\n\n" + exc.StackTrace);
                 }
                 finally
                 {
@@ -120,6 +133,42 @@ namespace Isabella
                     Marshal.ReleaseComObject(excel);
                 }
             }
+        }
+
+        private void Isabella_Load(object sender, EventArgs e)
+        {
+            receivedBagDataGridView.DataSource = getReceivedBags();
+        }
+
+        private System.Data.DataTable getReceivedBags()
+        {
+            System.Data.DataTable table = new System.Data.DataTable();
+
+            MySqlDataReader reader = DBConnection.getData("select * from bag");
+
+            table.Load(reader);
+
+            return table;
+        }
+
+        private void receivedBagDataGridView_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            //receivedBagDataGridView.
+            //receivedItemDataGridView.DataSource = getReceivedItems();
+            string tmp = receivedBagDataGridView.Rows[e.RowIndex].Cells[1].Value.ToString();
+
+            label3.Text = tmp;
+        }
+
+        private System.Data.DataTable getReceivedItems()
+        {
+            System.Data.DataTable table = new System.Data.DataTable();
+
+            //MySqlDataReader reader = DBConnection.getData("select * from item where bag_id=");
+
+            //table.Load(reader);
+
+            return table;
         }
     }
 }
