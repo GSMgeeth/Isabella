@@ -140,6 +140,13 @@ namespace Isabella
             receivedBagDataGridView.DataSource = getReceivedBags();
 
             receivedBagDataGridView.Columns[0].Visible = false;
+
+            long count = receivedBagDataGridView.RowCount;
+
+            for (long i = 0; i < count; i++)
+            {
+                
+            }
         }
 
         private System.Data.DataTable getReceivedBags()
