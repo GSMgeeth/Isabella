@@ -175,7 +175,7 @@ namespace Isabella
         {
             System.Data.DataTable table = new System.Data.DataTable();
 
-            MySqlDataReader reader = DBConnection.getData("select * from bag");
+            MySqlDataReader reader = DBConnection.getData("select b.bag_id, d.deptName, b.date, b.issued from bag b inner join department d on b.deptNo=d.deptNo");
 
             table.Load(reader);
 
