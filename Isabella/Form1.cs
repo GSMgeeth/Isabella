@@ -140,8 +140,21 @@ namespace Isabella
         private void Isabella_Load(object sender, EventArgs e)
         {
             receivedBagDataGridView.DataSource = getReceivedBags();
+            issuedBagDataGridView.DataSource = getIssuedBags();
 
             receivedBagDataGridView.Columns[0].Visible = false;
+            issuedBagDataGridView.Columns[0].Visible = false;
+        }
+
+        private object getIssuedBags()
+        {
+            System.Data.DataTable table = new System.Data.DataTable();
+
+            MySqlDataReader reader = DBConnection.getData("select * from bag where issued=1");
+
+            table.Load(reader);
+
+            return table;
         }
 
         private System.Data.DataTable getReceivedBags()
@@ -177,6 +190,17 @@ namespace Isabella
             return table;
         }
 
+        private System.Data.DataTable getIssuedItems(int bag_id)
+        {
+            System.Data.DataTable table = new System.Data.DataTable();
+
+            MySqlDataReader reader = DBConnection.getData("select * from item where bag_id=" + bag_id);
+
+            table.Load(reader);
+
+            return table;
+        }
+
         private void receivedBagDataGridView_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             string tmp = receivedBagDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString();
@@ -188,6 +212,18 @@ namespace Isabella
             Database.issueBag(bag);
 
             receivedBagDataGridView.DataSource = getReceivedBags();
+            issuedBagDataGridView.DataSource = getIssuedBags();
+        }
+
+        private void issuedBagDataGridView_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string tmp = issuedBagDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+            issuedItemDataGridView.DataSource = getIssuedItems(Int32.Parse(tmp));
+
+            issuedItemDataGridView.RowHeadersVisible = false;
+            issuedItemDataGridView.Columns[0].Visible = false;
+            issuedItemDataGridView.Columns[1].Visible = false;
         }
     }
 }
