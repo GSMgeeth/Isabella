@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,16 +46,16 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.searchBagTabControl = new System.Windows.Forms.TabControl();
             this.receivedTab = new System.Windows.Forms.TabPage();
-            this.issuedTab = new System.Windows.Forms.TabPage();
-            this.receivedBagDataGridView = new System.Windows.Forms.DataGridView();
             this.receivedItemDataGridView = new System.Windows.Forms.DataGridView();
+            this.receivedBagDataGridView = new System.Windows.Forms.DataGridView();
+            this.issuedTab = new System.Windows.Forms.TabPage();
             this.panel1.SuspendLayout();
             this.AddDataPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.searchBagTabControl.SuspendLayout();
             this.receivedTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.receivedBagDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.receivedItemDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.receivedBagDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -214,48 +213,6 @@
             this.receivedTab.Text = "Received";
             this.receivedTab.UseVisualStyleBackColor = true;
             // 
-            // issuedTab
-            // 
-            this.issuedTab.Location = new System.Drawing.Point(4, 38);
-            this.issuedTab.Name = "issuedTab";
-            this.issuedTab.Padding = new System.Windows.Forms.Padding(3);
-            this.issuedTab.Size = new System.Drawing.Size(878, 478);
-            this.issuedTab.TabIndex = 1;
-            this.issuedTab.Text = "Issued";
-            this.issuedTab.UseVisualStyleBackColor = true;
-            // 
-            // receivedBagDataGridView
-            // 
-            this.receivedBagDataGridView.AllowUserToAddRows = false;
-            this.receivedBagDataGridView.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.receivedBagDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.receivedBagDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.receivedBagDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.receivedBagDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.receivedBagDataGridView.DefaultCellStyle = dataGridViewCellStyle4;
-            this.receivedBagDataGridView.Location = new System.Drawing.Point(7, 70);
-            this.receivedBagDataGridView.Name = "receivedBagDataGridView";
-            this.receivedBagDataGridView.ReadOnly = true;
-            this.receivedBagDataGridView.RowTemplate.Height = 24;
-            this.receivedBagDataGridView.Size = new System.Drawing.Size(534, 402);
-            this.receivedBagDataGridView.TabIndex = 0;
-            this.receivedBagDataGridView.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.receivedBagDataGridView_RowHeaderMouseClick);
-            // 
             // receivedItemDataGridView
             // 
             this.receivedItemDataGridView.AllowUserToAddRows = false;
@@ -276,6 +233,41 @@
             this.receivedItemDataGridView.RowTemplate.Height = 24;
             this.receivedItemDataGridView.Size = new System.Drawing.Size(325, 402);
             this.receivedItemDataGridView.TabIndex = 1;
+            // 
+            // receivedBagDataGridView
+            // 
+            this.receivedBagDataGridView.AllowUserToAddRows = false;
+            this.receivedBagDataGridView.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.receivedBagDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.receivedBagDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.receivedBagDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.receivedBagDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            this.receivedBagDataGridView.Location = new System.Drawing.Point(7, 70);
+            this.receivedBagDataGridView.Name = "receivedBagDataGridView";
+            this.receivedBagDataGridView.ReadOnly = true;
+            this.receivedBagDataGridView.RowTemplate.Height = 24;
+            this.receivedBagDataGridView.Size = new System.Drawing.Size(534, 402);
+            this.receivedBagDataGridView.TabIndex = 0;
+            this.receivedBagDataGridView.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.receivedBagDataGridView_RowHeaderMouseClick);
+            this.receivedBagDataGridView.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.receivedBagDataGridView_RowHeaderMouseDoubleClick);
+            // 
+            // issuedTab
+            // 
+            this.issuedTab.Location = new System.Drawing.Point(4, 38);
+            this.issuedTab.Name = "issuedTab";
+            this.issuedTab.Padding = new System.Windows.Forms.Padding(3);
+            this.issuedTab.Size = new System.Drawing.Size(878, 478);
+            this.issuedTab.TabIndex = 1;
+            this.issuedTab.Text = "Issued";
+            this.issuedTab.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -300,8 +292,8 @@
             this.panel2.ResumeLayout(false);
             this.searchBagTabControl.ResumeLayout(false);
             this.receivedTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.receivedBagDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.receivedItemDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.receivedBagDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }

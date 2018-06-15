@@ -16,6 +16,11 @@ namespace Isabella.Role
 
         private Item[] items;
 
+        public Bag(int bag_id)
+        {
+            this.bag_id = bag_id;
+        }
+
         public Bag(DateTime date, int qty, Department dept)
         {
             this.date = date;

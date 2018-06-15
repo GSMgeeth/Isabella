@@ -118,6 +118,8 @@ namespace Isabella
                     reader.Close();
 
                     Database.saveBag(bag);
+
+                    receivedBagDataGridView.DataSource = getReceivedBags();
                 }
                 catch (Exception exc)
                 {
@@ -173,6 +175,19 @@ namespace Isabella
             table.Load(reader);
 
             return table;
+        }
+
+        private void receivedBagDataGridView_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string tmp = receivedBagDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+            Bag bag = new Bag(Int32.Parse(tmp));
+
+            bag.issue();
+
+            Database.issueBag(bag);
+
+            receivedBagDataGridView.DataSource = getReceivedBags();
         }
     }
 }
