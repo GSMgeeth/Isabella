@@ -144,9 +144,23 @@ namespace Isabella
 
             receivedBagDataGridView.Columns[0].Visible = false;
             issuedBagDataGridView.Columns[0].Visible = false;
+
+            fillDeptComboBox();
         }
 
-        private object getIssuedBags()
+        private void fillDeptComboBox()
+        {
+            MySqlDataReader reader = DBConnection.getData("select * from department");
+
+            while (reader.Read())
+            {
+                DeptCmb.Items.Add(reader.GetString("deptName"));
+            }
+
+            reader.Close();
+        }
+
+        private System.Data.DataTable getIssuedBags()
         {
             System.Data.DataTable table = new System.Data.DataTable();
 
@@ -224,6 +238,40 @@ namespace Isabella
             issuedItemDataGridView.RowHeadersVisible = false;
             issuedItemDataGridView.Columns[0].Visible = false;
             issuedItemDataGridView.Columns[1].Visible = false;
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            string deptName = DeptCmb.SelectedItem.ToString();
+
+            receivedBagDataGridView.DataSource = getReceivedBagsByDept(deptName);
+        }
+
+        private System.Data.DataTable getReceivedBagsByDept(string deptName)
+        {
+            System.Data.DataTable table = new System.Data.DataTable();
+            int deptNo = 1;
+
+            MySqlDataReader readerDept = DBConnection.getData("select * from department where deptName='" + deptName + "'");
+
+            while (readerDept.Read())
+            {
+                deptNo = readerDept.GetInt32("deptNo");
+            }
+
+            readerDept.Close();
+
+            MySqlDataReader reader = DBConnection.getData("select * from bag where deptNo=" + deptNo);
+
+            table.Load(reader);
+
+            return table;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DeptCmb.SelectedIndex = 0;
+            receivedBagDataGridView.DataSource = getReceivedBags();
         }
     }
 }
