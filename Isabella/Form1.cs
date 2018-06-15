@@ -273,5 +273,40 @@ namespace Isabella
             DeptCmb.SelectedIndex = 0;
             receivedBagDataGridView.DataSource = getReceivedBags();
         }
+
+        private void receivedDatePicker_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime date = receivedDatePicker.Value;
+
+            System.Data.DataTable table = getReceivedBagsByDate(date);
+
+            if (table != null)
+            {
+                receivedBagDataGridView.DataSource = table;
+            }
+            else
+            {
+                MessageBox.Show("No records of this date!", "Bags picker by date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private System.Data.DataTable getReceivedBagsByDate(DateTime date)
+        {
+            System.Data.DataTable table = new System.Data.DataTable();
+
+            MySqlDataReader reader = DBConnection.getData("select * from bag where date='" + date.ToString("yyyy/M/d") + "'");
+
+            if (!reader.HasRows)
+            {
+                reader.Close();
+                return null;
+            }
+            else
+            {
+                table.Load(reader);
+
+                return table;
+            }
+        }
     }
 }

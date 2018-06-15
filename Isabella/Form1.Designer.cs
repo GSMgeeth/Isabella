@@ -58,6 +58,7 @@
             this.DeptCmb = new System.Windows.Forms.ComboBox();
             this.searchButton = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
+            this.receivedDatePicker = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
             this.AddDataPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -215,6 +216,7 @@
             // 
             // receivedTab
             // 
+            this.receivedTab.Controls.Add(this.receivedDatePicker);
             this.receivedTab.Controls.Add(this.resetButton);
             this.receivedTab.Controls.Add(this.searchButton);
             this.receivedTab.Controls.Add(this.DeptCmb);
@@ -367,13 +369,23 @@
             // resetButton
             // 
             this.resetButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetButton.Location = new System.Drawing.Point(390, 11);
+            this.resetButton.Location = new System.Drawing.Point(795, 9);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(77, 28);
             this.resetButton.TabIndex = 5;
             this.resetButton.Text = "All";
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // receivedDatePicker
+            // 
+            this.receivedDatePicker.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.receivedDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.receivedDatePicker.Location = new System.Drawing.Point(442, 11);
+            this.receivedDatePicker.Name = "receivedDatePicker";
+            this.receivedDatePicker.Size = new System.Drawing.Size(287, 27);
+            this.receivedDatePicker.TabIndex = 6;
+            this.receivedDatePicker.ValueChanged += new System.EventHandler(this.receivedDatePicker_ValueChanged);
             // 
             // Form1
             // 
@@ -433,6 +445,7 @@
         private System.Windows.Forms.ComboBox DeptCmb;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Button resetButton;
+        private System.Windows.Forms.DateTimePicker receivedDatePicker;
     }
 }
 
