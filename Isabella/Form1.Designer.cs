@@ -243,7 +243,7 @@
             this.receivedDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.receivedDatePicker.Location = new System.Drawing.Point(285, 11);
             this.receivedDatePicker.Name = "receivedDatePicker";
-            this.receivedDatePicker.Size = new System.Drawing.Size(269, 27);
+            this.receivedDatePicker.Size = new System.Drawing.Size(299, 27);
             this.receivedDatePicker.TabIndex = 6;
             this.receivedDatePicker.ValueChanged += new System.EventHandler(this.receivedDatePicker_ValueChanged);
             // 
@@ -427,9 +427,10 @@
             // 
             // bagNoTxtBox
             // 
-            this.bagNoTxtBox.Location = new System.Drawing.Point(561, 11);
+            this.bagNoTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bagNoTxtBox.Location = new System.Drawing.Point(590, 11);
             this.bagNoTxtBox.Name = "bagNoTxtBox";
-            this.bagNoTxtBox.Size = new System.Drawing.Size(62, 34);
+            this.bagNoTxtBox.Size = new System.Drawing.Size(62, 27);
             this.bagNoTxtBox.TabIndex = 7;
             // 
             // Form1

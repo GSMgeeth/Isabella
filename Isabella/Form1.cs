@@ -197,7 +197,7 @@ namespace Isabella
         {
             System.Data.DataTable table = new System.Data.DataTable();
 
-            MySqlDataReader reader = DBConnection.getData("select * from bag where issued=1");
+            MySqlDataReader reader = DBConnection.getData("select b.bag_id, d.deptName, b.date, b.bagNo, b.issued from bag b inner join department d on b.deptNo=d.deptNo where issued=1");
 
             table.Load(reader);
 
@@ -313,6 +313,7 @@ namespace Isabella
                 }
                 else
                 {
+                    reader.Close();
                     MessageBox.Show("No records for this data!", "Bags finder", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
@@ -346,6 +347,7 @@ namespace Isabella
         private void button1_Click(object sender, EventArgs e)
         {
             DeptCmb.SelectedIndex = 0;
+            bagNoTxtBox.Clear();
             receivedBagDataGridView.DataSource = getReceivedBags();
         }
 
