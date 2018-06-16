@@ -63,6 +63,7 @@
             this.issuedTab = new System.Windows.Forms.TabPage();
             this.issuedItemDataGridView = new System.Windows.Forms.DataGridView();
             this.issuedBagDataGridView = new System.Windows.Forms.DataGridView();
+            this.bagNoTxtBox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.AddDataPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -220,6 +221,7 @@
             // 
             // receivedTab
             // 
+            this.receivedTab.Controls.Add(this.bagNoTxtBox);
             this.receivedTab.Controls.Add(this.receivedDatePicker);
             this.receivedTab.Controls.Add(this.resetButton);
             this.receivedTab.Controls.Add(this.searchButton);
@@ -239,9 +241,9 @@
             // 
             this.receivedDatePicker.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.receivedDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.receivedDatePicker.Location = new System.Drawing.Point(442, 11);
+            this.receivedDatePicker.Location = new System.Drawing.Point(285, 11);
             this.receivedDatePicker.Name = "receivedDatePicker";
-            this.receivedDatePicker.Size = new System.Drawing.Size(287, 27);
+            this.receivedDatePicker.Size = new System.Drawing.Size(269, 27);
             this.receivedDatePicker.TabIndex = 6;
             this.receivedDatePicker.ValueChanged += new System.EventHandler(this.receivedDatePicker_ValueChanged);
             // 
@@ -259,7 +261,7 @@
             // searchButton
             // 
             this.searchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchButton.Location = new System.Drawing.Point(298, 11);
+            this.searchButton.Location = new System.Drawing.Point(704, 9);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(85, 28);
             this.searchButton.TabIndex = 4;
@@ -423,6 +425,13 @@
             this.issuedBagDataGridView.TabIndex = 2;
             this.issuedBagDataGridView.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.issuedBagDataGridView_RowHeaderMouseClick);
             // 
+            // bagNoTxtBox
+            // 
+            this.bagNoTxtBox.Location = new System.Drawing.Point(561, 11);
+            this.bagNoTxtBox.Name = "bagNoTxtBox";
+            this.bagNoTxtBox.Size = new System.Drawing.Size(62, 34);
+            this.bagNoTxtBox.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -482,6 +491,7 @@
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.DateTimePicker receivedDatePicker;
+        private System.Windows.Forms.TextBox bagNoTxtBox;
     }
 }
 

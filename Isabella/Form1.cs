@@ -277,7 +277,49 @@ namespace Isabella
         {
             string deptName = DeptCmb.SelectedItem.ToString();
 
-            receivedBagDataGridView.DataSource = getReceivedBagsByDept(deptName);
+            //receivedBagDataGridView.DataSource = getReceivedBagsByDept(deptName);
+
+            //new way of searching bags
+
+            int deptNo = 1;
+
+            MySqlDataReader readerDept = DBConnection.getData("select * from department where deptName='" + deptName + "'");
+
+            while (readerDept.Read())
+            {
+                deptNo = readerDept.GetInt32("deptNo");
+            }
+
+            readerDept.Close();
+
+            DateTime date = receivedDatePicker.Value;
+
+            try
+            {
+                int bagNo = Int32.Parse(bagNoTxtBox.Text);
+
+                MySqlDataReader reader = DBConnection.getData("select b.bag_id, d.deptName, b.date, b.bagNo, b.issued " +
+                    "from bag b inner join department d " +
+                    "on b.deptNo=d.deptNo " +
+                    "where d.deptNo=" + deptNo + " and b.bagNo=" + bagNo + " and b.date='" + date.ToString("yyyy/M/d") + "'");
+
+                if (reader.HasRows)
+                {
+                    System.Data.DataTable table = new System.Data.DataTable();
+
+                    table.Load(reader);
+
+                    receivedBagDataGridView.DataSource = table;
+                }
+                else
+                {
+                    MessageBox.Show("No records for this data!", "Bags finder", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Invalid data!", "Bags finder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private System.Data.DataTable getReceivedBagsByDept(string deptName)
@@ -308,7 +350,7 @@ namespace Isabella
         }
 
         private void receivedDatePicker_ValueChanged(object sender, EventArgs e)
-        {
+        {/*
             DateTime date = receivedDatePicker.Value;
 
             System.Data.DataTable table = getReceivedBagsByDate(date);
@@ -320,7 +362,7 @@ namespace Isabella
             else
             {
                 MessageBox.Show("No records of this date!", "Bags picker by date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            }*/
         }
 
         private System.Data.DataTable getReceivedBagsByDate(DateTime date)
