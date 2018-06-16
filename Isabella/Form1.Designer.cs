@@ -49,16 +49,16 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.searchBagTabControl = new System.Windows.Forms.TabControl();
             this.receivedTab = new System.Windows.Forms.TabPage();
+            this.receivedDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.resetButton = new System.Windows.Forms.Button();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.DeptCmb = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.receivedItemDataGridView = new System.Windows.Forms.DataGridView();
             this.receivedBagDataGridView = new System.Windows.Forms.DataGridView();
             this.issuedTab = new System.Windows.Forms.TabPage();
             this.issuedItemDataGridView = new System.Windows.Forms.DataGridView();
             this.issuedBagDataGridView = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
-            this.DeptCmb = new System.Windows.Forms.ComboBox();
-            this.searchButton = new System.Windows.Forms.Button();
-            this.resetButton = new System.Windows.Forms.Button();
-            this.receivedDatePicker = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
             this.AddDataPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -231,6 +231,59 @@
             this.receivedTab.Text = "Received";
             this.receivedTab.UseVisualStyleBackColor = true;
             // 
+            // receivedDatePicker
+            // 
+            this.receivedDatePicker.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.receivedDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.receivedDatePicker.Location = new System.Drawing.Point(442, 11);
+            this.receivedDatePicker.Name = "receivedDatePicker";
+            this.receivedDatePicker.Size = new System.Drawing.Size(287, 27);
+            this.receivedDatePicker.TabIndex = 6;
+            this.receivedDatePicker.ValueChanged += new System.EventHandler(this.receivedDatePicker_ValueChanged);
+            // 
+            // resetButton
+            // 
+            this.resetButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetButton.Location = new System.Drawing.Point(795, 9);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(77, 28);
+            this.resetButton.TabIndex = 5;
+            this.resetButton.Text = "All";
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // searchButton
+            // 
+            this.searchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchButton.Location = new System.Drawing.Point(298, 11);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(85, 28);
+            this.searchButton.TabIndex = 4;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            // 
+            // DeptCmb
+            // 
+            this.DeptCmb.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DeptCmb.FormattingEnabled = true;
+            this.DeptCmb.ItemHeight = 20;
+            this.DeptCmb.Location = new System.Drawing.Point(120, 11);
+            this.DeptCmb.Name = "DeptCmb";
+            this.DeptCmb.Size = new System.Drawing.Size(159, 28);
+            this.DeptCmb.TabIndex = 3;
+            this.DeptCmb.Text = "All";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(11, 11);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(102, 20);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Search By:";
+            // 
             // receivedItemDataGridView
             // 
             this.receivedItemDataGridView.AllowUserToAddRows = false;
@@ -333,59 +386,6 @@
             this.issuedBagDataGridView.Size = new System.Drawing.Size(534, 402);
             this.issuedBagDataGridView.TabIndex = 2;
             this.issuedBagDataGridView.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.issuedBagDataGridView_RowHeaderMouseClick);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(11, 11);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(102, 20);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Search By:";
-            // 
-            // DeptCmb
-            // 
-            this.DeptCmb.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DeptCmb.FormattingEnabled = true;
-            this.DeptCmb.ItemHeight = 20;
-            this.DeptCmb.Location = new System.Drawing.Point(120, 11);
-            this.DeptCmb.Name = "DeptCmb";
-            this.DeptCmb.Size = new System.Drawing.Size(159, 28);
-            this.DeptCmb.TabIndex = 3;
-            this.DeptCmb.Text = "All";
-            // 
-            // searchButton
-            // 
-            this.searchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchButton.Location = new System.Drawing.Point(298, 11);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(85, 28);
-            this.searchButton.TabIndex = 4;
-            this.searchButton.Text = "Search";
-            this.searchButton.UseVisualStyleBackColor = true;
-            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
-            // 
-            // resetButton
-            // 
-            this.resetButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetButton.Location = new System.Drawing.Point(795, 9);
-            this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(77, 28);
-            this.resetButton.TabIndex = 5;
-            this.resetButton.Text = "All";
-            this.resetButton.UseVisualStyleBackColor = true;
-            this.resetButton.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // receivedDatePicker
-            // 
-            this.receivedDatePicker.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.receivedDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.receivedDatePicker.Location = new System.Drawing.Point(442, 11);
-            this.receivedDatePicker.Name = "receivedDatePicker";
-            this.receivedDatePicker.Size = new System.Drawing.Size(287, 27);
-            this.receivedDatePicker.TabIndex = 6;
-            this.receivedDatePicker.ValueChanged += new System.EventHandler(this.receivedDatePicker_ValueChanged);
             // 
             // Form1
             // 

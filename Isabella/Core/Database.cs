@@ -18,18 +18,48 @@ namespace Isabella
             DBConnection.updateDB("insert into department (deptNo, deptName) values (" + deptNo + ", '" + deptName + "')");
         }
 
+        public static bool isBagExists(Bag bag)
+        {
+            bool exists = false;
+
+            try
+            {
+                DateTime date = bag.getDate();
+                int qty = bag.getQty();
+                int bagNo = bag.getBagNo();
+                bool issued = bag.isIssued();
+                int deptNo = bag.getDept().getDeptNo();
+
+                MySqlDataReader reader = DBConnection.getData("select * from bag where deptNo=" + deptNo + " and date='" + date.ToString("yyyy/M/d") + "' and bagNo=" + bagNo);
+
+                while (reader.Read())
+                {
+                    exists = true;
+                }
+
+                reader.Close();
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+
+            return exists;
+        }
+
         public static void saveBag(Bag bag)
         {
             try
             {
                 DateTime date = bag.getDate();
                 int qty = bag.getQty();
+                int bagNo = bag.getBagNo();
                 bool issued = bag.isIssued();
                 int deptNo = bag.getDept().getDeptNo();
 
-                DBConnection.updateDB("insert into bag (deptNo, date) values (" + deptNo + ", '" + date.ToString("yyyy/M/d") + "')");
+                DBConnection.updateDB("insert into bag (deptNo, date, bagNo) values (" + deptNo + ", '" + date.ToString("yyyy/M/d") + "', " + bagNo + ")");
 
-                MySqlDataReader reader = DBConnection.getData("select MAX(bag_id) as bag_id from bag where deptNo=" + deptNo + " and date='" + date.ToString("yyyy/M/d") + "' and issued=0");
+                MySqlDataReader reader = DBConnection.getData("select MAX(bag_id) as bag_id from bag where deptNo=" + deptNo + " and date='" + date.ToString("yyyy/M/d") + "' and issued=0 and bagNo=" + bagNo);
                 int bag_id = -1;
 
                 while (reader.Read())

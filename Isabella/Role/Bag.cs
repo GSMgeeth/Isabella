@@ -11,6 +11,7 @@ namespace Isabella.Role
         private int bag_id;
         private DateTime date;
         private int qty;
+        private int bagNo;
         private bool issued;
         private Department dept;
 
@@ -21,10 +22,11 @@ namespace Isabella.Role
             this.bag_id = bag_id;
         }
 
-        public Bag(DateTime date, int qty, Department dept)
+        public Bag(DateTime date, int qty, Department dept, int bagNo)
         {
             this.date = date;
             this.qty = qty;
+            this.bagNo = bagNo;
             this.issued = false;
             this.dept = dept;
             items = new Item[qty];
@@ -58,6 +60,16 @@ namespace Isabella.Role
         public int getBag_id()
         {
             return bag_id;
+        }
+
+        public void setBagNo(int bagNo)
+        {
+            this.bagNo = bagNo;
+        }
+
+        public int getBagNo()
+        {
+            return bagNo;
         }
 
         public void setDate(DateTime date)

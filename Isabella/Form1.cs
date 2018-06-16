@@ -55,85 +55,118 @@ namespace Isabella
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-            string name = openFileDialog1.SafeFileName;
-
-            if (name.Contains(".xlsx"))
+            try
             {
-                _Application excel = new _Excel.Application();
-                Workbook wb;
-                Worksheet ws;
+                string name = openFileDialog1.SafeFileName;
 
-                string path = "C:/Users/Geeth Sandaru/Downloads/" + name;
-
-                wb = excel.Workbooks.Open(path);
-                ws = wb.Worksheets[1];
-
-                double deptNo = ws.Cells[1, 1].Value2;
-                string date = ws.Cells[1, 2].Value2.ToString();
-                double qty = ws.Cells[1, 3].Value2;
-
-                string day = date.Substring(1, date.IndexOf('/') - 1);
-                string tmpMonth = date.Substring(date.IndexOf('/') + 1);
-                string month = tmpMonth.Substring(0, tmpMonth.IndexOf('/'));
-                string year = tmpMonth.Substring((tmpMonth.IndexOf('/') + 1), 4);
-
-                DateTime d = new DateTime(Int32.Parse(year), Int32.Parse(month), Int32.Parse(day));
-                int q = (int)qty;
-                Department dept = new Department((int)deptNo);
-
-                Bag bag = new Bag(d, q, dept);
-
-                DataTextBox.Text = "Bag deptNo : " + deptNo + "\nBag sent date : " + date + "\nQuantity : " + qty + "\n";
-                DataTextBox.AppendText("\nyear : " + year + "  " + d.Year);
-                DataTextBox.AppendText("\nmonth : " + month + "  " + d.Month);
-                DataTextBox.AppendText("\nday : " + day + "  " + d.Day + "\n\n");
-                
-                for (int i = 0; i < (int)qty; i++)
+                if (name.Contains(".xlsx"))
                 {
-                    string color = ws.Cells[(i + 2), 1].Value2;
-                    string size = ws.Cells[(i + 2), 2].Value2;
-                    string article = ws.Cells[(i + 2), 3].Value2;
+                    _Application excel = new _Excel.Application();
+                    Workbook wb;
+                    Worksheet ws;
 
-                    string tmp = "\nItem " + (i + 1) + " : " + color + " " + size + " " + article;
+                    string path = "C:/Users/Geeth Sandaru/Downloads/" + name;
 
-                    DataTextBox.AppendText(tmp);
+                    wb = excel.Workbooks.Open(path);
+                    ws = wb.Worksheets[1];
 
-                    bag.addItem(i, color, size, article);
-                }
-                
-                try
-                {
-                    MySqlDataReader reader = DBConnection.getData("select * from department");
+                    string deptTmp = ws.Cells[2, 1].Value2;
 
-                    while (reader.Read())
+                    int deptNo = 1;
+
+                    MySqlDataReader readerDept = DBConnection.getData("select * from department where deptName='" + deptTmp + "'");
+
+                    if (readerDept.HasRows)
                     {
-                        int dNo = reader.GetInt32("deptNo");
-                        string deptName = reader.GetString("deptName");
+                        while (readerDept.Read())
+                            deptNo = readerDept.GetInt32("deptNo");
 
-                        string tmp2 = "\nDept : " + dNo + " " + deptName;
+                        readerDept.Close();
 
-                        DataTextBox.AppendText(tmp2);
+                        string date = ws.Cells[2, 2].Value2.ToString();
+                        double qty = ws.Cells[2, 3].Value2;
+                        double dayBagNo = ws.Cells[2, 4].Value2;
+
+                        string day = date.Substring(1, date.IndexOf('/') - 1);
+                        string tmpMonth = date.Substring(date.IndexOf('/') + 1);
+                        string month = tmpMonth.Substring(0, tmpMonth.IndexOf('/'));
+                        string year = tmpMonth.Substring((tmpMonth.IndexOf('/') + 1), 4);
+
+                        DateTime d = new DateTime(Int32.Parse(year), Int32.Parse(month), Int32.Parse(day));
+                        int q = (int)qty;
+                        int bNo = (int)dayBagNo;
+                        Department dept = new Department((int)deptNo);
+
+                        Bag bag = new Bag(d, q, dept, bNo);
+
+                        if (Database.isBagExists(bag))
+                        {
+                            MessageBox.Show("Bag already exists!", "File reader", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            DataTextBox.Text = "Bag deptNo : " + deptNo + "\nBag sent date : " + date + "\nQuantity : " + qty + "\nBagNo : " + dayBagNo + "\n";
+                            DataTextBox.AppendText("\nyear : " + year + "  " + d.Year);
+                            DataTextBox.AppendText("\nmonth : " + month + "  " + d.Month);
+                            DataTextBox.AppendText("\nday : " + day + "  " + d.Day + "\n\n");
+
+                            for (int i = 0; i < (int)qty; i++)
+                            {
+                                string color = ws.Cells[(i + 5), 1].Value2;
+                                string size = ws.Cells[(i + 5), 2].Value2;
+                                string article = ws.Cells[(i + 5), 3].Value2;
+
+                                string tmp = "\nItem " + (i + 1) + " : " + color + " " + size + " " + article;
+
+                                DataTextBox.AppendText(tmp);
+
+                                bag.addItem(i, color, size, article);
+                            }
+
+                            try
+                            {
+                                MySqlDataReader reader = DBConnection.getData("select * from department");
+
+                                while (reader.Read())
+                                {
+                                    int dNo = reader.GetInt32("deptNo");
+                                    string deptName = reader.GetString("deptName");
+
+                                    string tmp2 = "\nDept : " + dNo + " " + deptName;
+
+                                    DataTextBox.AppendText(tmp2);
+                                }
+
+                                reader.Close();
+
+                                Database.saveBag(bag);
+
+                                receivedBagDataGridView.DataSource = getReceivedBags();
+                            }
+                            catch (Exception exc)
+                            {
+                                DataTextBox.AppendText("\n" + exc.Message);
+                                DataTextBox.AppendText("\n\n" + exc.StackTrace);
+                            }
+                            finally
+                            {
+                                wb.Close();
+                                excel.Quit();
+
+                                Marshal.ReleaseComObject(wb);
+                                Marshal.ReleaseComObject(excel);
+                            }
+                        }
                     }
-
-                    reader.Close();
-
-                    Database.saveBag(bag);
-
-                    receivedBagDataGridView.DataSource = getReceivedBags();
+                    else
+                    {
+                        MessageBox.Show("Wrong Department name in the Excel file!", "File reader", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                catch (Exception exc)
-                {
-                    DataTextBox.AppendText("\n" + exc.Message);
-                    DataTextBox.AppendText("\n\n" + exc.StackTrace);
-                }
-                finally
-                {
-                    wb.Close();
-                    excel.Quit();
-
-                    Marshal.ReleaseComObject(wb);
-                    Marshal.ReleaseComObject(excel);
-                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Something wrong with the excel file!", "File reader", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -175,7 +208,7 @@ namespace Isabella
         {
             System.Data.DataTable table = new System.Data.DataTable();
 
-            MySqlDataReader reader = DBConnection.getData("select b.bag_id, d.deptName, b.date, b.issued from bag b inner join department d on b.deptNo=d.deptNo");
+            MySqlDataReader reader = DBConnection.getData("select b.bag_id, d.deptName, b.date, b.bagNo, b.issued from bag b inner join department d on b.deptNo=d.deptNo");
 
             table.Load(reader);
 
@@ -261,7 +294,7 @@ namespace Isabella
 
             readerDept.Close();
 
-            MySqlDataReader reader = DBConnection.getData("select * from bag where deptNo=" + deptNo);
+            MySqlDataReader reader = DBConnection.getData("select b.bag_id, d.deptName, b.date, b.bagNo, b.issued from bag b inner join department d on b.deptNo=d.deptNo where d.deptNo=" + deptNo);
 
             table.Load(reader);
 
@@ -294,7 +327,7 @@ namespace Isabella
         {
             System.Data.DataTable table = new System.Data.DataTable();
 
-            MySqlDataReader reader = DBConnection.getData("select * from bag where date='" + date.ToString("yyyy/M/d") + "'");
+            MySqlDataReader reader = DBConnection.getData("select b.bag_id, d.deptName, b.date, b.bagNo, b.issued from bag b inner join department d on b.deptNo=d.deptNo where b.date='" + date.ToString("yyyy/M/d") + "'");
 
             if (!reader.HasRows)
             {
