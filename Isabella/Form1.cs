@@ -197,7 +197,7 @@ namespace Isabella
         {
             System.Data.DataTable table = new System.Data.DataTable();
 
-            MySqlDataReader reader = DBConnection.getData("select b.bag_id, d.deptName, b.date, b.bagNo, b.issued from bag b inner join department d on b.deptNo=d.deptNo where issued=1");
+            MySqlDataReader reader = DBConnection.getData("select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, t.place from bag b inner join department d on b.deptNo=d.deptNo inner join issuedTo t on b.place_id=t.place_id where b.issued=1");
 
             table.Load(reader);
 
@@ -253,8 +253,10 @@ namespace Isabella
             string tmp = receivedBagDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString();
 
             Bag bag = new Bag(Int32.Parse(tmp));
+            
 
-            bag.issue();
+
+            bag.issue(1);
 
             Database.issueBag(bag);
 

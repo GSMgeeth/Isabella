@@ -13,6 +13,7 @@ namespace Isabella.Role
         private int qty;
         private int bagNo;
         private bool issued;
+        private int place_id;
         private Department dept;
 
         private Item[] items;
@@ -28,6 +29,7 @@ namespace Isabella.Role
             this.qty = qty;
             this.bagNo = bagNo;
             this.issued = false;
+            this.place_id = 0;
             this.dept = dept;
             items = new Item[qty];
         }
@@ -92,6 +94,11 @@ namespace Isabella.Role
             return qty;
         }
 
+        public int getPlace_id()
+        {
+            return place_id;
+        }
+
         public void setDept(Department dept)
         {
             this.dept = dept;
@@ -107,9 +114,10 @@ namespace Isabella.Role
             return items;
         }
 
-        public void issue()
+        public void issue(int place_id)
         {
             issued = true;
+            this.place_id = place_id;
         }
 
         public bool isIssued()
