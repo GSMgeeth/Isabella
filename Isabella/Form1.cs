@@ -39,7 +39,9 @@ namespace Isabella
 
         private void GenReportButton_Click(object sender, EventArgs e)
         {
+            ReportForm repFrm = new ReportForm();
 
+            repFrm.Show();
         }
 
         private void ConfigButton_Click(object sender, EventArgs e)
