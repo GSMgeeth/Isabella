@@ -94,8 +94,6 @@ namespace Isabella
             int bag_id = bag.getBag_id();
             int place_id = bag.getPlace_id();
 
-            MySqlDataReader reader = DBConnection.getData("");
-
             DBConnection.updateDB("update bag set issued=1, place_id=" + place_id + " where bag_id=" + bag_id);
         }
     }

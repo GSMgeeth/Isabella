@@ -53,6 +53,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.searchBagTabControl = new System.Windows.Forms.TabControl();
             this.receivedTab = new System.Windows.Forms.TabPage();
+            this.bagNoTxtBox = new System.Windows.Forms.TextBox();
             this.receivedDatePicker = new System.Windows.Forms.DateTimePicker();
             this.resetButton = new System.Windows.Forms.Button();
             this.searchButton = new System.Windows.Forms.Button();
@@ -63,7 +64,6 @@
             this.issuedTab = new System.Windows.Forms.TabPage();
             this.issuedItemDataGridView = new System.Windows.Forms.DataGridView();
             this.issuedBagDataGridView = new System.Windows.Forms.DataGridView();
-            this.bagNoTxtBox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.AddDataPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -236,6 +236,14 @@
             this.receivedTab.TabIndex = 0;
             this.receivedTab.Text = "Received";
             this.receivedTab.UseVisualStyleBackColor = true;
+            // 
+            // bagNoTxtBox
+            // 
+            this.bagNoTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bagNoTxtBox.Location = new System.Drawing.Point(590, 11);
+            this.bagNoTxtBox.Name = "bagNoTxtBox";
+            this.bagNoTxtBox.Size = new System.Drawing.Size(62, 27);
+            this.bagNoTxtBox.TabIndex = 7;
             // 
             // receivedDatePicker
             // 
@@ -424,14 +432,6 @@
             this.issuedBagDataGridView.Size = new System.Drawing.Size(534, 402);
             this.issuedBagDataGridView.TabIndex = 2;
             this.issuedBagDataGridView.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.issuedBagDataGridView_RowHeaderMouseClick);
-            // 
-            // bagNoTxtBox
-            // 
-            this.bagNoTxtBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bagNoTxtBox.Location = new System.Drawing.Point(590, 11);
-            this.bagNoTxtBox.Name = "bagNoTxtBox";
-            this.bagNoTxtBox.Size = new System.Drawing.Size(62, 27);
-            this.bagNoTxtBox.TabIndex = 7;
             // 
             // Form1
             // 
