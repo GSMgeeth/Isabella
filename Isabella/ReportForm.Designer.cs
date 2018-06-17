@@ -87,6 +87,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.ReportTabControl);
             this.Name = "ReportForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ReportForm";
             this.ReportTabControl.ResumeLayout(false);
             this.receivedReportTab.ResumeLayout(false);
