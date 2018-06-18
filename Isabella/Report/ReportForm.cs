@@ -16,5 +16,14 @@ namespace Isabella
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DateTime date = reportDatePicker.Value;
+
+            testReport frm = new testReport(date);
+
+            frm.Show();
+        }
     }
 }

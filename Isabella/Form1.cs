@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Isabella.Role;
+using Isabella.Report;
 using Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using MySql.Data.MySqlClient;

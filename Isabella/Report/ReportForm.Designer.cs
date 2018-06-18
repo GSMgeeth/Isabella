@@ -30,8 +30,9 @@
         {
             this.ReportTabControl = new System.Windows.Forms.TabControl();
             this.receivedReportTab = new System.Windows.Forms.TabPage();
-            this.issuedReportTab = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
+            this.issuedReportTab = new System.Windows.Forms.TabPage();
+            this.reportDatePicker = new System.Windows.Forms.DateTimePicker();
             this.ReportTabControl.SuspendLayout();
             this.receivedReportTab.SuspendLayout();
             this.SuspendLayout();
@@ -50,6 +51,7 @@
             // receivedReportTab
             // 
             this.receivedReportTab.BackColor = System.Drawing.Color.LightGray;
+            this.receivedReportTab.Controls.Add(this.reportDatePicker);
             this.receivedReportTab.Controls.Add(this.button1);
             this.receivedReportTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.receivedReportTab.Location = new System.Drawing.Point(4, 29);
@@ -58,6 +60,16 @@
             this.receivedReportTab.Size = new System.Drawing.Size(789, 415);
             this.receivedReportTab.TabIndex = 0;
             this.receivedReportTab.Text = "Received Bags";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(209, 102);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(81, 30);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Report";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // issuedReportTab
             // 
@@ -70,14 +82,14 @@
             this.issuedReportTab.TabIndex = 1;
             this.issuedReportTab.Text = "Issued Bags";
             // 
-            // button1
+            // reportDatePicker
             // 
-            this.button1.Location = new System.Drawing.Point(7, 45);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(81, 30);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.reportDatePicker.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reportDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reportDatePicker.Location = new System.Drawing.Point(109, 48);
+            this.reportDatePicker.Name = "reportDatePicker";
+            this.reportDatePicker.Size = new System.Drawing.Size(299, 27);
+            this.reportDatePicker.TabIndex = 7;
             // 
             // ReportForm
             // 
@@ -101,5 +113,6 @@
         private System.Windows.Forms.TabPage receivedReportTab;
         private System.Windows.Forms.TabPage issuedReportTab;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DateTimePicker reportDatePicker;
     }
 }
