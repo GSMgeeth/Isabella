@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
 namespace Isabella
@@ -42,6 +43,30 @@ namespace Isabella
             if (conn != null)
             {
                 new MySqlCommand(qry, getConnection()).ExecuteNonQuery();
+            }
+        }
+
+        public static void backupDB()
+        {
+            try
+            {
+                string file = "C:/Users/Geeth Sandaru/Downloads/Backup.sql";
+
+                if (conn != null)
+                {
+                    using (MySqlCommand cmd = new MySqlCommand())
+                    {
+                        using (MySqlBackup mb = new MySqlBackup(cmd))
+                        {
+                            cmd.Connection = getConnection();
+                            mb.ExportToFile(file);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

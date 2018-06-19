@@ -95,6 +95,8 @@ namespace Isabella
             int place_id = bag.getPlace_id();
 
             DBConnection.updateDB("update bag set issued=1, place_id=" + place_id + " where bag_id=" + bag_id);
+
+            DBConnection.backupDB();
         }
     }
 }

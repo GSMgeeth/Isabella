@@ -386,5 +386,10 @@ namespace Isabella
                 return table;
             }
         }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DBConnection.backupDB();
+        }
     }
 }
