@@ -255,15 +255,9 @@ namespace Isabella
         {
             string tmp = receivedBagDataGridView.Rows[e.RowIndex].Cells[0].Value.ToString();
 
-            //Bag bag = new Bag(Int32.Parse(tmp));
-
             Form2 f2 = new Form2(Int32.Parse(tmp));
 
             f2.ShowDialog(this);
-
-            //bag.issue(1);
-
-            //Database.issueBag(bag);
 
             receivedBagDataGridView.DataSource = getReceivedBags();
             issuedBagDataGridView.DataSource = getIssuedBags();
