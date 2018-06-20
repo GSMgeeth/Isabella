@@ -29,17 +29,19 @@ namespace Isabella
             table.Columns.Add("Date", typeof(DateTime));
             table.Columns.Add("BagNo", typeof(int));
             table.Columns.Add("Issued", typeof(bool));
+            table.Columns.Add("Place", typeof(string));
             
             try
             {
-                MySqlDataReader reader = DBConnection.getData("select d.deptName, b.date, b.bagNo, b.issued " +
-                            "from bag b inner join department d on b.deptNo=d.deptNo where MONTH(b.date)=" + date.Month);
+                MySqlDataReader reader = DBConnection.getData("select d.deptName, b.date, b.bagNo, b.issued, i.place " +
+                            "from bag b inner join department d on b.deptNo=d.deptNo " +
+                            "inner join issuedto i on i.place_id=b.place_id where MONTH(b.date)=" + date.Month);
 
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        table.Rows.Add(reader.GetString("deptName"), reader.GetDateTime("date"), reader.GetInt32("bagNo"), reader.GetBoolean("issued"));
+                        table.Rows.Add(reader.GetString("deptName"), reader.GetDateTime("date"), reader.GetInt32("bagNo"), reader.GetBoolean("issued"), reader.GetString("place"));
                     }
 
                     reader.Close();

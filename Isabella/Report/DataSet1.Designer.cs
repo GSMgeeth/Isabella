@@ -287,6 +287,8 @@ namespace Isabella.Report {
             
             private global::System.Data.DataColumn columnIssued;
             
+            private global::System.Data.DataColumn columnPlace;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public BagsDataTable() {
@@ -354,6 +356,14 @@ namespace Isabella.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn PlaceColumn {
+                get {
+                    return this.columnPlace;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -389,13 +399,14 @@ namespace Isabella.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public BagsRow AddBagsRow(string DeptName, System.DateTime Date, int BagNo, bool Issued) {
+            public BagsRow AddBagsRow(string DeptName, System.DateTime Date, int BagNo, bool Issued, string Place) {
                 BagsRow rowBagsRow = ((BagsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         DeptName,
                         Date,
                         BagNo,
-                        Issued};
+                        Issued,
+                        Place};
                 rowBagsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBagsRow);
                 return rowBagsRow;
@@ -422,6 +433,7 @@ namespace Isabella.Report {
                 this.columnDate = base.Columns["Date"];
                 this.columnBagNo = base.Columns["BagNo"];
                 this.columnIssued = base.Columns["Issued"];
+                this.columnPlace = base.Columns["Place"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -435,6 +447,8 @@ namespace Isabella.Report {
                 base.Columns.Add(this.columnBagNo);
                 this.columnIssued = new global::System.Data.DataColumn("Issued", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIssued);
+                this.columnPlace = new global::System.Data.DataColumn("Place", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPlace);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -641,6 +655,22 @@ namespace Isabella.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Place {
+                get {
+                    try {
+                        return ((string)(this[this.tableBags.PlaceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Place\' in table \'Bags\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBags.PlaceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsDeptNameNull() {
                 return this.IsNull(this.tableBags.DeptNameColumn);
             }
@@ -685,6 +715,18 @@ namespace Isabella.Report {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetIssuedNull() {
                 this[this.tableBags.IssuedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsPlaceNull() {
+                return this.IsNull(this.tableBags.PlaceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetPlaceNull() {
+                this[this.tableBags.PlaceColumn] = global::System.Convert.DBNull;
             }
         }
         
