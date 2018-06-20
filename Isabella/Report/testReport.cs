@@ -1,24 +1,16 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Isabella
 {
     public partial class testReport : Form
     {
-        private DateTime date;
         private string qry;
 
-        public testReport(DateTime date, string qry)
+        public testReport(string qry)
         {
-            this.date = date;
             this.qry = qry;
             InitializeComponent();
         }
@@ -26,6 +18,7 @@ namespace Isabella
         private void testReport_Load(object sender, EventArgs e)
         {
             DataTable table = new DataTable();
+            MySqlDataReader reader = null;
 
             table.Columns.Add("DeptName", typeof(string));
             table.Columns.Add("Date", typeof(DateTime));
@@ -35,13 +28,27 @@ namespace Isabella
             
             try
             {
-                MySqlDataReader reader = DBConnection.getData(qry);
+                reader = DBConnection.getData(qry);
 
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        table.Rows.Add(reader.GetString("deptName"), reader.GetDateTime("date"), reader.GetInt32("bagNo"), reader.GetBoolean("issued"), reader.GetString("place"));
+                        Object o;
+
+                        try
+                        {
+                            o = reader.GetString("place");
+                        }
+                        catch (Exception)
+                        {
+                            o = null;
+                        }
+
+                        if (o != null)
+                            table.Rows.Add(reader.GetString("deptName"), reader.GetDateTime("date"), reader.GetInt32("bagNo"), reader.GetBoolean("issued"), reader.GetString("place"));
+                        else
+                            table.Rows.Add(reader.GetString("deptName"), reader.GetDateTime("date"), reader.GetInt32("bagNo"), reader.GetBoolean("issued"), "null");
                     }
 
                     reader.Close();
@@ -59,9 +66,10 @@ namespace Isabella
                     MessageBox.Show("No records of this date!", "Bags picker by date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("No records of this date!", "Bags picker by date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                reader.Close();
+                MessageBox.Show("No records of this date!\n" + ex.Message, "Bags picker by date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }
