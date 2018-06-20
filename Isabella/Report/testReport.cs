@@ -14,10 +14,12 @@ namespace Isabella
     public partial class testReport : Form
     {
         private DateTime date;
+        private string qry;
 
-        public testReport(DateTime date)
+        public testReport(DateTime date, string qry)
         {
             this.date = date;
+            this.qry = qry;
             InitializeComponent();
         }
 
@@ -33,9 +35,7 @@ namespace Isabella
             
             try
             {
-                MySqlDataReader reader = DBConnection.getData("select d.deptName, b.date, b.bagNo, b.issued, i.place " +
-                            "from bag b inner join department d on b.deptNo=d.deptNo " +
-                            "inner join issuedto i on i.place_id=b.place_id where MONTH(b.date)=" + date.Month);
+                MySqlDataReader reader = DBConnection.getData(qry);
 
                 if (reader.HasRows)
                 {

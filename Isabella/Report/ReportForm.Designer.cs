@@ -30,9 +30,11 @@
         {
             this.ReportTabControl = new System.Windows.Forms.TabControl();
             this.receivedReportTab = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.issuedReportTab = new System.Windows.Forms.TabPage();
             this.reportDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.AllSelectedMonth = new System.Windows.Forms.Button();
+            this.issuedReportTab = new System.Windows.Forms.TabPage();
+            this.IssuedSelectedMonth = new System.Windows.Forms.Button();
+            this.BalanceSelectedMonth = new System.Windows.Forms.Button();
             this.ReportTabControl.SuspendLayout();
             this.receivedReportTab.SuspendLayout();
             this.SuspendLayout();
@@ -51,8 +53,10 @@
             // receivedReportTab
             // 
             this.receivedReportTab.BackColor = System.Drawing.Color.LightGray;
+            this.receivedReportTab.Controls.Add(this.BalanceSelectedMonth);
+            this.receivedReportTab.Controls.Add(this.IssuedSelectedMonth);
             this.receivedReportTab.Controls.Add(this.reportDatePicker);
-            this.receivedReportTab.Controls.Add(this.button1);
+            this.receivedReportTab.Controls.Add(this.AllSelectedMonth);
             this.receivedReportTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.receivedReportTab.Location = new System.Drawing.Point(4, 29);
             this.receivedReportTab.Name = "receivedReportTab";
@@ -61,15 +65,24 @@
             this.receivedReportTab.TabIndex = 0;
             this.receivedReportTab.Text = "Received Bags";
             // 
-            // button1
+            // reportDatePicker
             // 
-            this.button1.Location = new System.Drawing.Point(209, 102);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(81, 30);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Report";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.reportDatePicker.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reportDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reportDatePicker.Location = new System.Drawing.Point(7, 30);
+            this.reportDatePicker.Name = "reportDatePicker";
+            this.reportDatePicker.Size = new System.Drawing.Size(299, 27);
+            this.reportDatePicker.TabIndex = 7;
+            // 
+            // AllSelectedMonth
+            // 
+            this.AllSelectedMonth.Location = new System.Drawing.Point(312, 30);
+            this.AllSelectedMonth.Name = "AllSelectedMonth";
+            this.AllSelectedMonth.Size = new System.Drawing.Size(56, 30);
+            this.AllSelectedMonth.TabIndex = 0;
+            this.AllSelectedMonth.Text = "All";
+            this.AllSelectedMonth.UseVisualStyleBackColor = true;
+            this.AllSelectedMonth.Click += new System.EventHandler(this.button1_Click);
             // 
             // issuedReportTab
             // 
@@ -82,14 +95,24 @@
             this.issuedReportTab.TabIndex = 1;
             this.issuedReportTab.Text = "Issued Bags";
             // 
-            // reportDatePicker
+            // IssuedSelectedMonth
             // 
-            this.reportDatePicker.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.reportDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.reportDatePicker.Location = new System.Drawing.Point(109, 48);
-            this.reportDatePicker.Name = "reportDatePicker";
-            this.reportDatePicker.Size = new System.Drawing.Size(299, 27);
-            this.reportDatePicker.TabIndex = 7;
+            this.IssuedSelectedMonth.Location = new System.Drawing.Point(374, 30);
+            this.IssuedSelectedMonth.Name = "IssuedSelectedMonth";
+            this.IssuedSelectedMonth.Size = new System.Drawing.Size(76, 30);
+            this.IssuedSelectedMonth.TabIndex = 8;
+            this.IssuedSelectedMonth.Text = "Issued";
+            this.IssuedSelectedMonth.UseVisualStyleBackColor = true;
+            this.IssuedSelectedMonth.Click += new System.EventHandler(this.IssuedSelectedMonth_Click);
+            // 
+            // BalanceSelectedMonth
+            // 
+            this.BalanceSelectedMonth.Location = new System.Drawing.Point(457, 30);
+            this.BalanceSelectedMonth.Name = "BalanceSelectedMonth";
+            this.BalanceSelectedMonth.Size = new System.Drawing.Size(87, 30);
+            this.BalanceSelectedMonth.TabIndex = 9;
+            this.BalanceSelectedMonth.Text = "Balance";
+            this.BalanceSelectedMonth.UseVisualStyleBackColor = true;
             // 
             // ReportForm
             // 
@@ -112,7 +135,9 @@
         private System.Windows.Forms.TabControl ReportTabControl;
         private System.Windows.Forms.TabPage receivedReportTab;
         private System.Windows.Forms.TabPage issuedReportTab;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button AllSelectedMonth;
         private System.Windows.Forms.DateTimePicker reportDatePicker;
+        private System.Windows.Forms.Button IssuedSelectedMonth;
+        private System.Windows.Forms.Button BalanceSelectedMonth;
     }
 }

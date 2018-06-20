@@ -276,7 +276,16 @@ namespace Isabella
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            string deptName = DeptCmb.SelectedItem.ToString();
+            string deptName = "Die";
+
+            try
+            {
+                deptName = DeptCmb.SelectedItem.ToString();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Select a department!", "Bags finder", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
             //receivedBagDataGridView.DataSource = getReceivedBagsByDept(deptName);
 
