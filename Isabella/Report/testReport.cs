@@ -18,6 +18,8 @@ namespace Isabella
         private void testReport_Load(object sender, EventArgs e)
         {
             DataTable table = new DataTable();
+            //create a second item table and define columns. Then, inside the if statement, initialize the rows
+            //Then,  put it on the rpt.Database.Tables["items"].setDataSource(table2);
             MySqlDataReader reader = null;
 
             table.Columns.Add("DeptName", typeof(string));
