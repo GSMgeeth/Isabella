@@ -30,12 +30,12 @@
         {
             this.ReportTabControl = new System.Windows.Forms.TabControl();
             this.receivedReportTab = new System.Windows.Forms.TabPage();
+            this.BalanceSelectedMonth = new System.Windows.Forms.Button();
             this.reportDatePicker = new System.Windows.Forms.DateTimePicker();
             this.AllSelectedMonth = new System.Windows.Forms.Button();
             this.issuedReportTab = new System.Windows.Forms.TabPage();
-            this.BalanceSelectedMonth = new System.Windows.Forms.Button();
-            this.IssuedSelectedMonth = new System.Windows.Forms.Button();
             this.dateTimePickerIssued = new System.Windows.Forms.DateTimePicker();
+            this.IssuedSelectedMonth = new System.Windows.Forms.Button();
             this.ReportTabControl.SuspendLayout();
             this.receivedReportTab.SuspendLayout();
             this.issuedReportTab.SuspendLayout();
@@ -65,6 +65,16 @@
             this.receivedReportTab.Size = new System.Drawing.Size(789, 415);
             this.receivedReportTab.TabIndex = 0;
             this.receivedReportTab.Text = "Received Bags";
+            // 
+            // BalanceSelectedMonth
+            // 
+            this.BalanceSelectedMonth.Location = new System.Drawing.Point(374, 30);
+            this.BalanceSelectedMonth.Name = "BalanceSelectedMonth";
+            this.BalanceSelectedMonth.Size = new System.Drawing.Size(98, 30);
+            this.BalanceSelectedMonth.TabIndex = 9;
+            this.BalanceSelectedMonth.Text = "Balance";
+            this.BalanceSelectedMonth.UseVisualStyleBackColor = true;
+            this.BalanceSelectedMonth.Click += new System.EventHandler(this.BalanceSelectedMonth_Click);
             // 
             // reportDatePicker
             // 
@@ -98,15 +108,14 @@
             this.issuedReportTab.TabIndex = 1;
             this.issuedReportTab.Text = "Issued Bags";
             // 
-            // BalanceSelectedMonth
+            // dateTimePickerIssued
             // 
-            this.BalanceSelectedMonth.Location = new System.Drawing.Point(374, 30);
-            this.BalanceSelectedMonth.Name = "BalanceSelectedMonth";
-            this.BalanceSelectedMonth.Size = new System.Drawing.Size(98, 30);
-            this.BalanceSelectedMonth.TabIndex = 9;
-            this.BalanceSelectedMonth.Text = "Balance";
-            this.BalanceSelectedMonth.UseVisualStyleBackColor = true;
-            this.BalanceSelectedMonth.Click += new System.EventHandler(this.BalanceSelectedMonth_Click);
+            this.dateTimePickerIssued.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerIssued.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePickerIssued.Location = new System.Drawing.Point(7, 47);
+            this.dateTimePickerIssued.Name = "dateTimePickerIssued";
+            this.dateTimePickerIssued.Size = new System.Drawing.Size(299, 27);
+            this.dateTimePickerIssued.TabIndex = 10;
             // 
             // IssuedSelectedMonth
             // 
@@ -117,15 +126,6 @@
             this.IssuedSelectedMonth.Text = "Issued";
             this.IssuedSelectedMonth.UseVisualStyleBackColor = true;
             this.IssuedSelectedMonth.Click += new System.EventHandler(this.IssuedSelectedMonth_Click_1);
-            // 
-            // dateTimePickerIssued
-            // 
-            this.dateTimePickerIssued.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerIssued.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerIssued.Location = new System.Drawing.Point(7, 47);
-            this.dateTimePickerIssued.Name = "dateTimePickerIssued";
-            this.dateTimePickerIssued.Size = new System.Drawing.Size(299, 27);
-            this.dateTimePickerIssued.TabIndex = 10;
             // 
             // ReportForm
             // 

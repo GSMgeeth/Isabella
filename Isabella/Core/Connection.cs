@@ -12,6 +12,7 @@ namespace Isabella
     {
         private static string connString = string.Format("Server=localhost; database=Isabella; UID=root; password=; SSLMode=none");
         private static MySqlConnection conn = new MySqlConnection(connString);
+        private static MySqlConnection tmpConn = null;
 
         private DBConnection() { }
 
@@ -28,6 +29,30 @@ namespace Isabella
             {
                 return null;
             }
+        }
+
+        private static MySqlConnection getTmpConnection()
+        {
+            if (tmpConn == null)
+            {
+                tmpConn = new MySqlConnection(connString);
+            }
+
+            if (tmpConn.State.ToString().Equals("Closed") || tmpConn.State.ToString().Equals("closed"))
+                tmpConn.Open();
+
+            return tmpConn;
+        }
+
+        public static MySqlDataReader getDataViaTmpConnection(string qry)
+        {
+            return new MySqlCommand(qry, getTmpConnection()).ExecuteReader();
+        }
+
+        public static void closeTmpConnection()
+        {
+            if (tmpConn.State.ToString().Equals("Open") || tmpConn.State.ToString().Equals("open"))
+                tmpConn.Close();
         }
         
         public static MySqlDataReader getData(string qry)

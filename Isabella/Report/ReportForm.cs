@@ -21,7 +21,7 @@ namespace Isabella
         {
             DateTime date = reportDatePicker.Value;
 
-            string qry = "select d.deptName, b.date, b.bagNo, b.issued, i.place " +
+            string qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
                             "from bag b left join issuedto i on b.place_id=i.place_id " +
                             "inner join department d on b.deptNo=d.deptNo where MONTH(b.date)=" + date.Month;
 
@@ -50,7 +50,7 @@ namespace Isabella
         {
             DateTime date = reportDatePicker.Value;
 
-            string qry = "select d.deptName, b.date, b.bagNo, b.issued, i.place " +
+            string qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
                             "from bag b inner join department d on b.deptNo=d.deptNo " +
                             "left join issuedto i on b.place_id=i.place_id " +
                             "where b.issued=0 and MONTH(b.date)=" + date.Month;
@@ -64,7 +64,7 @@ namespace Isabella
         {
             DateTime date = dateTimePickerIssued.Value;
 
-            string qry = "select d.deptName, b.date, b.bagNo, b.issued, i.place " +
+            string qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
                             "from bag b inner join department d on b.deptNo=d.deptNo " +
                             "inner join issuedto i on i.place_id=b.place_id " +
                             "where b.issued=1 and MONTH(b.date)=" + date.Month;
