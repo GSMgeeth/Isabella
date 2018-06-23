@@ -72,6 +72,7 @@
             this.Controls.Add(this.ethBtn);
             this.Controls.Add(this.ydBtn);
             this.Name = "Form2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Issue Where?";
             this.ResumeLayout(false);
             this.PerformLayout();

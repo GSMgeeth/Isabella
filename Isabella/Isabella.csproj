@@ -112,6 +112,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configure\ConfigurationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configure\ConfigurationForm.Designer.cs">
+      <DependentUpon>ConfigurationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\Connection.cs" />
     <Compile Include="Core\Database.cs" />
     <Compile Include="Form1.cs">
@@ -155,6 +161,9 @@
     <Compile Include="Report\testReport.Designer.cs">
       <DependentUpon>testReport.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Configure\ConfigurationForm.resx">
+      <DependentUpon>ConfigurationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

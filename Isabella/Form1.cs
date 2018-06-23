@@ -13,6 +13,7 @@ using Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using MySql.Data.MySqlClient;
 using _Excel = Microsoft.Office.Interop.Excel;
+using Isabella.Configure;
 
 namespace Isabella
 {
@@ -47,7 +48,9 @@ namespace Isabella
 
         private void ConfigButton_Click(object sender, EventArgs e)
         {
-
+            ConfigurationForm configFrm = new ConfigurationForm();
+            
+            configFrm.Show();
         }
 
         private void AddFileButton_Click(object sender, EventArgs e)
@@ -184,7 +187,7 @@ namespace Isabella
             fillDeptComboBox();
         }
 
-        private void fillDeptComboBox()
+        public void fillDeptComboBox()
         {
             MySqlDataReader reader = DBConnection.getData("select * from department");
 

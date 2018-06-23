@@ -22,6 +22,11 @@ namespace Isabella.Role
             this.deptName = deptName;
         }
 
+        public Department (string deptName)
+        {
+            this.deptName = deptName;
+        }
+
         public int getDeptNo()
         {
             return deptNo;
