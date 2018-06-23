@@ -68,7 +68,7 @@
             // 
             // BalanceSelectedMonth
             // 
-            this.BalanceSelectedMonth.Location = new System.Drawing.Point(374, 30);
+            this.BalanceSelectedMonth.Location = new System.Drawing.Point(398, 27);
             this.BalanceSelectedMonth.Name = "BalanceSelectedMonth";
             this.BalanceSelectedMonth.Size = new System.Drawing.Size(98, 30);
             this.BalanceSelectedMonth.TabIndex = 9;
@@ -82,12 +82,12 @@
             this.reportDatePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.reportDatePicker.Location = new System.Drawing.Point(7, 30);
             this.reportDatePicker.Name = "reportDatePicker";
-            this.reportDatePicker.Size = new System.Drawing.Size(299, 27);
+            this.reportDatePicker.Size = new System.Drawing.Size(323, 27);
             this.reportDatePicker.TabIndex = 7;
             // 
             // AllSelectedMonth
             // 
-            this.AllSelectedMonth.Location = new System.Drawing.Point(312, 30);
+            this.AllSelectedMonth.Location = new System.Drawing.Point(336, 27);
             this.AllSelectedMonth.Name = "AllSelectedMonth";
             this.AllSelectedMonth.Size = new System.Drawing.Size(56, 30);
             this.AllSelectedMonth.TabIndex = 0;
@@ -114,12 +114,12 @@
             this.dateTimePickerIssued.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePickerIssued.Location = new System.Drawing.Point(7, 47);
             this.dateTimePickerIssued.Name = "dateTimePickerIssued";
-            this.dateTimePickerIssued.Size = new System.Drawing.Size(299, 27);
+            this.dateTimePickerIssued.Size = new System.Drawing.Size(322, 27);
             this.dateTimePickerIssued.TabIndex = 10;
             // 
             // IssuedSelectedMonth
             // 
-            this.IssuedSelectedMonth.Location = new System.Drawing.Point(312, 47);
+            this.IssuedSelectedMonth.Location = new System.Drawing.Point(335, 44);
             this.IssuedSelectedMonth.Name = "IssuedSelectedMonth";
             this.IssuedSelectedMonth.Size = new System.Drawing.Size(76, 30);
             this.IssuedSelectedMonth.TabIndex = 9;

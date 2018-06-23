@@ -18,17 +18,20 @@ namespace Isabella
 
         private static MySqlConnection getConnection()
         {
-            if (conn != null)
+            try
             {
-                if (conn.State.ToString().Equals("closed") || conn.State.ToString().Equals("Closed"))
-                    conn.Open();
+                if (conn != null)
+                {
+                    if (conn.State.ToString().Equals("closed") || conn.State.ToString().Equals("Closed"))
+                        conn.Open();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Connection error!\nCheck if the MySQL connection has started!", "MySQL Connection", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+            }
 
-                return conn;
-            }
-            else
-            {
-                return null;
-            }
+            return conn;
         }
 
         private static MySqlConnection getTmpConnection()
