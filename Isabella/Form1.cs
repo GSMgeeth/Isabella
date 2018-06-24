@@ -287,7 +287,7 @@ namespace Isabella
                     "on b.deptNo=d.deptNo " +
                     "where b.date='" + date.ToString("yyyy/M/d") + "'";
             
-            Object tmpDeptNameObj = DeptCmb.SelectedItem;
+            Object tmpDeptNameObj = DeptCmb.SelectedItem;   //checking push
             string tmpBagNo = bagNoTxtBox.Text;
 
             if ((tmpDeptNameObj == null) && (tmpBagNo.Equals("")))
