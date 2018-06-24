@@ -280,7 +280,87 @@ namespace Isabella
         private void searchButton_Click(object sender, EventArgs e)
         {
             string deptName = "Die";
+            int deptNo = 1;
+            DateTime date = receivedDatePicker.Value;
+            string qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued " +
+                    "from bag b inner join department d " +
+                    "on b.deptNo=d.deptNo " +
+                    "where b.date='" + date.ToString("yyyy/M/d") + "'";
+            
+            Object tmpDeptNameObj = DeptCmb.SelectedItem;
+            string tmpBagNo = bagNoTxtBox.Text;
 
+            if ((tmpDeptNameObj == null) && (tmpBagNo.Equals("")))
+            {
+                qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued " +
+                    "from bag b inner join department d " +
+                    "on b.deptNo=d.deptNo " +
+                    "where b.date='" + date.ToString("yyyy/M/d") + "'";
+            }
+            else if ((tmpDeptNameObj != null) && (tmpBagNo.Equals("")))
+            {
+                deptName = DeptCmb.SelectedItem.ToString();
+
+                MySqlDataReader readerDept = DBConnection.getData("select * from department " +
+                                                            "where deptName='" + deptName + "'");
+
+                while (readerDept.Read())
+                {
+                    deptNo = readerDept.GetInt32("deptNo");
+                }
+
+                readerDept.Close();
+
+                qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued " +
+                    "from bag b inner join department d " +
+                    "on b.deptNo=d.deptNo " +
+                    "where d.deptNo=" + deptNo + " and b.date='" + date.ToString("yyyy/M/d") + "'";
+            }
+            else if ((tmpDeptNameObj == null) && (!tmpBagNo.Equals("")))
+            {
+                try
+                {
+                    int bagNo = Int32.Parse(bagNoTxtBox.Text);
+
+                    qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued " +
+                    "from bag b inner join department d " +
+                    "on b.deptNo=d.deptNo " +
+                    "where b.bagNo=" + bagNo + " and b.date='" + date.ToString("yyyy/M/d") + "'";
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Invalid data!\nCheck Bag No value", "Bags finder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if ((tmpDeptNameObj != null) && (!tmpBagNo.Equals("")))
+            {
+                deptName = DeptCmb.SelectedItem.ToString();
+
+                MySqlDataReader readerDept = DBConnection.getData("select * from department " +
+                                                            "where deptName='" + deptName + "'");
+
+                while (readerDept.Read())
+                {
+                    deptNo = readerDept.GetInt32("deptNo");
+                }
+
+                readerDept.Close();
+
+                try
+                {
+                    int bagNo = Int32.Parse(bagNoTxtBox.Text);
+
+                    qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued " +
+                    "from bag b inner join department d " +
+                    "on b.deptNo=d.deptNo " +
+                    "where d.deptNo=" + deptNo + " and b.bagNo=" + bagNo + " and b.date='" + date.ToString("yyyy/M/d") + "'";
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Invalid data!\nCheck Bag No value", "Bags finder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            /*
             try
             {
                 deptName = DeptCmb.SelectedItem.ToString();
@@ -289,13 +369,7 @@ namespace Isabella
             {
                 MessageBox.Show("Select a department!", "Bags finder", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
-            //receivedBagDataGridView.DataSource = getReceivedBagsByDept(deptName);
-
-            //new way of searching bags
-
-            int deptNo = 1;
-
+            
             MySqlDataReader readerDept = DBConnection.getData("select * from department where deptName='" + deptName + "'");
 
             while (readerDept.Read())
@@ -304,17 +378,12 @@ namespace Isabella
             }
 
             readerDept.Close();
-
-            DateTime date = receivedDatePicker.Value;
-
+            */
             try
             {
-                int bagNo = Int32.Parse(bagNoTxtBox.Text);
+                //int bagNo = Int32.Parse(bagNoTxtBox.Text);
 
-                MySqlDataReader reader = DBConnection.getData("select b.bag_id, d.deptName, b.date, b.bagNo, b.issued " +
-                    "from bag b inner join department d " +
-                    "on b.deptNo=d.deptNo " +
-                    "where d.deptNo=" + deptNo + " and b.bagNo=" + bagNo + " and b.date='" + date.ToString("yyyy/M/d") + "'");
+                MySqlDataReader reader = DBConnection.getData(qry);
 
                 if (reader.HasRows)
                 {

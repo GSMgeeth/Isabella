@@ -41,7 +41,7 @@ namespace Isabella.Configure
         {
             string newDept = newDeptTxtBox.Text;
 
-            if (newDept != null)
+            if ((newDept != null) && (!newDept.Equals("")))
             {
                 Department dept = new Department(newDept);
 
