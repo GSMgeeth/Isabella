@@ -381,8 +381,6 @@ namespace Isabella
             */
             try
             {
-                //int bagNo = Int32.Parse(bagNoTxtBox.Text);
-
                 MySqlDataReader reader = DBConnection.getData(qry);
 
                 if (reader.HasRows)
