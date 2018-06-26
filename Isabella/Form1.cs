@@ -71,7 +71,7 @@ namespace Isabella
                     Workbook wb;
                     Worksheet ws;
 
-                    string path = "C:/Users/Geeth Sandaru/Downloads/" + name;
+                    string path = "D:/SecondQuality/" + name;
 
                     wb = excel.Workbooks.Open(path);
                     ws = wb.Worksheets[1];

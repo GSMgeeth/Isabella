@@ -78,7 +78,7 @@ namespace Isabella
         {
             try
             {
-                string file = "C:/Users/Geeth Sandaru/Downloads/Backup.sql";
+                string file = "D:/SecondQuality/Backup.sql";
 
                 if (conn != null)
                 {
