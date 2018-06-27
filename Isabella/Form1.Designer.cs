@@ -64,6 +64,8 @@
             this.issuedTab = new System.Windows.Forms.TabPage();
             this.issuedItemDataGridView = new System.Windows.Forms.DataGridView();
             this.issuedBagDataGridView = new System.Windows.Forms.DataGridView();
+            this.bagQty = new System.Windows.Forms.Label();
+            this.bagQtyIssued = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.AddDataPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -221,6 +223,7 @@
             // 
             // receivedTab
             // 
+            this.receivedTab.Controls.Add(this.bagQty);
             this.receivedTab.Controls.Add(this.bagNoTxtBox);
             this.receivedTab.Controls.Add(this.receivedDatePicker);
             this.receivedTab.Controls.Add(this.resetButton);
@@ -314,7 +317,7 @@
             this.receivedItemDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -362,6 +365,7 @@
             // 
             // issuedTab
             // 
+            this.issuedTab.Controls.Add(this.bagQtyIssued);
             this.issuedTab.Controls.Add(this.issuedItemDataGridView);
             this.issuedTab.Controls.Add(this.issuedBagDataGridView);
             this.issuedTab.Location = new System.Drawing.Point(4, 38);
@@ -433,6 +437,26 @@
             this.issuedBagDataGridView.TabIndex = 2;
             this.issuedBagDataGridView.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.issuedBagDataGridView_RowHeaderMouseClick);
             // 
+            // bagQty
+            // 
+            this.bagQty.AutoSize = true;
+            this.bagQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bagQty.Location = new System.Drawing.Point(711, 47);
+            this.bagQty.Name = "bagQty";
+            this.bagQty.Size = new System.Drawing.Size(43, 17);
+            this.bagQty.TabIndex = 8;
+            this.bagQty.Text = "Qty :";
+            // 
+            // bagQtyIssued
+            // 
+            this.bagQtyIssued.AutoSize = true;
+            this.bagQtyIssued.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bagQtyIssued.Location = new System.Drawing.Point(711, 47);
+            this.bagQtyIssued.Name = "bagQtyIssued";
+            this.bagQtyIssued.Size = new System.Drawing.Size(43, 17);
+            this.bagQtyIssued.TabIndex = 9;
+            this.bagQtyIssued.Text = "Qty :";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -462,6 +486,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.receivedItemDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.receivedBagDataGridView)).EndInit();
             this.issuedTab.ResumeLayout(false);
+            this.issuedTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.issuedItemDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.issuedBagDataGridView)).EndInit();
             this.ResumeLayout(false);
@@ -495,6 +520,8 @@
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.DateTimePicker receivedDatePicker;
         private System.Windows.Forms.TextBox bagNoTxtBox;
+        private System.Windows.Forms.Label bagQty;
+        private System.Windows.Forms.Label bagQtyIssued;
     }
 }
 

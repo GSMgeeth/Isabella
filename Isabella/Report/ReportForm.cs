@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,11 +21,34 @@ namespace Isabella
         private void button1_Click(object sender, EventArgs e)
         {
             DateTime date = reportDatePicker.Value;
+            Object tmpDeptNameObj = DeptCmbMonthly.SelectedItem;
+            string qry = "";
 
-            string qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
+            if (tmpDeptNameObj == null)
+            {
+                qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
                             "from bag b left join issuedto i on b.place_id=i.place_id " +
                             "inner join department d on b.deptNo=d.deptNo where MONTH(b.date)=" + date.Month;
+            }
+            else
+            {
+                string deptName = tmpDeptNameObj.ToString();
 
+                if (deptName.Equals("All"))
+                {
+                    qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
+                            "from bag b left join issuedto i on b.place_id=i.place_id " +
+                            "inner join department d on b.deptNo=d.deptNo where MONTH(b.date)=" + date.Month;
+                }
+                else
+                {
+                    qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
+                            "from bag b left join issuedto i on b.place_id=i.place_id " +
+                            "inner join department d on b.deptNo=d.deptNo " +
+                            "where d.deptName='" + deptName + "' and MONTH(b.date)=" + date.Month;
+                }
+            }
+            
             testReport frm = new testReport(qry);
 
             frm.Show();
@@ -49,12 +73,36 @@ namespace Isabella
         private void BalanceSelectedMonth_Click(object sender, EventArgs e)
         {
             DateTime date = reportDatePicker.Value;
+            Object tmpDeptNameObj = DeptCmbMonthly.SelectedItem;
+            string qry = "";
 
-            string qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
+            if (tmpDeptNameObj == null)
+            {
+                qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
                             "from bag b inner join department d on b.deptNo=d.deptNo " +
                             "left join issuedto i on b.place_id=i.place_id " +
                             "where b.issued=0 and MONTH(b.date)=" + date.Month;
+            }
+            else
+            {
+                string deptName = tmpDeptNameObj.ToString();
 
+                if (deptName.Equals("All"))
+                {
+                    qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
+                            "from bag b inner join department d on b.deptNo=d.deptNo " +
+                            "left join issuedto i on b.place_id=i.place_id " +
+                            "where b.issued=0 and MONTH(b.date)=" + date.Month;
+                }
+                else
+                {
+                    qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
+                            "from bag b inner join department d on b.deptNo=d.deptNo " +
+                            "left join issuedto i on b.place_id=i.place_id " +
+                            "where b.issued=0 and d.deptName='" + deptName + "' and MONTH(b.date)=" + date.Month;
+                }
+            }
+            
             testReport frm = new testReport(qry);
 
             frm.Show();
@@ -77,11 +125,34 @@ namespace Isabella
         private void allSelectedDay_Click(object sender, EventArgs e)
         {
             DateTime date = dailyReportDateTimePicker.Value;
+            Object tmpDeptNameObj = DeptCmbMonthly.SelectedItem;
+            string qry = "";
 
-            string qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
+            if (tmpDeptNameObj == null)
+            {
+                qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
                             "from bag b left join issuedto i on b.place_id=i.place_id " +
                             "inner join department d on b.deptNo=d.deptNo where b.date='" + date.ToString("yyyy/M/d") + "'";
+            }
+            else
+            {
+                string deptName = tmpDeptNameObj.ToString();
 
+                if (deptName.Equals("All"))
+                {
+                    qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
+                            "from bag b left join issuedto i on b.place_id=i.place_id " +
+                            "inner join department d on b.deptNo=d.deptNo where b.date='" + date.ToString("yyyy/M/d") + "'";
+                }
+                else
+                {
+                    qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
+                            "from bag b left join issuedto i on b.place_id=i.place_id " +
+                            "inner join department d on b.deptNo=d.deptNo " +
+                            "where d.deptName='" + deptName + "' and b.date='" + date.ToString("yyyy/M/d") + "'";
+                }
+            }
+            
             testReport frm = new testReport(qry);
 
             frm.Show();
@@ -90,12 +161,36 @@ namespace Isabella
         private void balanceSelectedDay_Click(object sender, EventArgs e)
         {
             DateTime date = dailyReportDateTimePicker.Value;
+            Object tmpDeptNameObj = DeptCmbMonthly.SelectedItem;
+            string qry = "";
 
-            string qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
+            if (tmpDeptNameObj == null)
+            {
+                qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
                             "from bag b inner join department d on b.deptNo=d.deptNo " +
                             "left join issuedto i on b.place_id=i.place_id " +
                             "where b.issued=0 and b.date='" + date.ToString("yyyy/M/d") + "'";
+            }
+            else
+            {
+                string deptName = tmpDeptNameObj.ToString();
 
+                if (deptName.Equals("All"))
+                {
+                    qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
+                            "from bag b inner join department d on b.deptNo=d.deptNo " +
+                            "left join issuedto i on b.place_id=i.place_id " +
+                            "where b.issued=0 and b.date='" + date.ToString("yyyy/M/d") + "'";
+                }
+                else
+                {
+                    qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
+                            "from bag b inner join department d on b.deptNo=d.deptNo " +
+                            "left join issuedto i on b.place_id=i.place_id " +
+                            "where b.issued=0 and d.deptName='" + deptName + "' and b.date='" + date.ToString("yyyy/M/d") + "'";
+                }
+            }
+            
             testReport frm = new testReport(qry);
 
             frm.Show();
@@ -113,6 +208,27 @@ namespace Isabella
             testReport frm = new testReport(qry);
 
             frm.Show();
+        }
+
+        private void ReportForm_Load(object sender, EventArgs e)
+        {
+            fillDeptCmb();
+        }
+
+        public void fillDeptCmb()
+        {
+            MySqlDataReader reader = DBConnection.getData("select * from department");
+
+            DeptCmbMonthly.Items.Add("All");
+            DeptCmbDaily.Items.Add("All");
+
+            while (reader.Read())
+            {
+                DeptCmbMonthly.Items.Add(reader.GetString("deptName"));
+                DeptCmbDaily.Items.Add(reader.GetString("deptName"));
+            }
+
+            reader.Close();
         }
     }
 }

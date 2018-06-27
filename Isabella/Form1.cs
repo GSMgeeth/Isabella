@@ -240,6 +240,15 @@ namespace Isabella
 
             table.Load(reader);
 
+            MySqlDataReader readerCount = DBConnection.getData("select COUNT(bag_id) as itemCount from item where bag_id=" + bag_id + " group by bag_id;");
+
+            while (readerCount.Read())
+            {
+                bagQty.Text = "Total items : " + readerCount.GetInt32("itemCount");
+            }
+
+            readerCount.Close();
+
             return table;
         }
 
@@ -250,6 +259,15 @@ namespace Isabella
             MySqlDataReader reader = DBConnection.getData("select * from item where bag_id=" + bag_id);
 
             table.Load(reader);
+
+            MySqlDataReader readerCount = DBConnection.getData("select COUNT(bag_id) as itemCount from item where bag_id=" + bag_id + " group by bag_id;");
+
+            while (readerCount.Read())
+            {
+                bagQtyIssued.Text = "Total items : " + readerCount.GetInt32("itemCount");
+            }
+
+            readerCount.Close();
 
             return table;
         }

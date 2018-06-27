@@ -103,9 +103,7 @@ namespace Isabella
                 }
             }
             catch (Exception ex)
-            {
-                reader.Close();
-                
+            {   
                 if (readerItems != null)
                     if (!readerItems.IsClosed)
                         readerItems.Close();

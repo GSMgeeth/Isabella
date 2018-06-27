@@ -87,8 +87,10 @@ namespace Isabella.Configure
                     CurrentDeptDataGridView.DataSource = getCurrentDept();
 
                     Form1 mainFrm = new Form1();
+                    ReportForm repFrm = new ReportForm();
 
                     mainFrm.fillDeptComboBox();
+                    repFrm.fillDeptCmb();
                 }
             }
             catch (Exception)
