@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -47,12 +48,12 @@
             this.GenReportButton = new System.Windows.Forms.Button();
             this.ConfigButton = new System.Windows.Forms.Button();
             this.AddDataPanel = new System.Windows.Forms.Panel();
-            this.DataTextBox = new System.Windows.Forms.RichTextBox();
             this.AddFileButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel2 = new System.Windows.Forms.Panel();
             this.searchBagTabControl = new System.Windows.Forms.TabControl();
             this.receivedTab = new System.Windows.Forms.TabPage();
+            this.bagQty = new System.Windows.Forms.Label();
             this.bagNoTxtBox = new System.Windows.Forms.TextBox();
             this.receivedDatePicker = new System.Windows.Forms.DateTimePicker();
             this.resetButton = new System.Windows.Forms.Button();
@@ -62,10 +63,15 @@
             this.receivedItemDataGridView = new System.Windows.Forms.DataGridView();
             this.receivedBagDataGridView = new System.Windows.Forms.DataGridView();
             this.issuedTab = new System.Windows.Forms.TabPage();
+            this.bagQtyIssued = new System.Windows.Forms.Label();
             this.issuedItemDataGridView = new System.Windows.Forms.DataGridView();
             this.issuedBagDataGridView = new System.Windows.Forms.DataGridView();
-            this.bagQty = new System.Windows.Forms.Label();
-            this.bagQtyIssued = new System.Windows.Forms.Label();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.TotalRcvLbl = new System.Windows.Forms.Label();
+            this.BalanceLbl = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.AddDataPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -171,20 +177,16 @@
             // AddDataPanel
             // 
             this.AddDataPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.AddDataPanel.Controls.Add(this.DataTextBox);
+            this.AddDataPanel.Controls.Add(this.label5);
+            this.AddDataPanel.Controls.Add(this.label4);
+            this.AddDataPanel.Controls.Add(this.BalanceLbl);
+            this.AddDataPanel.Controls.Add(this.TotalRcvLbl);
+            this.AddDataPanel.Controls.Add(this.progressBar);
             this.AddDataPanel.Controls.Add(this.AddFileButton);
             this.AddDataPanel.Location = new System.Drawing.Point(291, 102);
             this.AddDataPanel.Name = "AddDataPanel";
             this.AddDataPanel.Size = new System.Drawing.Size(893, 540);
             this.AddDataPanel.TabIndex = 7;
-            // 
-            // DataTextBox
-            // 
-            this.DataTextBox.Location = new System.Drawing.Point(117, 230);
-            this.DataTextBox.Name = "DataTextBox";
-            this.DataTextBox.Size = new System.Drawing.Size(676, 250);
-            this.DataTextBox.TabIndex = 2;
-            this.DataTextBox.Text = "";
             // 
             // AddFileButton
             // 
@@ -239,6 +241,16 @@
             this.receivedTab.TabIndex = 0;
             this.receivedTab.Text = "Received";
             this.receivedTab.UseVisualStyleBackColor = true;
+            // 
+            // bagQty
+            // 
+            this.bagQty.AutoSize = true;
+            this.bagQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bagQty.Location = new System.Drawing.Point(711, 47);
+            this.bagQty.Name = "bagQty";
+            this.bagQty.Size = new System.Drawing.Size(43, 17);
+            this.bagQty.TabIndex = 8;
+            this.bagQty.Text = "Qty :";
             // 
             // bagNoTxtBox
             // 
@@ -376,6 +388,16 @@
             this.issuedTab.Text = "Issued";
             this.issuedTab.UseVisualStyleBackColor = true;
             // 
+            // bagQtyIssued
+            // 
+            this.bagQtyIssued.AutoSize = true;
+            this.bagQtyIssued.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bagQtyIssued.Location = new System.Drawing.Point(711, 47);
+            this.bagQtyIssued.Name = "bagQtyIssued";
+            this.bagQtyIssued.Size = new System.Drawing.Size(43, 17);
+            this.bagQtyIssued.TabIndex = 9;
+            this.bagQtyIssued.Text = "Qty :";
+            // 
             // issuedItemDataGridView
             // 
             this.issuedItemDataGridView.AllowUserToAddRows = false;
@@ -437,25 +459,56 @@
             this.issuedBagDataGridView.TabIndex = 2;
             this.issuedBagDataGridView.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.issuedBagDataGridView_RowHeaderMouseClick);
             // 
-            // bagQty
+            // notifyIcon1
             // 
-            this.bagQty.AutoSize = true;
-            this.bagQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bagQty.Location = new System.Drawing.Point(711, 47);
-            this.bagQty.Name = "bagQty";
-            this.bagQty.Size = new System.Drawing.Size(43, 17);
-            this.bagQty.TabIndex = 8;
-            this.bagQty.Text = "Qty :";
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
             // 
-            // bagQtyIssued
+            // progressBar
             // 
-            this.bagQtyIssued.AutoSize = true;
-            this.bagQtyIssued.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bagQtyIssued.Location = new System.Drawing.Point(711, 47);
-            this.bagQtyIssued.Name = "bagQtyIssued";
-            this.bagQtyIssued.Size = new System.Drawing.Size(43, 17);
-            this.bagQtyIssued.TabIndex = 9;
-            this.bagQtyIssued.Text = "Qty :";
+            this.progressBar.Location = new System.Drawing.Point(128, 255);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(603, 28);
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar.TabIndex = 1;
+            // 
+            // TotalRcvLbl
+            // 
+            this.TotalRcvLbl.AutoSize = true;
+            this.TotalRcvLbl.Location = new System.Drawing.Point(737, 283);
+            this.TotalRcvLbl.Name = "TotalRcvLbl";
+            this.TotalRcvLbl.Size = new System.Drawing.Size(40, 17);
+            this.TotalRcvLbl.TabIndex = 2;
+            this.TotalRcvLbl.Text = "Total";
+            // 
+            // BalanceLbl
+            // 
+            this.BalanceLbl.AutoSize = true;
+            this.BalanceLbl.Location = new System.Drawing.Point(642, 286);
+            this.BalanceLbl.Name = "BalanceLbl";
+            this.BalanceLbl.Size = new System.Drawing.Size(59, 17);
+            this.BalanceLbl.TabIndex = 3;
+            this.BalanceLbl.Text = "Balance";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(740, 317);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(45, 17);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Total";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(645, 321);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(66, 17);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Balance";
             // 
             // Form1
             // 
@@ -468,8 +521,8 @@
             this.Controls.Add(this.SearchBagButton);
             this.Controls.Add(this.AddDataButton);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.AddDataPanel);
+            this.Controls.Add(this.panel2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -479,6 +532,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.AddDataPanel.ResumeLayout(false);
+            this.AddDataPanel.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.searchBagTabControl.ResumeLayout(false);
             this.receivedTab.ResumeLayout(false);
@@ -505,7 +559,6 @@
         private System.Windows.Forms.Panel AddDataPanel;
         private System.Windows.Forms.Button AddFileButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.RichTextBox DataTextBox;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TabControl searchBagTabControl;
         private System.Windows.Forms.TabPage receivedTab;
@@ -522,6 +575,12 @@
         private System.Windows.Forms.TextBox bagNoTxtBox;
         private System.Windows.Forms.Label bagQty;
         private System.Windows.Forms.Label bagQtyIssued;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.Label BalanceLbl;
+        private System.Windows.Forms.Label TotalRcvLbl;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
     }
 }
 

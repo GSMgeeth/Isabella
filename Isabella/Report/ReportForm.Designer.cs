@@ -30,6 +30,8 @@
         {
             this.ReportTabControl = new System.Windows.Forms.TabControl();
             this.receivedReportTab = new System.Windows.Forms.TabPage();
+            this.DeptCmbDaily = new System.Windows.Forms.ComboBox();
+            this.DeptCmbMonthly = new System.Windows.Forms.ComboBox();
             this.balanceSelectedDay = new System.Windows.Forms.Button();
             this.allSelectedDay = new System.Windows.Forms.Button();
             this.dailyReportDateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -45,8 +47,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePickerIssued = new System.Windows.Forms.DateTimePicker();
             this.IssuedSelectedMonth = new System.Windows.Forms.Button();
-            this.DeptCmbMonthly = new System.Windows.Forms.ComboBox();
-            this.DeptCmbDaily = new System.Windows.Forms.ComboBox();
             this.ReportTabControl.SuspendLayout();
             this.receivedReportTab.SuspendLayout();
             this.issuedReportTab.SuspendLayout();
@@ -84,11 +84,33 @@
             this.receivedReportTab.TabIndex = 0;
             this.receivedReportTab.Text = "Received Bags";
             // 
+            // DeptCmbDaily
+            // 
+            this.DeptCmbDaily.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DeptCmbDaily.FormattingEnabled = true;
+            this.DeptCmbDaily.ItemHeight = 20;
+            this.DeptCmbDaily.Location = new System.Drawing.Point(336, 149);
+            this.DeptCmbDaily.Name = "DeptCmbDaily";
+            this.DeptCmbDaily.Size = new System.Drawing.Size(159, 28);
+            this.DeptCmbDaily.TabIndex = 18;
+            this.DeptCmbDaily.Text = "All";
+            // 
+            // DeptCmbMonthly
+            // 
+            this.DeptCmbMonthly.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DeptCmbMonthly.FormattingEnabled = true;
+            this.DeptCmbMonthly.ItemHeight = 20;
+            this.DeptCmbMonthly.Location = new System.Drawing.Point(336, 42);
+            this.DeptCmbMonthly.Name = "DeptCmbMonthly";
+            this.DeptCmbMonthly.Size = new System.Drawing.Size(159, 28);
+            this.DeptCmbMonthly.TabIndex = 17;
+            this.DeptCmbMonthly.Text = "All";
+            // 
             // balanceSelectedDay
             // 
             this.balanceSelectedDay.Location = new System.Drawing.Point(579, 149);
             this.balanceSelectedDay.Name = "balanceSelectedDay";
-            this.balanceSelectedDay.Size = new System.Drawing.Size(97, 27);
+            this.balanceSelectedDay.Size = new System.Drawing.Size(98, 30);
             this.balanceSelectedDay.TabIndex = 16;
             this.balanceSelectedDay.Text = "Balance";
             this.balanceSelectedDay.UseVisualStyleBackColor = true;
@@ -232,28 +254,6 @@
             this.IssuedSelectedMonth.Text = "Issued";
             this.IssuedSelectedMonth.UseVisualStyleBackColor = true;
             this.IssuedSelectedMonth.Click += new System.EventHandler(this.IssuedSelectedMonth_Click_1);
-            // 
-            // DeptCmbMonthly
-            // 
-            this.DeptCmbMonthly.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DeptCmbMonthly.FormattingEnabled = true;
-            this.DeptCmbMonthly.ItemHeight = 20;
-            this.DeptCmbMonthly.Location = new System.Drawing.Point(336, 42);
-            this.DeptCmbMonthly.Name = "DeptCmbMonthly";
-            this.DeptCmbMonthly.Size = new System.Drawing.Size(159, 28);
-            this.DeptCmbMonthly.TabIndex = 17;
-            this.DeptCmbMonthly.Text = "All";
-            // 
-            // DeptCmbDaily
-            // 
-            this.DeptCmbDaily.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DeptCmbDaily.FormattingEnabled = true;
-            this.DeptCmbDaily.ItemHeight = 20;
-            this.DeptCmbDaily.Location = new System.Drawing.Point(336, 149);
-            this.DeptCmbDaily.Name = "DeptCmbDaily";
-            this.DeptCmbDaily.Size = new System.Drawing.Size(159, 28);
-            this.DeptCmbDaily.TabIndex = 18;
-            this.DeptCmbDaily.Text = "All";
             // 
             // ReportForm
             // 

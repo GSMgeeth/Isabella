@@ -89,11 +89,11 @@ namespace Isabella
 
                         readerDept.Close();
 
-                        string date = ws.Cells[2, 2].Value2.ToString();
+                        string date = ws.Cells[2, 2].Value2;
                         double qty = ws.Cells[2, 3].Value2;
                         double dayBagNo = ws.Cells[2, 4].Value2;
 
-                        string day = date.Substring(1, date.IndexOf('/') - 1);
+                        string day = date.Substring(0, date.IndexOf('/'));
                         string tmpMonth = date.Substring(date.IndexOf('/') + 1);
                         string month = tmpMonth.Substring(0, tmpMonth.IndexOf('/'));
                         string year = tmpMonth.Substring((tmpMonth.IndexOf('/') + 1), 4);
@@ -111,11 +111,12 @@ namespace Isabella
                         }
                         else
                         {
+                            /*
                             DataTextBox.Text = "Bag deptNo : " + deptNo + "\nBag sent date : " + date + "\nQuantity : " + qty + "\nBagNo : " + dayBagNo + "\n";
                             DataTextBox.AppendText("\nyear : " + year + "  " + d.Year);
                             DataTextBox.AppendText("\nmonth : " + month + "  " + d.Month);
                             DataTextBox.AppendText("\nday : " + day + "  " + d.Day + "\n\n");
-
+                            */
                             for (int i = 0; i < (int)qty; i++)
                             {
                                 string color = ws.Cells[(i + 5), 1].Value2;
@@ -124,7 +125,7 @@ namespace Isabella
 
                                 string tmp = "\nItem " + (i + 1) + " : " + color + " " + size + " " + article;
 
-                                DataTextBox.AppendText(tmp);
+                                //DataTextBox.AppendText(tmp);
 
                                 bag.addItem(i, color, size, article);
                             }
@@ -140,7 +141,7 @@ namespace Isabella
 
                                     string tmp2 = "\nDept : " + dNo + " " + deptName;
 
-                                    DataTextBox.AppendText(tmp2);
+                                    //DataTextBox.AppendText(tmp2);
                                 }
 
                                 reader.Close();
@@ -148,11 +149,16 @@ namespace Isabella
                                 Database.saveBag(bag);
 
                                 receivedBagDataGridView.DataSource = getReceivedBags();
+                                setProgress();
+
+                                notifyIcon1.Icon = SystemIcons.Application;
+                                notifyIcon1.BalloonTipText = "The data has been added to the DB successfully!";
+                                notifyIcon1.ShowBalloonTip(1000);
                             }
                             catch (Exception exc)
                             {
-                                DataTextBox.AppendText("\n" + exc.Message);
-                                DataTextBox.AppendText("\n\n" + exc.StackTrace);
+                                //DataTextBox.AppendText("\n" + exc.Message);
+                                //DataTextBox.AppendText("\n\n" + exc.StackTrace);
                             }
                             finally
                             {
@@ -172,7 +178,7 @@ namespace Isabella
             }
             catch (Exception exception)
             {
-                MessageBox.Show("Something wrong with the excel file!", "File reader", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Something wrong with the excel file!\n" + exception.StackTrace, "File reader", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -180,11 +186,44 @@ namespace Isabella
         {
             receivedBagDataGridView.DataSource = getReceivedBags();
             issuedBagDataGridView.DataSource = getIssuedBags();
-
+            
             receivedBagDataGridView.Columns[0].Visible = false;
             issuedBagDataGridView.Columns[0].Visible = false;
 
+            setProgress();
             fillDeptComboBox();
+        }
+
+        private void setProgress()
+        {
+            int total = 100;
+            int balance = 50;
+
+            MySqlDataReader readerTotal = DBConnection.getData("select COUNT(bag_id) AS bagsCount from bag");
+
+            while (readerTotal.Read())
+            {
+                total = readerTotal.GetInt32("bagsCount");
+            }
+
+            readerTotal.Close();
+
+            MySqlDataReader readerBal = DBConnection.getData("select COUNT(bag_id) AS bagsBal from bag where issued=0");
+
+            while (readerBal.Read())
+            {
+                balance = readerBal.GetInt32("bagsBal");
+            }
+
+            readerBal.Close();
+
+            double percent = (total - balance) / (double)total;
+
+            progressBar.Value = (int)percent;
+            //progressBar.Value = 75;
+
+            TotalRcvLbl.Text = "" + total;
+            BalanceLbl.Text = "" + balance;
         }
 
         public void fillDeptComboBox()
@@ -282,6 +321,7 @@ namespace Isabella
 
             receivedBagDataGridView.DataSource = getReceivedBags();
             issuedBagDataGridView.DataSource = getIssuedBags();
+            setProgress();
         }
 
         private void issuedBagDataGridView_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
