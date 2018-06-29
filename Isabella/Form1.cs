@@ -217,7 +217,7 @@ namespace Isabella
 
             readerBal.Close();
 
-            double percent = (total - balance) / (double)total;
+            double percent = ((total - balance) / (double)total) * 100;
 
             progressBar.Value = (int)percent;
             //progressBar.Value = 75;
