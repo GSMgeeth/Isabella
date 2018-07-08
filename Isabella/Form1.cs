@@ -55,7 +55,7 @@ namespace Isabella
 
         private void AddFileButton_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "Excel Workbook|*.xlsx";
+            openFileDialog1.Filter = "Excel Workbook|*.xlsx|Excel Workbook 2003|*.xls";
             openFileDialog1.ShowDialog();
         }
 
@@ -74,105 +74,126 @@ namespace Isabella
                     string path = "D:/SecondQuality/" + name;
 
                     wb = excel.Workbooks.Open(path);
-                    ws = wb.Worksheets[1];
+                    ws = wb.Worksheets[2];
 
-                    string deptTmp = ws.Cells[2, 1].Value2;
-
-                    int deptNo = 1;
-
-                    MySqlDataReader readerDept = DBConnection.getData("select * from department where deptName='" + deptTmp + "'");
-
-                    if (readerDept.HasRows)
+                    if (ws.Cells[2, 1].Value2 != null)
                     {
-                        while (readerDept.Read())
-                            deptNo = readerDept.GetInt32("deptNo");
+                        string deptTmp = "";
 
-                        readerDept.Close();
+                        deptTmp = ws.Cells[2, 1].Value2.ToString();
 
-                        string date = ws.Cells[2, 2].Value2;
-                        double qty = ws.Cells[2, 3].Value2;
-                        double dayBagNo = ws.Cells[2, 4].Value2;
+                        int deptNo = 1;
 
-                        string day = date.Substring(0, date.IndexOf('/'));
-                        string tmpMonth = date.Substring(date.IndexOf('/') + 1);
-                        string month = tmpMonth.Substring(0, tmpMonth.IndexOf('/'));
-                        string year = tmpMonth.Substring((tmpMonth.IndexOf('/') + 1), 4);
+                        MySqlDataReader readerDept = DBConnection.getData("select * from department where deptName='" + deptTmp + "'");
 
-                        DateTime d = new DateTime(Int32.Parse(year), Int32.Parse(month), Int32.Parse(day));
-                        int q = (int)qty;
-                        int bNo = (int)dayBagNo;
-                        Department dept = new Department((int)deptNo);
-
-                        Bag bag = new Bag(d, q, dept, bNo);
-
-                        if (Database.isBagExists(bag))
+                        if (readerDept.HasRows)
                         {
-                            MessageBox.Show("Bag already exists!", "File reader", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        else
-                        {
-                            /*
-                            DataTextBox.Text = "Bag deptNo : " + deptNo + "\nBag sent date : " + date + "\nQuantity : " + qty + "\nBagNo : " + dayBagNo + "\n";
-                            DataTextBox.AppendText("\nyear : " + year + "  " + d.Year);
-                            DataTextBox.AppendText("\nmonth : " + month + "  " + d.Month);
-                            DataTextBox.AppendText("\nday : " + day + "  " + d.Day + "\n\n");
-                            */
-                            for (int i = 0; i < (int)qty; i++)
+                            while (readerDept.Read())
+                                deptNo = readerDept.GetInt32("deptNo");
+
+                            readerDept.Close();
+
+                            int row = 3;
+
+                            double tmpD = ws.Cells[3, 2].Value2;
+                            double dayBagNo = ws.Cells[row, 3].Value2;
+
+                            DateTime d = DateTime.FromOADate(tmpD);
+                            double qty = 1;
+                            int q = (int)qty;
+                            int bNo = (int)dayBagNo;
+                            Department dept = new Department((int)deptNo);
+
+                            Bag bag = new Bag(d, q, dept, bNo);
+
+                            if (Database.isBagExists(bag))
                             {
-                                string color = ws.Cells[(i + 5), 1].Value2;
-                                string size = ws.Cells[(i + 5), 2].Value2;
-                                string article = ws.Cells[(i + 5), 3].Value2;
+                                MessageBox.Show("Bag already exists!", "File reader", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            
+                            while (ws.Cells[row, 5].Value2 != null)
+                            {
+                                if ((ws.Cells[row, 2].Value2 != null) && (tmpD != ws.Cells[row, 2].Value2))
+                                {
+                                    tmpD = ws.Cells[row, 2].Value2;
+                                }
 
-                                string tmp = "\nItem " + (i + 1) + " : " + color + " " + size + " " + article;
+                                if ((ws.Cells[row, 3].Value2 != null) && (dayBagNo != ws.Cells[row, 3].Value2))
+                                {
+                                    try
+                                    {
+                                        Database.saveBag(bag);
 
-                                //DataTextBox.AppendText(tmp);
+                                        setProgress();
+                                    }
+                                    catch (Exception exc)
+                                    {
+                                        MessageBox.Show("Error in saving the bag in DB!\n" + exc, "File reader", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
 
-                                bag.addItem(i, color, size, article);
+                                    dayBagNo = ws.Cells[row, 3].Value2;
+
+                                    d = DateTime.FromOADate(tmpD);
+                                    qty = 1;
+                                    q = (int)qty;
+                                    bNo = (int)dayBagNo;
+                                    dept = new Department((int)deptNo);
+
+                                    bag = new Bag(d, q, dept, bNo);
+
+                                    if (Database.isBagExists(bag))
+                                    {
+                                        MessageBox.Show("Bag already exists!", "File reader", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                }
+
+                                string article = ws.Cells[(row), 5].Value2.ToString();
+                                string color = ws.Cells[(row), 6].Value2.ToString();
+                                string size = ws.Cells[(row), 7].Value2.ToString();
+
+                                double qtyTmpSame = ws.Cells[(row), 8].Value2;
+                                int qtySame = (int)qtyTmpSame;
+
+                                for (int j = 0; j < qtySame; j++)
+                                {
+                                    bag.addItem(0, color, size, article);
+                                }
+                                
+                                row++;
                             }
 
                             try
                             {
-                                MySqlDataReader reader = DBConnection.getData("select * from department");
-
-                                while (reader.Read())
-                                {
-                                    int dNo = reader.GetInt32("deptNo");
-                                    string deptName = reader.GetString("deptName");
-
-                                    string tmp2 = "\nDept : " + dNo + " " + deptName;
-
-                                    //DataTextBox.AppendText(tmp2);
-                                }
-
-                                reader.Close();
-
                                 Database.saveBag(bag);
 
-                                receivedBagDataGridView.DataSource = getReceivedBags();
                                 setProgress();
-
-                                notifyIcon1.Icon = SystemIcons.Application;
-                                notifyIcon1.BalloonTipText = "The data has been added to the DB successfully!";
-                                notifyIcon1.ShowBalloonTip(1000);
                             }
                             catch (Exception exc)
                             {
-                                //DataTextBox.AppendText("\n" + exc.Message);
-                                //DataTextBox.AppendText("\n\n" + exc.StackTrace);
+                                MessageBox.Show("Error in saving the bag in DB!\n" + exc, "File reader", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
-                            finally
-                            {
-                                wb.Close();
-                                excel.Quit();
 
-                                Marshal.ReleaseComObject(wb);
-                                Marshal.ReleaseComObject(excel);
-                            }
+                            receivedBagDataGridView.DataSource = getReceivedBags();
+                            setProgress();
+
+                            notifyIcon1.Icon = SystemIcons.Application;
+                            notifyIcon1.BalloonTipText = "The data has been added to the DB successfully!";
+                            notifyIcon1.ShowBalloonTip(1000);
+
+                            wb.Close();
+                            excel.Quit();
+
+                            Marshal.ReleaseComObject(wb);
+                            Marshal.ReleaseComObject(excel);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Wrong Department name in the Excel file!", "File reader", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Wrong Department name in the Excel file!", "File reader", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Department name error in the Excel file!", "File reader", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -196,34 +217,48 @@ namespace Isabella
 
         private void setProgress()
         {
-            int total = 100;
-            int balance = 50;
+            int total = 0;
+            int balance = 0;
 
             MySqlDataReader readerTotal = DBConnection.getData("select COUNT(bag_id) AS bagsCount from bag");
 
-            while (readerTotal.Read())
+            if (readerTotal.HasRows)
             {
-                total = readerTotal.GetInt32("bagsCount");
+                while (readerTotal.Read())
+                {
+                    total = readerTotal.GetInt32("bagsCount");
+                }
+
+                readerTotal.Close();
+
+                MySqlDataReader readerBal = DBConnection.getData("select COUNT(bag_id) AS bagsBal from bag where issued=0");
+
+                while (readerBal.Read())
+                {
+                    balance = readerBal.GetInt32("bagsBal");
+                }
+
+                readerBal.Close();
+
+                double percent = 0;
+
+                if (total != 0)
+                    percent = (balance / (double)total) * 100;
+
+                progressBar.Value = (int)percent;
+
+                TotalRcvLbl.Text = "" + total;
+                BalanceLbl.Text = "" + balance;
             }
-
-            readerTotal.Close();
-
-            MySqlDataReader readerBal = DBConnection.getData("select COUNT(bag_id) AS bagsBal from bag where issued=0");
-
-            while (readerBal.Read())
+            else
             {
-                balance = readerBal.GetInt32("bagsBal");
+                double percent = 0;
+
+                progressBar.Value = (int)percent;
+
+                TotalRcvLbl.Text = "" + total;
+                BalanceLbl.Text = "" + balance;
             }
-
-            readerBal.Close();
-
-            double percent = ((total - balance) / (double)total) * 100;
-
-            progressBar.Value = (int)percent;
-            //progressBar.Value = 75;
-
-            TotalRcvLbl.Text = "" + total;
-            BalanceLbl.Text = "" + balance;
         }
 
         public void fillDeptComboBox()

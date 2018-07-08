@@ -77,8 +77,10 @@ namespace Isabella
 
                 if (bag_id != -1)
                 {
-                    Item[] items = bag.getItems();
-
+                    //Item[] items = bag.getItems();
+                    LinkedList<Item> itemList = bag.getItemList();
+                    Item[] items = itemList.ToArray<Item>();
+                    
                     foreach (Item item in items)
                     {
                         string color = item.getColor();

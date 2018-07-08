@@ -17,6 +17,12 @@ namespace Isabella.Role
         private Department dept;
 
         private Item[] items;
+        private LinkedList<Item> itemList = new LinkedList<Item>();
+
+        public Bag()
+        {
+
+        }
 
         public Bag(int bag_id)
         {
@@ -36,6 +42,7 @@ namespace Isabella.Role
 
         public bool addItem(int index, string color, string size, string article)
         {
+            /*
             if (index >= 0 && index < qty)
             {
                 if (items[index] == null)
@@ -51,7 +58,14 @@ namespace Isabella.Role
             else
             {
                 return false;
-            }
+            }*/
+
+            if (itemList.Count == 0)
+                itemList.AddFirst(new Item(color, size, article));
+            else
+                itemList.AddLast(new Item(color, size, article));
+
+            return true;
         }
 
         public void setBag_id(int bag_id)
@@ -112,6 +126,11 @@ namespace Isabella.Role
         public Item[] getItems()
         {
             return items;
+        }
+
+        public LinkedList<Item> getItemList()
+        {
+            return itemList;
         }
 
         public void issue(int place_id)
