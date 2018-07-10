@@ -19,8 +19,6 @@ namespace Isabella
         {
             DataTable table = new DataTable();
             DataTable tableItem = new DataTable();
-            //create a second item table and define columns. Then, inside the if statement, initialize the rows
-            //Then,  put it on the rpt.Database.Tables["items"].setDataSource(table2);
             MySqlDataReader reader = null;
             MySqlDataReader readerItems = null;
 

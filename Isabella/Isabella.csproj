@@ -145,11 +145,28 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Report\DataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet2.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Report\ReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Report\ReportForm.Designer.cs">
       <DependentUpon>ReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\SummaryReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SummaryReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\summaryReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\summaryReportForm.Designer.cs">
+      <DependentUpon>summaryReportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Role\Bag.cs" />
     <Compile Include="Role\Department.cs" />
@@ -186,6 +203,13 @@
     <EmbeddedResource Include="Report\ReportForm.resx">
       <DependentUpon>ReportForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\SummaryReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SummaryReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\summaryReportForm.resx">
+      <DependentUpon>summaryReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\testReport.resx">
       <DependentUpon>testReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -210,6 +234,17 @@
     </None>
     <None Include="Report\DataSet1.xss">
       <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="Report\DataSet2.xsc">
+      <DependentUpon>DataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="Report\DataSet2.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet2.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Report\DataSet2.xss">
+      <DependentUpon>DataSet2.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
