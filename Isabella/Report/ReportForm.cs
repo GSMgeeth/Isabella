@@ -227,7 +227,7 @@ namespace Isabella
                             "LEFT JOIN issuedto t ON b.place_id=t.place_id " +
                             "INNER JOIN item i on b.bag_id=i.bag_id " +
                             "WHERE issued=1 " +
-                            "GROUP BY i.bag_id;";
+                            "GROUP BY b.place_id;";
 
             summaryReportForm frm = new summaryReportForm(qry);
 
