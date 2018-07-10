@@ -13,6 +13,7 @@ namespace Isabella.Role
         private int qty;
         private int bagNo;
         private bool issued;
+        private DateTime issuedDate;
         private int place_id;
         private Department dept;
 
@@ -98,6 +99,16 @@ namespace Isabella.Role
             return date;
         }
 
+        public void setIssuedDate(DateTime issuedDate)
+        {
+            this.issuedDate = issuedDate;
+        }
+
+        public DateTime getIssuedDate()
+        {
+            return issuedDate;
+        }
+
         public void setQty(int qty)
         {
             this.qty = qty;
@@ -136,6 +147,7 @@ namespace Isabella.Role
         public void issue(int place_id)
         {
             issued = true;
+            this.issuedDate = DateTime.Today;
             this.place_id = place_id;
         }
 

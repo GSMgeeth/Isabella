@@ -97,10 +97,10 @@ namespace Isabella
         {
             DateTime date = dateTimePickerIssued.Value;
 
-            string qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
+            string qry = "select b.bag_id, d.deptName, b.issuedDate as date, b.bagNo, b.issued, i.place " +
                             "from bag b inner join department d on b.deptNo=d.deptNo " +
                             "inner join issuedto i on i.place_id=b.place_id " +
-                            "where b.issued=1 and MONTH(b.date)=" + date.Month;
+                            "where b.issued=1 and MONTH(b.issuedDate)=" + date.Month;
 
             testReport frm = new testReport(qry);
 
@@ -185,10 +185,10 @@ namespace Isabella
         {
             DateTime date = dateTimePickerIssuedDaily.Value;
 
-            string qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued, i.place " +
+            string qry = "select b.bag_id, d.deptName, b.issuedDate as date, b.bagNo, b.issued, i.place " +
                             "from bag b inner join department d on b.deptNo=d.deptNo " +
                             "inner join issuedto i on i.place_id=b.place_id " +
-                            "where b.issued=1 and b.date='" + date.ToString("yyyy/M/d") + "'";
+                            "where b.issued=1 and b.issuedDate<='" + date.ToString("yyyy/M/d") + "'";
 
             testReport frm = new testReport(qry);
 

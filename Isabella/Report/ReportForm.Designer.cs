@@ -193,9 +193,9 @@
             // 
             this.issuedSelectedDay.Location = new System.Drawing.Point(336, 152);
             this.issuedSelectedDay.Name = "issuedSelectedDay";
-            this.issuedSelectedDay.Size = new System.Drawing.Size(76, 30);
+            this.issuedSelectedDay.Size = new System.Drawing.Size(113, 30);
             this.issuedSelectedDay.TabIndex = 14;
-            this.issuedSelectedDay.Text = "Issued";
+            this.issuedSelectedDay.Text = "Get Report";
             this.issuedSelectedDay.UseVisualStyleBackColor = true;
             this.issuedSelectedDay.Click += new System.EventHandler(this.issuedSelectedDay_Click);
             // 
@@ -212,9 +212,9 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(7, 113);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(114, 20);
+            this.label3.Size = new System.Drawing.Size(139, 20);
             this.label3.TabIndex = 12;
-            this.label3.Text = "Daily Report";
+            this.label3.Text = "To-Date Report";
             // 
             // label2
             // 
@@ -239,9 +239,9 @@
             // 
             this.IssuedSelectedMonth.Location = new System.Drawing.Point(335, 44);
             this.IssuedSelectedMonth.Name = "IssuedSelectedMonth";
-            this.IssuedSelectedMonth.Size = new System.Drawing.Size(76, 30);
+            this.IssuedSelectedMonth.Size = new System.Drawing.Size(114, 30);
             this.IssuedSelectedMonth.TabIndex = 9;
-            this.IssuedSelectedMonth.Text = "Issued";
+            this.IssuedSelectedMonth.Text = "Get Report";
             this.IssuedSelectedMonth.UseVisualStyleBackColor = true;
             this.IssuedSelectedMonth.Click += new System.EventHandler(this.IssuedSelectedMonth_Click_1);
             // 
