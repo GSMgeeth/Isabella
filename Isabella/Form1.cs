@@ -217,25 +217,26 @@ namespace Isabella
 
         private void setProgress()
         {
-            int total = 0;
-            int balance = 0;
+            uint total = 0;
+            uint balance = 0;
 
-            MySqlDataReader readerTotal = DBConnection.getData("select COUNT(bag_id) AS bagsCount from bag");
+            MySqlDataReader readerTotal = DBConnection.getData("select COUNT(item_id) AS itemCount from item");
 
             if (readerTotal.HasRows)
             {
                 while (readerTotal.Read())
                 {
-                    total = readerTotal.GetInt32("bagsCount");
+                    total = readerTotal.GetUInt32("itemCount");
                 }
 
                 readerTotal.Close();
 
-                MySqlDataReader readerBal = DBConnection.getData("select COUNT(bag_id) AS bagsBal from bag where issued=0");
+                MySqlDataReader readerBal = DBConnection.getData("select COUNT(i.item_id) AS itemBal from item i " +
+                    "inner join bag b on i.bag_id=b.bag_id where b.issued=0");
 
                 while (readerBal.Read())
                 {
-                    balance = readerBal.GetInt32("bagsBal");
+                    balance = readerBal.GetUInt32("itemBal");
                 }
 
                 readerBal.Close();
