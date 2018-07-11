@@ -65,6 +65,8 @@ namespace Isabella
             {
                 string name = openFileDialog1.SafeFileName;
 
+                DBConnection.extraBackupDB();
+
                 if (name.Contains(".xlsx"))
                 {
                     _Application excel = new _Excel.Application();

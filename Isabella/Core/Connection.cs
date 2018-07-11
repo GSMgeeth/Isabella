@@ -97,5 +97,29 @@ namespace Isabella
                 MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        public static void extraBackupDB()
+        {
+            try
+            {
+                string file = "D:/SecondQuality/Extra/BackupExtra.sql";
+
+                if (conn != null)
+                {
+                    using (MySqlCommand cmd = new MySqlCommand())
+                    {
+                        using (MySqlBackup mb = new MySqlBackup(cmd))
+                        {
+                            cmd.Connection = getConnection();
+                            mb.ExportToFile(file);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
