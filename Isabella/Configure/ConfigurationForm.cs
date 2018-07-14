@@ -22,8 +22,21 @@ namespace Isabella.Configure
         private void ConfigurationForm_Load(object sender, EventArgs e)
         {
             CurrentDeptDataGridView.DataSource = getCurrentDept();
+            currentIssueDataGridView.DataSource = getCurrentIssue();
 
             CurrentDeptDataGridView.Columns[0].Visible = false;
+            currentIssueDataGridView.Columns[0].Visible = false;
+        }
+
+        private System.Data.DataTable getCurrentIssue()
+        {
+            System.Data.DataTable table = new System.Data.DataTable();
+
+            MySqlDataReader reader = DBConnection.getData("select * from issuedTo");
+
+            table.Load(reader);
+
+            return table;
         }
 
         private System.Data.DataTable getCurrentDept()
@@ -96,6 +109,37 @@ namespace Isabella.Configure
             catch (Exception)
             {
                 MessageBox.Show("Something went wrong!", "Delete Department", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void addNewIssuePlaceBtn_Click(object sender, EventArgs e)
+        {
+            string newIssuedPlace = newIssuePlaceTxtBox.Text;
+
+            if ((newIssuedPlace != null) && (!newIssuedPlace.Equals("")))
+            {
+                IssuedTo place = new IssuedTo(newIssuedPlace);
+
+                MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + newIssuedPlace + "'");
+
+                if (reader.HasRows)
+                {
+                    reader.Close();
+                    MessageBox.Show("This place already exists!", "Add issueing place", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    reader.Close();
+                    Database.saveIssuedPlace(place);
+
+                    currentIssueDataGridView.DataSource = getCurrentIssue();
+
+                    newIssuePlaceTxtBox.Text = "";
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please enter the new issueing place name!", "Add issueing place", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

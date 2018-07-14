@@ -28,30 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ydBtn = new System.Windows.Forms.Button();
-            this.ethBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.issuePlaceCmb = new System.Windows.Forms.ComboBox();
+            this.issueBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // ydBtn
-            // 
-            this.ydBtn.Location = new System.Drawing.Point(334, 71);
-            this.ydBtn.Name = "ydBtn";
-            this.ydBtn.Size = new System.Drawing.Size(117, 42);
-            this.ydBtn.TabIndex = 0;
-            this.ydBtn.Text = "YarnDye";
-            this.ydBtn.UseVisualStyleBackColor = true;
-            this.ydBtn.Click += new System.EventHandler(this.ydBtn_Click);
-            // 
-            // ethBtn
-            // 
-            this.ethBtn.Location = new System.Drawing.Point(457, 71);
-            this.ethBtn.Name = "ethBtn";
-            this.ethBtn.Size = new System.Drawing.Size(117, 42);
-            this.ethBtn.TabIndex = 1;
-            this.ethBtn.Text = "Ethiopia";
-            this.ethBtn.UseVisualStyleBackColor = true;
-            this.ethBtn.Click += new System.EventHandler(this.ethBtn_Click);
             // 
             // label1
             // 
@@ -63,26 +43,44 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "To where you are issueing?";
             // 
+            // issuePlaceCmb
+            // 
+            this.issuePlaceCmb.FormattingEnabled = true;
+            this.issuePlaceCmb.Location = new System.Drawing.Point(281, 12);
+            this.issuePlaceCmb.Name = "issuePlaceCmb";
+            this.issuePlaceCmb.Size = new System.Drawing.Size(197, 24);
+            this.issuePlaceCmb.TabIndex = 3;
+            // 
+            // issueBtn
+            // 
+            this.issueBtn.Location = new System.Drawing.Point(512, 12);
+            this.issueBtn.Name = "issueBtn";
+            this.issueBtn.Size = new System.Drawing.Size(109, 26);
+            this.issueBtn.TabIndex = 4;
+            this.issueBtn.Text = "Issue";
+            this.issueBtn.UseVisualStyleBackColor = true;
+            this.issueBtn.Click += new System.EventHandler(this.issueBtn_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(586, 134);
+            this.ClientSize = new System.Drawing.Size(694, 134);
+            this.Controls.Add(this.issueBtn);
+            this.Controls.Add(this.issuePlaceCmb);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.ethBtn);
-            this.Controls.Add(this.ydBtn);
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Issue Where?";
+            this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button ydBtn;
-        private System.Windows.Forms.Button ethBtn;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox issuePlaceCmb;
+        private System.Windows.Forms.Button issueBtn;
     }
 }

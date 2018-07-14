@@ -170,6 +170,7 @@
     </Compile>
     <Compile Include="Role\Bag.cs" />
     <Compile Include="Role\Department.cs" />
+    <Compile Include="Role\IssuedTo.cs" />
     <Compile Include="Role\Item.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Report\testReport.cs">

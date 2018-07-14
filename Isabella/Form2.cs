@@ -1,4 +1,5 @@
 ﻿using Isabella.Role;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -46,6 +47,48 @@ namespace Isabella
         private void closeForm()
         {
             this.Close();
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            MySqlDataReader reader = DBConnection.getData("select * from issuedTo");
+
+            while (reader.Read())
+            {
+                issuePlaceCmb.Items.Add(reader.GetString("place"));
+            }
+
+            reader.Close();
+        }
+
+        private void issueBtn_Click(object sender, EventArgs e)
+        {
+            object tmpPlaceObj = issuePlaceCmb.SelectedItem;
+
+            if (tmpPlaceObj != null)
+            {
+                string place = tmpPlaceObj.ToString();
+
+                MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+
+                if (reader.HasRows)
+                {
+                    Bag bag = new Bag(bag_id);
+
+                    while (reader.Read())
+                    {
+                        int place_id = reader.GetInt32("place_id");
+
+                        bag.issue(place_id);
+                    }
+
+                    reader.Close();
+
+                    Database.issueBag(bag);
+
+                    closeForm();
+                }
+            }
         }
     }
 }

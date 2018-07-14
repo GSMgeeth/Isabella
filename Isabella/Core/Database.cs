@@ -17,6 +17,13 @@ namespace Isabella
             DBConnection.updateDB("insert into department (deptName) values ('" + deptName + "')");
         }
 
+        public static void saveIssuedPlace(IssuedTo iss)
+        {
+            string place = iss.getPlace();
+
+            DBConnection.updateDB("insert into issuedTo (place) values ('" + place + "')");
+        }
+
         public static void deleteDepartment(Department dept)
         {
             int deptNo = dept.getDeptNo();
