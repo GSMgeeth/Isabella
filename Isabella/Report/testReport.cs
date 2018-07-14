@@ -57,7 +57,7 @@ namespace Isabella
                         if (o != null)
                             table.Rows.Add(reader.GetInt32("bag_id"), reader.GetString("deptName"), reader.GetDateTime("date"), reader.GetInt32("bagNo"), reader.GetBoolean("issued"), reader.GetString("place"));
                         else
-                            table.Rows.Add(reader.GetInt32("bag_id"), reader.GetString("deptName"), reader.GetDateTime("date"), reader.GetInt32("bagNo"), reader.GetBoolean("issued"), "null");
+                            table.Rows.Add(reader.GetInt32("bag_id"), reader.GetString("deptName"), reader.GetDateTime("date"), reader.GetInt32("bagNo"), reader.GetBoolean("issued"), "   ");
 
                         int bag_id = reader.GetInt32("bag_id");
 
