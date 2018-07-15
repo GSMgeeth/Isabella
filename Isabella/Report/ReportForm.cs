@@ -96,11 +96,35 @@ namespace Isabella
         private void IssuedSelectedMonth_Click_1(object sender, EventArgs e)
         {
             DateTime date = dateTimePickerIssued.Value;
+            Object tmpIssuedPlaceObj = IssuedPlaceCmbMonthly.SelectedItem;
+            string qry = "";
 
-            string qry = "select b.bag_id, d.deptName, b.issuedDate as date, b.bagNo, b.issued, i.place " +
+            if (tmpIssuedPlaceObj == null)
+            {
+                qry = "select b.bag_id, d.deptName, b.issuedDate as date, b.bagNo, b.issued, i.place " +
                             "from bag b inner join department d on b.deptNo=d.deptNo " +
                             "inner join issuedto i on i.place_id=b.place_id " +
                             "where b.issued=1 and MONTH(b.issuedDate)=" + date.Month;
+            }
+            else
+            {
+                string place = tmpIssuedPlaceObj.ToString();
+
+                if (place.Equals("All"))
+                {
+                    qry = "select b.bag_id, d.deptName, b.issuedDate as date, b.bagNo, b.issued, i.place " +
+                            "from bag b inner join department d on b.deptNo=d.deptNo " +
+                            "inner join issuedto i on i.place_id=b.place_id " +
+                            "where b.issued=1 and MONTH(b.issuedDate)=" + date.Month;
+                }
+                else
+                {
+                    qry = "select b.bag_id, d.deptName, b.issuedDate as date, b.bagNo, b.issued, i.place " +
+                            "from bag b inner join department d on b.deptNo=d.deptNo " +
+                            "inner join issuedto i on i.place_id=b.place_id " +
+                            "where b.issued=1 and i.place='" + place + "' and MONTH(b.issuedDate)=" + date.Month;
+                }
+            }
 
             testReport frm = new testReport(qry);
 
@@ -198,6 +222,23 @@ namespace Isabella
         private void ReportForm_Load(object sender, EventArgs e)
         {
             fillDeptCmb();
+            fillIssuedPlace();
+        }
+
+        private void fillIssuedPlace()
+        {
+            MySqlDataReader reader = DBConnection.getData("select * from issuedTo");
+
+            IssuedPlaceCmbMonthly.Items.Add("All");
+            IssuedPlaceCmbToDate.Items.Add("All");
+
+            while (reader.Read())
+            {
+                IssuedPlaceCmbMonthly.Items.Add(reader.GetString("place"));
+                IssuedPlaceCmbToDate.Items.Add(reader.GetString("place"));
+            }
+
+            reader.Close();
         }
 
         public void fillDeptCmb()

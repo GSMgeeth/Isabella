@@ -40,13 +40,15 @@
             this.reportDatePicker = new System.Windows.Forms.DateTimePicker();
             this.AllSelectedMonth = new System.Windows.Forms.Button();
             this.issuedReportTab = new System.Windows.Forms.TabPage();
+            this.SummaryIssuedBtn = new System.Windows.Forms.Button();
             this.issuedSelectedDay = new System.Windows.Forms.Button();
             this.dateTimePickerIssuedDaily = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePickerIssued = new System.Windows.Forms.DateTimePicker();
             this.IssuedSelectedMonth = new System.Windows.Forms.Button();
-            this.SummaryIssuedBtn = new System.Windows.Forms.Button();
+            this.IssuedPlaceCmbMonthly = new System.Windows.Forms.ComboBox();
+            this.IssuedPlaceCmbToDate = new System.Windows.Forms.ComboBox();
             this.ReportTabControl.SuspendLayout();
             this.receivedReportTab.SuspendLayout();
             this.issuedReportTab.SuspendLayout();
@@ -174,6 +176,8 @@
             // issuedReportTab
             // 
             this.issuedReportTab.BackColor = System.Drawing.Color.LightGray;
+            this.issuedReportTab.Controls.Add(this.IssuedPlaceCmbToDate);
+            this.issuedReportTab.Controls.Add(this.IssuedPlaceCmbMonthly);
             this.issuedReportTab.Controls.Add(this.SummaryIssuedBtn);
             this.issuedReportTab.Controls.Add(this.issuedSelectedDay);
             this.issuedReportTab.Controls.Add(this.dateTimePickerIssuedDaily);
@@ -189,11 +193,22 @@
             this.issuedReportTab.TabIndex = 1;
             this.issuedReportTab.Text = "Issued Bags";
             // 
+            // SummaryIssuedBtn
+            // 
+            this.SummaryIssuedBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SummaryIssuedBtn.Location = new System.Drawing.Point(7, 277);
+            this.SummaryIssuedBtn.Name = "SummaryIssuedBtn";
+            this.SummaryIssuedBtn.Size = new System.Drawing.Size(177, 32);
+            this.SummaryIssuedBtn.TabIndex = 20;
+            this.SummaryIssuedBtn.Text = "Summary Report";
+            this.SummaryIssuedBtn.UseVisualStyleBackColor = true;
+            this.SummaryIssuedBtn.Click += new System.EventHandler(this.SummaryIssuedBtn_Click);
+            // 
             // issuedSelectedDay
             // 
-            this.issuedSelectedDay.Location = new System.Drawing.Point(336, 152);
+            this.issuedSelectedDay.Location = new System.Drawing.Point(569, 149);
             this.issuedSelectedDay.Name = "issuedSelectedDay";
-            this.issuedSelectedDay.Size = new System.Drawing.Size(113, 30);
+            this.issuedSelectedDay.Size = new System.Drawing.Size(114, 30);
             this.issuedSelectedDay.TabIndex = 14;
             this.issuedSelectedDay.Text = "Get Report";
             this.issuedSelectedDay.UseVisualStyleBackColor = true;
@@ -237,7 +252,7 @@
             // 
             // IssuedSelectedMonth
             // 
-            this.IssuedSelectedMonth.Location = new System.Drawing.Point(335, 44);
+            this.IssuedSelectedMonth.Location = new System.Drawing.Point(569, 45);
             this.IssuedSelectedMonth.Name = "IssuedSelectedMonth";
             this.IssuedSelectedMonth.Size = new System.Drawing.Size(114, 30);
             this.IssuedSelectedMonth.TabIndex = 9;
@@ -245,16 +260,21 @@
             this.IssuedSelectedMonth.UseVisualStyleBackColor = true;
             this.IssuedSelectedMonth.Click += new System.EventHandler(this.IssuedSelectedMonth_Click_1);
             // 
-            // SummaryIssuedBtn
+            // IssuedPlaceCmbMonthly
             // 
-            this.SummaryIssuedBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SummaryIssuedBtn.Location = new System.Drawing.Point(7, 277);
-            this.SummaryIssuedBtn.Name = "SummaryIssuedBtn";
-            this.SummaryIssuedBtn.Size = new System.Drawing.Size(177, 32);
-            this.SummaryIssuedBtn.TabIndex = 20;
-            this.SummaryIssuedBtn.Text = "Summary Report";
-            this.SummaryIssuedBtn.UseVisualStyleBackColor = true;
-            this.SummaryIssuedBtn.Click += new System.EventHandler(this.SummaryIssuedBtn_Click);
+            this.IssuedPlaceCmbMonthly.FormattingEnabled = true;
+            this.IssuedPlaceCmbMonthly.Location = new System.Drawing.Point(336, 47);
+            this.IssuedPlaceCmbMonthly.Name = "IssuedPlaceCmbMonthly";
+            this.IssuedPlaceCmbMonthly.Size = new System.Drawing.Size(199, 28);
+            this.IssuedPlaceCmbMonthly.TabIndex = 21;
+            // 
+            // IssuedPlaceCmbToDate
+            // 
+            this.IssuedPlaceCmbToDate.FormattingEnabled = true;
+            this.IssuedPlaceCmbToDate.Location = new System.Drawing.Point(336, 152);
+            this.IssuedPlaceCmbToDate.Name = "IssuedPlaceCmbToDate";
+            this.IssuedPlaceCmbToDate.Size = new System.Drawing.Size(199, 28);
+            this.IssuedPlaceCmbToDate.TabIndex = 22;
             // 
             // ReportForm
             // 
@@ -297,5 +317,7 @@
         private System.Windows.Forms.ComboBox DeptCmbDaily;
         private System.Windows.Forms.ComboBox DeptCmbMonthly;
         private System.Windows.Forms.Button SummaryIssuedBtn;
+        private System.Windows.Forms.ComboBox IssuedPlaceCmbToDate;
+        private System.Windows.Forms.ComboBox IssuedPlaceCmbMonthly;
     }
 }
