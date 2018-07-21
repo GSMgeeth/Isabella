@@ -243,22 +243,11 @@ namespace Isabella
 
                 readerBal.Close();
 
-                double percent = 0;
-
-                if (total != 0)
-                    percent = (balance / (double)total) * 100;
-
-                progressBar.Value = (int)percent;
-
                 TotalRcvLbl.Text = "" + total;
                 BalanceLbl.Text = "" + balance;
             }
             else
             {
-                double percent = 0;
-
-                progressBar.Value = (int)percent;
-
                 TotalRcvLbl.Text = "" + total;
                 BalanceLbl.Text = "" + balance;
             }
@@ -280,7 +269,7 @@ namespace Isabella
         {
             System.Data.DataTable table = new System.Data.DataTable();
 
-            MySqlDataReader reader = DBConnection.getData("select b.bag_id, d.deptName, b.date, b.bagNo, t.place from bag b inner join department d on b.deptNo=d.deptNo inner join issuedTo t on b.place_id=t.place_id where b.issued=1");
+            MySqlDataReader reader = DBConnection.getData("select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as BagNo, t.place as Place from bag b inner join department d on b.deptNo=d.deptNo inner join issuedTo t on b.place_id=t.place_id where b.issued=1");
 
             table.Load(reader);
 
@@ -291,7 +280,7 @@ namespace Isabella
         {
             System.Data.DataTable table = new System.Data.DataTable();
 
-            MySqlDataReader reader = DBConnection.getData("select b.bag_id, d.deptName, b.date, b.bagNo, b.issued from bag b inner join department d on b.deptNo=d.deptNo");
+            MySqlDataReader reader = DBConnection.getData("select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as BagNo, b.issued as Issued from bag b inner join department d on b.deptNo=d.deptNo");
 
             table.Load(reader);
 
@@ -305,15 +294,16 @@ namespace Isabella
             receivedItemDataGridView.DataSource = getReceivedItems(Int32.Parse(tmp));
 
             receivedItemDataGridView.RowHeadersVisible = false;
-            receivedItemDataGridView.Columns[0].Visible = false;
-            receivedItemDataGridView.Columns[1].Visible = false;
+            //receivedItemDataGridView.Columns[0].Visible = false;
+            //receivedItemDataGridView.Columns[1].Visible = false;
         }
 
         private System.Data.DataTable getReceivedItems(int bag_id)
         {
             System.Data.DataTable table = new System.Data.DataTable();
 
-            MySqlDataReader reader = DBConnection.getData("select * from item where bag_id=" + bag_id);
+            MySqlDataReader reader = DBConnection.getData("select article as Article, size as Size, color as Color, COUNT(item_id) as Qty from item " +
+                                                            "where bag_id=" + bag_id + " group by color, size, article");
 
             table.Load(reader);
 
@@ -333,7 +323,8 @@ namespace Isabella
         {
             System.Data.DataTable table = new System.Data.DataTable();
 
-            MySqlDataReader reader = DBConnection.getData("select * from item where bag_id=" + bag_id);
+            MySqlDataReader reader = DBConnection.getData("select article as Article, color as Color, size as Size, COUNT(item_id) as Qty " +
+                                                          "from item where bag_id=" + bag_id + " group by article, color, size");
 
             table.Load(reader);
 
@@ -369,8 +360,8 @@ namespace Isabella
             issuedItemDataGridView.DataSource = getIssuedItems(Int32.Parse(tmp));
 
             issuedItemDataGridView.RowHeadersVisible = false;
-            issuedItemDataGridView.Columns[0].Visible = false;
-            issuedItemDataGridView.Columns[1].Visible = false;
+            //issuedItemDataGridView.Columns[0].Visible = false;
+            //issuedItemDataGridView.Columns[1].Visible = false;
         }
 
         private void searchButton_Click(object sender, EventArgs e)
@@ -378,7 +369,7 @@ namespace Isabella
             string deptName = "Die";
             int deptNo = 1;
             DateTime date = receivedDatePicker.Value;
-            string qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued " +
+            string qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as Bag No, b.issued as Issued " +
                     "from bag b inner join department d " +
                     "on b.deptNo=d.deptNo " +
                     "where b.date='" + date.ToString("yyyy/M/d") + "'";
@@ -388,7 +379,7 @@ namespace Isabella
 
             if ((tmpDeptNameObj == null) && (tmpBagNo.Equals("")))
             {
-                qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued " +
+                qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as Bag No, b.issued as Issued " +
                     "from bag b inner join department d " +
                     "on b.deptNo=d.deptNo " +
                     "where b.date='" + date.ToString("yyyy/M/d") + "'";
@@ -407,7 +398,7 @@ namespace Isabella
 
                 readerDept.Close();
 
-                qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued " +
+                qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as Bag No, b.issued as Issued " +
                     "from bag b inner join department d " +
                     "on b.deptNo=d.deptNo " +
                     "where d.deptNo=" + deptNo + " and b.date='" + date.ToString("yyyy/M/d") + "'";
@@ -418,7 +409,7 @@ namespace Isabella
                 {
                     int bagNo = Int32.Parse(bagNoTxtBox.Text);
 
-                    qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued " +
+                    qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as Bag No, b.issued as Issued " +
                     "from bag b inner join department d " +
                     "on b.deptNo=d.deptNo " +
                     "where b.bagNo=" + bagNo + " and b.date='" + date.ToString("yyyy/M/d") + "'";
@@ -446,7 +437,7 @@ namespace Isabella
                 {
                     int bagNo = Int32.Parse(bagNoTxtBox.Text);
 
-                    qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued " +
+                    qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as Bag No, b.issued as Issued " +
                     "from bag b inner join department d " +
                     "on b.deptNo=d.deptNo " +
                     "where d.deptNo=" + deptNo + " and b.bagNo=" + bagNo + " and b.date='" + date.ToString("yyyy/M/d") + "'";
@@ -528,7 +519,7 @@ namespace Isabella
         }
 
         private void receivedDatePicker_ValueChanged(object sender, EventArgs e)
-        {/*
+        {
             DateTime date = receivedDatePicker.Value;
 
             System.Data.DataTable table = getReceivedBagsByDate(date);
@@ -540,14 +531,51 @@ namespace Isabella
             else
             {
                 MessageBox.Show("No records of this date!", "Bags picker by date", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }*/
+            }
         }
 
         private System.Data.DataTable getReceivedBagsByDate(DateTime date)
         {
             System.Data.DataTable table = new System.Data.DataTable();
 
-            MySqlDataReader reader = DBConnection.getData("select b.bag_id, d.deptName, b.date, b.bagNo, b.issued from bag b inner join department d on b.deptNo=d.deptNo where b.date='" + date.ToString("yyyy/M/d") + "'");
+            string qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued " +
+                    "from bag b inner join department d " +
+                    "on b.deptNo=d.deptNo " +
+                    "where b.date='" + date.ToString("yyyy/M/d") + "'";
+
+            Object tmpDeptNameObj = DeptCmb.SelectedItem;
+            string deptName = "";
+            int deptNo = 1;
+
+            if (tmpDeptNameObj == null)
+            {
+                qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued " +
+                    "from bag b inner join department d " +
+                    "on b.deptNo=d.deptNo " +
+                    "where b.date='" + date.ToString("yyyy/M/d") + "'";
+            }
+            else if (tmpDeptNameObj != null)
+            {
+                deptName = DeptCmb.SelectedItem.ToString();
+
+                MySqlDataReader readerDept = DBConnection.getData("select * from department " +
+                                                            "where deptName='" + deptName + "'");
+
+                while (readerDept.Read())
+                {
+                    deptNo = readerDept.GetInt32("deptNo");
+                }
+
+                readerDept.Close();
+
+                qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued " +
+                    "from bag b inner join department d " +
+                    "on b.deptNo=d.deptNo " +
+                    "where d.deptNo=" + deptNo + " and b.date='" + date.ToString("yyyy/M/d") + "'";
+            }
+
+
+            MySqlDataReader reader = DBConnection.getData(qry);
 
             if (!reader.HasRows)
             {
@@ -565,6 +593,50 @@ namespace Isabella
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DBConnection.backupDB();
+        }
+
+        private void DeptCmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int deptNo = 0;
+            string deptName = DeptCmb.SelectedItem.ToString();
+
+            MySqlDataReader readerDept = DBConnection.getData("select * from department " +
+                                                        "where deptName='" + deptName + "'");
+
+            while (readerDept.Read())
+            {
+                deptNo = readerDept.GetInt32("deptNo");
+            }
+
+            readerDept.Close();
+
+            string qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as Bag No, b.issued as Issued " +
+                "from bag b inner join department d " +
+                "on b.deptNo=d.deptNo " +
+                "where d.deptNo=" + deptNo;
+
+            try
+            {
+                MySqlDataReader reader = DBConnection.getData(qry);
+
+                if (reader.HasRows)
+                {
+                    System.Data.DataTable table = new System.Data.DataTable();
+
+                    table.Load(reader);
+
+                    receivedBagDataGridView.DataSource = table;
+                }
+                else
+                {
+                    reader.Close();
+                    MessageBox.Show("No records for this data!", "Bags finder", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Invalid data!", "Bags finder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

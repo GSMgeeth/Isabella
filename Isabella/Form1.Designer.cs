@@ -39,6 +39,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -48,6 +51,10 @@
             this.GenReportButton = new System.Windows.Forms.Button();
             this.ConfigButton = new System.Windows.Forms.Button();
             this.AddDataPanel = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.BalanceLbl = new System.Windows.Forms.Label();
+            this.TotalRcvLbl = new System.Windows.Forms.Label();
             this.AddFileButton = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -67,11 +74,7 @@
             this.issuedItemDataGridView = new System.Windows.Forms.DataGridView();
             this.issuedBagDataGridView = new System.Windows.Forms.DataGridView();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.TotalRcvLbl = new System.Windows.Forms.Label();
-            this.BalanceLbl = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel1.SuspendLayout();
             this.AddDataPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -82,6 +85,7 @@
             this.issuedTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.issuedItemDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.issuedBagDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -177,16 +181,56 @@
             // AddDataPanel
             // 
             this.AddDataPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.AddDataPanel.Controls.Add(this.chart1);
             this.AddDataPanel.Controls.Add(this.label5);
             this.AddDataPanel.Controls.Add(this.label4);
             this.AddDataPanel.Controls.Add(this.BalanceLbl);
             this.AddDataPanel.Controls.Add(this.TotalRcvLbl);
-            this.AddDataPanel.Controls.Add(this.progressBar);
             this.AddDataPanel.Controls.Add(this.AddFileButton);
             this.AddDataPanel.Location = new System.Drawing.Point(291, 102);
             this.AddDataPanel.Name = "AddDataPanel";
             this.AddDataPanel.Size = new System.Drawing.Size(893, 540);
             this.AddDataPanel.TabIndex = 7;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(654, 454);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 20);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Balance";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(124, 454);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(51, 20);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Total";
+            // 
+            // BalanceLbl
+            // 
+            this.BalanceLbl.AutoSize = true;
+            this.BalanceLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BalanceLbl.Location = new System.Drawing.Point(654, 419);
+            this.BalanceLbl.Name = "BalanceLbl";
+            this.BalanceLbl.Size = new System.Drawing.Size(70, 20);
+            this.BalanceLbl.TabIndex = 3;
+            this.BalanceLbl.Text = "Balance";
+            // 
+            // TotalRcvLbl
+            // 
+            this.TotalRcvLbl.AutoSize = true;
+            this.TotalRcvLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TotalRcvLbl.Location = new System.Drawing.Point(124, 420);
+            this.TotalRcvLbl.Name = "TotalRcvLbl";
+            this.TotalRcvLbl.Size = new System.Drawing.Size(46, 20);
+            this.TotalRcvLbl.TabIndex = 2;
+            this.TotalRcvLbl.Text = "Total";
             // 
             // AddFileButton
             // 
@@ -302,6 +346,7 @@
             this.DeptCmb.Size = new System.Drawing.Size(159, 28);
             this.DeptCmb.TabIndex = 3;
             this.DeptCmb.Text = "All";
+            this.DeptCmb.SelectedIndexChanged += new System.EventHandler(this.DeptCmb_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -464,53 +509,22 @@
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
             // 
-            // progressBar
+            // chart1
             // 
-            this.progressBar.Location = new System.Drawing.Point(128, 255);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(603, 28);
-            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar.TabIndex = 1;
-            // 
-            // TotalRcvLbl
-            // 
-            this.TotalRcvLbl.AutoSize = true;
-            this.TotalRcvLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TotalRcvLbl.Location = new System.Drawing.Point(124, 420);
-            this.TotalRcvLbl.Name = "TotalRcvLbl";
-            this.TotalRcvLbl.Size = new System.Drawing.Size(46, 20);
-            this.TotalRcvLbl.TabIndex = 2;
-            this.TotalRcvLbl.Text = "Total";
-            // 
-            // BalanceLbl
-            // 
-            this.BalanceLbl.AutoSize = true;
-            this.BalanceLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BalanceLbl.Location = new System.Drawing.Point(654, 419);
-            this.BalanceLbl.Name = "BalanceLbl";
-            this.BalanceLbl.Size = new System.Drawing.Size(70, 20);
-            this.BalanceLbl.TabIndex = 3;
-            this.BalanceLbl.Text = "Balance";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(124, 454);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 20);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Total";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(654, 454);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 20);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Balance";
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(23, 65);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(332, 300);
+            this.chart1.TabIndex = 6;
+            this.chart1.Text = "chart1";
             // 
             // Form1
             // 
@@ -545,6 +559,7 @@
             this.issuedTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.issuedItemDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.issuedBagDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -580,9 +595,9 @@
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.Label BalanceLbl;
         private System.Windows.Forms.Label TotalRcvLbl;
-        private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }
 
