@@ -71,7 +71,13 @@ namespace Isabella.Configure
                     Database.saveDepartment(dept);
 
                     CurrentDeptDataGridView.DataSource = getCurrentDept();
+                    /*
+                    Form1 mainFrm = new Form1();
+                    ReportForm repFrm = new ReportForm();
 
+                    mainFrm.fillDeptComboBox();
+                    repFrm.fillDeptCmb();
+                    */
                     newDeptTxtBox.Text = "";
                 }
             }
@@ -98,12 +104,13 @@ namespace Isabella.Configure
                     Database.deleteDepartment(dept);
 
                     CurrentDeptDataGridView.DataSource = getCurrentDept();
-
+                    /*
                     Form1 mainFrm = new Form1();
                     ReportForm repFrm = new ReportForm();
 
                     mainFrm.fillDeptComboBox();
                     repFrm.fillDeptCmb();
+                    */
                 }
             }
             catch (Exception)
@@ -133,6 +140,12 @@ namespace Isabella.Configure
                     Database.saveIssuedPlace(place);
 
                     currentIssueDataGridView.DataSource = getCurrentIssue();
+
+                    //Form1 mainFrm = new Form1();
+                    //ReportForm repFrm = new ReportForm();
+
+                    //mainFrm.fillDeptComboBox();
+                    //repFrm.fillIssuedPlace();
 
                     newIssuePlaceTxtBox.Text = "";
                 }

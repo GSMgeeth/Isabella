@@ -225,7 +225,7 @@ namespace Isabella
             fillIssuedPlace();
         }
 
-        private void fillIssuedPlace()
+        public void fillIssuedPlace()
         {
             MySqlDataReader reader = DBConnection.getData("select * from issuedTo");
 

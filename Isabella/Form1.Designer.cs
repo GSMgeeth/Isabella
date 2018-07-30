@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -39,9 +45,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,6 +54,10 @@
             this.GenReportButton = new System.Windows.Forms.Button();
             this.ConfigButton = new System.Windows.Forms.Button();
             this.AddDataPanel = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.chartIssued = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chartBalance = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.BalanceLbl = new System.Windows.Forms.Label();
@@ -74,9 +81,13 @@
             this.issuedItemDataGridView = new System.Windows.Forms.DataGridView();
             this.issuedBagDataGridView = new System.Windows.Forms.DataGridView();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.dataSet2 = new Isabella.Report.DataSet2();
+            this.summaryDataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.deptTotalQtyLbl = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.AddDataPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartIssued)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartBalance)).BeginInit();
             this.panel2.SuspendLayout();
             this.searchBagTabControl.SuspendLayout();
             this.receivedTab.SuspendLayout();
@@ -85,7 +96,8 @@
             this.issuedTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.issuedItemDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.issuedBagDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.summaryDataTableBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -181,7 +193,10 @@
             // AddDataPanel
             // 
             this.AddDataPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.AddDataPanel.Controls.Add(this.chart1);
+            this.AddDataPanel.Controls.Add(this.label7);
+            this.AddDataPanel.Controls.Add(this.label6);
+            this.AddDataPanel.Controls.Add(this.chartIssued);
+            this.AddDataPanel.Controls.Add(this.chartBalance);
             this.AddDataPanel.Controls.Add(this.label5);
             this.AddDataPanel.Controls.Add(this.label4);
             this.AddDataPanel.Controls.Add(this.BalanceLbl);
@@ -192,11 +207,63 @@
             this.AddDataPanel.Size = new System.Drawing.Size(893, 540);
             this.AddDataPanel.TabIndex = 7;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(807, 40);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(49, 17);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Issued";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(23, 42);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(59, 17);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Balance";
+            // 
+            // chartIssued
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chartIssued.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartIssued.Legends.Add(legend1);
+            this.chartIssued.Location = new System.Drawing.Point(443, 65);
+            this.chartIssued.Name = "chartIssued";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartIssued.Series.Add(series1);
+            this.chartIssued.Size = new System.Drawing.Size(411, 352);
+            this.chartIssued.TabIndex = 7;
+            this.chartIssued.Text = "chart2";
+            // 
+            // chartBalance
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chartBalance.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chartBalance.Legends.Add(legend2);
+            this.chartBalance.Location = new System.Drawing.Point(23, 65);
+            this.chartBalance.Name = "chartBalance";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartBalance.Series.Add(series2);
+            this.chartBalance.Size = new System.Drawing.Size(400, 352);
+            this.chartBalance.TabIndex = 6;
+            this.chartBalance.Text = "chart1";
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(654, 454);
+            this.label5.Location = new System.Drawing.Point(654, 497);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 20);
             this.label5.TabIndex = 5;
@@ -206,7 +273,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(124, 454);
+            this.label4.Location = new System.Drawing.Point(124, 497);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(51, 20);
             this.label4.TabIndex = 4;
@@ -216,7 +283,7 @@
             // 
             this.BalanceLbl.AutoSize = true;
             this.BalanceLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BalanceLbl.Location = new System.Drawing.Point(654, 419);
+            this.BalanceLbl.Location = new System.Drawing.Point(654, 462);
             this.BalanceLbl.Name = "BalanceLbl";
             this.BalanceLbl.Size = new System.Drawing.Size(70, 20);
             this.BalanceLbl.TabIndex = 3;
@@ -226,7 +293,7 @@
             // 
             this.TotalRcvLbl.AutoSize = true;
             this.TotalRcvLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TotalRcvLbl.Location = new System.Drawing.Point(124, 420);
+            this.TotalRcvLbl.Location = new System.Drawing.Point(124, 463);
             this.TotalRcvLbl.Name = "TotalRcvLbl";
             this.TotalRcvLbl.Size = new System.Drawing.Size(46, 20);
             this.TotalRcvLbl.TabIndex = 2;
@@ -269,6 +336,7 @@
             // 
             // receivedTab
             // 
+            this.receivedTab.Controls.Add(this.deptTotalQtyLbl);
             this.receivedTab.Controls.Add(this.bagQty);
             this.receivedTab.Controls.Add(this.bagNoTxtBox);
             this.receivedTab.Controls.Add(this.receivedDatePicker);
@@ -292,9 +360,9 @@
             this.bagQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bagQty.Location = new System.Drawing.Point(711, 47);
             this.bagQty.Name = "bagQty";
-            this.bagQty.Size = new System.Drawing.Size(43, 17);
+            this.bagQty.Size = new System.Drawing.Size(103, 17);
             this.bagQty.TabIndex = 8;
-            this.bagQty.Text = "Qty :";
+            this.bagQty.Text = "Total items : ";
             // 
             // bagNoTxtBox
             // 
@@ -347,6 +415,7 @@
             this.DeptCmb.TabIndex = 3;
             this.DeptCmb.Text = "All";
             this.DeptCmb.SelectedIndexChanged += new System.EventHandler(this.DeptCmb_SelectedIndexChanged);
+            this.DeptCmb.SelectedValueChanged += new System.EventHandler(this.DeptCmb_SelectedValueChanged);
             // 
             // label3
             // 
@@ -509,22 +578,25 @@
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
             // 
-            // chart1
+            // dataSet2
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(23, 65);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(332, 300);
-            this.chart1.TabIndex = 6;
-            this.chart1.Text = "chart1";
+            this.dataSet2.DataSetName = "DataSet2";
+            this.dataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // summaryDataTableBindingSource
+            // 
+            this.summaryDataTableBindingSource.DataMember = "SummaryDataTable";
+            this.summaryDataTableBindingSource.DataSource = this.dataSet2;
+            // 
+            // deptTotalQtyLbl
+            // 
+            this.deptTotalQtyLbl.AutoSize = true;
+            this.deptTotalQtyLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deptTotalQtyLbl.Location = new System.Drawing.Point(7, 47);
+            this.deptTotalQtyLbl.Name = "deptTotalQtyLbl";
+            this.deptTotalQtyLbl.Size = new System.Drawing.Size(103, 17);
+            this.deptTotalQtyLbl.TabIndex = 9;
+            this.deptTotalQtyLbl.Text = "Total items : ";
             // 
             // Form1
             // 
@@ -537,8 +609,8 @@
             this.Controls.Add(this.SearchBagButton);
             this.Controls.Add(this.AddDataButton);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.AddDataPanel);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.AddDataPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -549,6 +621,8 @@
             this.panel1.PerformLayout();
             this.AddDataPanel.ResumeLayout(false);
             this.AddDataPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartIssued)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartBalance)).EndInit();
             this.panel2.ResumeLayout(false);
             this.searchBagTabControl.ResumeLayout(false);
             this.receivedTab.ResumeLayout(false);
@@ -559,7 +633,8 @@
             this.issuedTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.issuedItemDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.issuedBagDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.summaryDataTableBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -597,7 +672,13 @@
         private System.Windows.Forms.Label TotalRcvLbl;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartBalance;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartIssued;
+        private System.Windows.Forms.BindingSource summaryDataTableBindingSource;
+        private Report.DataSet2 dataSet2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label deptTotalQtyLbl;
     }
 }
 

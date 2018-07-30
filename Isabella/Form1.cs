@@ -50,7 +50,9 @@ namespace Isabella
         {
             ConfigurationForm configFrm = new ConfigurationForm();
             
-            configFrm.Show();
+            configFrm.ShowDialog();
+
+            fillDeptComboBox();
         }
 
         private void AddFileButton_Click(object sender, EventArgs e)
@@ -251,10 +253,82 @@ namespace Isabella
                 TotalRcvLbl.Text = "" + total;
                 BalanceLbl.Text = "" + balance;
             }
+
+            //pie chart
+
+            chartBalance.Series.Clear();
+            chartBalance.Legends.Clear();
+
+            chartBalance.Legends.Add("legend");
+            chartBalance.Legends[0].Title = "Department";
+
+            string srs = "seriesName";
+
+            chartBalance.Series.Add(srs);
+
+            chartBalance.Series[srs].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+
+            chartBalance.Series[srs].IsValueShownAsLabel = false;
+
+            chartIssued.Series.Clear();
+            chartIssued.Legends.Clear();
+
+            chartIssued.Legends.Add("legend");
+            chartIssued.Legends[0].Title = "Issued Place";
+            
+            string srsIss = "seriesNameIss";
+
+            chartIssued.Series.Add(srsIss);
+
+            chartIssued.Series[srsIss].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+
+            chartIssued.Series[srsIss].IsValueShownAsLabel = false;
+
+            string qryIss = "SELECT COUNT(i.item_id) as itemQty, t.place as place FROM bag b " +
+                            "LEFT JOIN issuedto t ON b.place_id=t.place_id " +
+                            "INNER JOIN item i on b.bag_id=i.bag_id " +
+                            "WHERE issued=1 " +
+                            "GROUP BY b.place_id;";
+
+            string qryBal = "select d.deptName as Dept, COUNT(bag_id) as Qty " +
+                            "from bag b inner join department d on b.deptNo=d.deptNo " +
+                            "where b.issued=0 group by b.deptNo";
+            
+            MySqlDataReader reader = DBConnection.getData(qryBal);
+
+            if (reader.HasRows)
+            {
+                int i = 0;
+                while (reader.Read())
+                {
+                    chartBalance.Series[srs].Points.AddXY(reader.GetString("Dept"), reader.GetInt32("Qty"));
+
+                    i++;
+                }
+            }
+
+            reader.Close();
+
+            reader = DBConnection.getData(qryIss);
+
+            if (reader.HasRows)
+            {
+                int i = 0;
+                while (reader.Read())
+                {
+                    chartIssued.Series[srsIss].Points.AddXY(reader.GetString("place"), reader.GetInt32("itemQty"));
+
+                    i++;
+                }
+            }
+
+            reader.Close();
         }
 
         public void fillDeptComboBox()
         {
+            DeptCmb.Items.Clear();
+
             MySqlDataReader reader = DBConnection.getData("select * from department");
 
             while (reader.Read())
@@ -283,6 +357,15 @@ namespace Isabella
             MySqlDataReader reader = DBConnection.getData("select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as BagNo, b.issued as Issued from bag b inner join department d on b.deptNo=d.deptNo");
 
             table.Load(reader);
+
+            MySqlDataReader readerCount = DBConnection.getData("select COUNT(item_id) as itemCount from item;");
+
+            while (readerCount.Read())
+            {
+                deptTotalQtyLbl.Text = "Total items : " + readerCount.GetInt32("itemCount");
+            }
+
+            readerCount.Close();
 
             return table;
         }
@@ -369,7 +452,7 @@ namespace Isabella
             string deptName = "Die";
             int deptNo = 1;
             DateTime date = receivedDatePicker.Value;
-            string qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as Bag No, b.issued as Issued " +
+            string qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as BagNo, b.issued as Issued " +
                     "from bag b inner join department d " +
                     "on b.deptNo=d.deptNo " +
                     "where b.date='" + date.ToString("yyyy/M/d") + "'";
@@ -379,7 +462,7 @@ namespace Isabella
 
             if ((tmpDeptNameObj == null) && (tmpBagNo.Equals("")))
             {
-                qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as Bag No, b.issued as Issued " +
+                qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as BagNo, b.issued as Issued " +
                     "from bag b inner join department d " +
                     "on b.deptNo=d.deptNo " +
                     "where b.date='" + date.ToString("yyyy/M/d") + "'";
@@ -397,8 +480,8 @@ namespace Isabella
                 }
 
                 readerDept.Close();
-
-                qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as Bag No, b.issued as Issued " +
+                
+                qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as BagNo, b.issued as Issued " +
                     "from bag b inner join department d " +
                     "on b.deptNo=d.deptNo " +
                     "where d.deptNo=" + deptNo + " and b.date='" + date.ToString("yyyy/M/d") + "'";
@@ -409,7 +492,7 @@ namespace Isabella
                 {
                     int bagNo = Int32.Parse(bagNoTxtBox.Text);
 
-                    qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as Bag No, b.issued as Issued " +
+                    qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as BagNo, b.issued as Issued " +
                     "from bag b inner join department d " +
                     "on b.deptNo=d.deptNo " +
                     "where b.bagNo=" + bagNo + " and b.date='" + date.ToString("yyyy/M/d") + "'";
@@ -437,7 +520,7 @@ namespace Isabella
                 {
                     int bagNo = Int32.Parse(bagNoTxtBox.Text);
 
-                    qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as Bag No, b.issued as Issued " +
+                    qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as BagNo, b.issued as Issued " +
                     "from bag b inner join department d " +
                     "on b.deptNo=d.deptNo " +
                     "where d.deptNo=" + deptNo + " and b.bagNo=" + bagNo + " and b.date='" + date.ToString("yyyy/M/d") + "'";
@@ -538,7 +621,7 @@ namespace Isabella
         {
             System.Data.DataTable table = new System.Data.DataTable();
 
-            string qry = "select b.bag_id, d.deptName, b.date, b.bagNo, b.issued " +
+            string qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as BagNo, b.issued as Issued " +
                     "from bag b inner join department d " +
                     "on b.deptNo=d.deptNo " +
                     "where b.date='" + date.ToString("yyyy/M/d") + "'";
@@ -610,7 +693,18 @@ namespace Isabella
 
             readerDept.Close();
 
-            string qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as Bag No, b.issued as Issued " +
+            MySqlDataReader readerCount = DBConnection.getData("select COUNT(i.item_id) as itemCount from item i " +
+                                                               "inner join bag b on i.bag_id=b.bag_id where " +
+                                                               "b.deptNo=" + deptNo + ";");
+
+            while (readerCount.Read())
+            {
+                deptTotalQtyLbl.Text = "Total items : " + readerCount.GetInt32("itemCount");
+            }
+
+            readerCount.Close();
+
+            string qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as BagNo, b.issued as Issued " +
                 "from bag b inner join department d " +
                 "on b.deptNo=d.deptNo " +
                 "where d.deptNo=" + deptNo;
@@ -636,6 +730,50 @@ namespace Isabella
             catch (Exception)
             {
                 MessageBox.Show("Invalid data!", "Bags finder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void DeptCmb_SelectedValueChanged(object sender, EventArgs e)
+        {
+            int deptNo = 0;
+            string deptName = DeptCmb.SelectedItem.ToString();
+
+            MySqlDataReader readerDept = DBConnection.getData("select * from department " +
+                                                        "where deptName='" + deptName + "'");
+
+            while (readerDept.Read())
+            {
+                deptNo = readerDept.GetInt32("deptNo");
+            }
+
+            readerDept.Close();
+
+            string qry = "select b.bag_id, d.deptName as Dept, b.date as Date, b.bagNo as BagNo, b.issued as Issued " +
+                "from bag b inner join department d " +
+                "on b.deptNo=d.deptNo " +
+                "where d.deptNo=" + deptNo;
+
+            try
+            {
+                MySqlDataReader reader = DBConnection.getData(qry);
+
+                if (reader.HasRows)
+                {
+                    System.Data.DataTable table = new System.Data.DataTable();
+
+                    table.Load(reader);
+
+                    receivedBagDataGridView.DataSource = table;
+                }
+                else
+                {
+                    reader.Close();
+                    MessageBox.Show("No records for this data!", "Bags finder", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ec)
+            {
+                MessageBox.Show("Invalid data!\n" + ec, "Bags finder", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
