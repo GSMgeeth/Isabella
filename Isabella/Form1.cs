@@ -776,5 +776,19 @@ namespace Isabella
                 MessageBox.Show("Invalid data!\n" + ec, "Bags finder", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void summBtn_Click(object sender, EventArgs e)
+        {
+            SummaryForm frm = new SummaryForm();
+
+            frm.Show();
+        }
+
+        private void catBtn_Click(object sender, EventArgs e)
+        {
+            CategoryForm frm = new CategoryForm();
+
+            frm.Show();
+        }
     }
 }

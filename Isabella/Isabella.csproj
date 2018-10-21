@@ -113,6 +113,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CategoryForm.Designer.cs">
+      <DependentUpon>CategoryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Configure\ConfigurationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,17 @@
       <DependentUpon>BagReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Report\CategoryFormReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CategoryFormReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\CategoryFormReportDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CategoryFormReportDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Report\DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -156,6 +173,17 @@
     </Compile>
     <Compile Include="Report\ReportForm.Designer.cs">
       <DependentUpon>ReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\SummaryFormReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SummaryFormReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\SummaryFormReportDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SummaryFormReportDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Report\SummaryReport.cs">
       <AutoGen>True</AutoGen>
@@ -180,6 +208,15 @@
     <Compile Include="Report\testReport.Designer.cs">
       <DependentUpon>testReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="SummaryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SummaryForm.Designer.cs">
+      <DependentUpon>SummaryForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="CategoryForm.resx">
+      <DependentUpon>CategoryForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Configure\ConfigurationForm.resx">
       <DependentUpon>ConfigurationForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -202,8 +239,16 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BagReport.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\CategoryFormReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CategoryFormReport.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\ReportForm.resx">
       <DependentUpon>ReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\SummaryFormReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SummaryFormReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\SummaryReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -214,6 +259,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\testReport.resx">
       <DependentUpon>testReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SummaryForm.resx">
+      <DependentUpon>SummaryForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Isabella_TemporaryKey.pfx" />
     <None Include="packages.config" />
@@ -226,6 +274,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Report\CategoryFormReportDataSet.xsc">
+      <DependentUpon>CategoryFormReportDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Report\CategoryFormReportDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CategoryFormReportDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Report\CategoryFormReportDataSet.xss">
+      <DependentUpon>CategoryFormReportDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Report\DataSet1.xsc">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </None>
@@ -247,6 +306,17 @@
     </None>
     <None Include="Report\DataSet2.xss">
       <DependentUpon>DataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="Report\SummaryFormReportDataSet.xsc">
+      <DependentUpon>SummaryFormReportDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Report\SummaryFormReportDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SummaryFormReportDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Report\SummaryFormReportDataSet.xss">
+      <DependentUpon>SummaryFormReportDataSet.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
