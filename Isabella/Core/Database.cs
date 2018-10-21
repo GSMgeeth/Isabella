@@ -38,14 +38,14 @@ namespace Isabella
             try
             {
                 DateTime date = bag.getDate();
-                int qty = bag.getQty();
+                //int qty = bag.getQty();
                 int bagNo = bag.getBagNo();
-                bool issued = bag.isIssued();
+                //bool issued = bag.isIssued();
                 int deptNo = bag.getDept().getDeptNo();
 
                 MySqlDataReader reader = DBConnection.getData("select * from bag where deptNo=" + deptNo + " and date='" + date.ToString("yyyy/M/d") + "' and bagNo=" + bagNo);
 
-                while (reader.Read())
+                if (reader.HasRows)
                 {
                     exists = true;
                 }

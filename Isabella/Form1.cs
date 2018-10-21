@@ -122,7 +122,7 @@ namespace Isabella
                                     tmpD = ws.Cells[row, 2].Value2;
                                 }
 
-                                if ((ws.Cells[row, 3].Value2 != null) && (dayBagNo != ws.Cells[row, 3].Value2))
+                                if ((ws.Cells[row, 3].Value2 != null) && (row != 3)/*(dayBagNo != ws.Cells[row, 3].Value2)*/)
                                 {
                                     try
                                     {
@@ -147,7 +147,7 @@ namespace Isabella
 
                                     if (Database.isBagExists(bag))
                                     {
-                                        MessageBox.Show("Bag already exists!", "File reader", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        MessageBox.Show("Bag already exists! " + d.ToString(), "File reader", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
                                 }
 
