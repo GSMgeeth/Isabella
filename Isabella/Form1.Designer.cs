@@ -86,6 +86,7 @@
             this.summaryDataTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.summBtn = new System.Windows.Forms.Button();
             this.catBtn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.AddDataPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartIssued)).BeginInit();
@@ -682,12 +683,28 @@
             this.catBtn.UseVisualStyleBackColor = false;
             this.catBtn.Click += new System.EventHandler(this.catBtn_Click);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Location = new System.Drawing.Point(9, 384);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(200, 46);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Article Segregation";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(897, 531);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.catBtn);
             this.Controls.Add(this.summBtn);
             this.Controls.Add(this.ConfigButton);
@@ -769,6 +786,7 @@
         private System.Windows.Forms.Label deptTotalQtyLbl;
         private System.Windows.Forms.Button summBtn;
         private System.Windows.Forms.Button catBtn;
+        private System.Windows.Forms.Button button1;
     }
 }
 

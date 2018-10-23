@@ -113,6 +113,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticleSegregationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ArticleSegregationForm.Designer.cs">
+      <DependentUpon>ArticleSegregationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CategoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\ArticleSegregationFormReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ArticleSegregationFormReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\BagReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -214,6 +226,9 @@
     <Compile Include="SummaryForm.Designer.cs">
       <DependentUpon>SummaryForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ArticleSegregationForm.resx">
+      <DependentUpon>ArticleSegregationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CategoryForm.resx">
       <DependentUpon>CategoryForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -235,6 +250,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Report\ArticleSegregationFormReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ArticleSegregationFormReport.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\BagReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BagReport.cs</LastGenOutput>

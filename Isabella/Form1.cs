@@ -790,5 +790,12 @@ namespace Isabella
 
             frm.Show();
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            ArticleSegregationForm frm = new ArticleSegregationForm();
+
+            frm.Show();
+        }
     }
 }
