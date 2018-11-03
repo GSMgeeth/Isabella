@@ -797,5 +797,12 @@ namespace Isabella
 
             frm.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FromToForm frm = new FromToForm();
+
+            frm.Show();
+        }
     }
 }

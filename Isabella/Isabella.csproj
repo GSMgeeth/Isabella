@@ -145,6 +145,12 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="FromToForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FromToForm.Designer.cs">
+      <DependentUpon>FromToForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\ArticleSegregationFormReport.cs">
@@ -179,6 +185,17 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\FromToFormReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FromToFormReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\FromToReportFormDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FromToReportFormDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Report\ReportForm.cs">
       <SubType>Form</SubType>
@@ -241,6 +258,9 @@
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FromToForm.resx">
+      <DependentUpon>FromToForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -261,6 +281,10 @@
     <EmbeddedResource Include="Report\CategoryFormReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CategoryFormReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\FromToFormReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FromToFormReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\ReportForm.resx">
       <DependentUpon>ReportForm.cs</DependentUpon>
@@ -325,6 +349,17 @@
     </None>
     <None Include="Report\DataSet2.xss">
       <DependentUpon>DataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="Report\FromToReportFormDataSet.xsc">
+      <DependentUpon>FromToReportFormDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Report\FromToReportFormDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FromToReportFormDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Report\FromToReportFormDataSet.xss">
+      <DependentUpon>FromToReportFormDataSet.xsd</DependentUpon>
     </None>
     <None Include="Report\SummaryFormReportDataSet.xsc">
       <DependentUpon>SummaryFormReportDataSet.xsd</DependentUpon>
