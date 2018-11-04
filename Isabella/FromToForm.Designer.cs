@@ -43,6 +43,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.toDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.label7 = new System.Windows.Forms.Label();
+            this.typeCmbBox = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,7 +75,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(9, 405);
+            this.label4.Location = new System.Drawing.Point(9, 508);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 16);
             this.label4.TabIndex = 27;
@@ -81,7 +83,7 @@
             // 
             // searchSizeTxt
             // 
-            this.searchSizeTxt.Location = new System.Drawing.Point(12, 421);
+            this.searchSizeTxt.Location = new System.Drawing.Point(12, 524);
             this.searchSizeTxt.Name = "searchSizeTxt";
             this.searchSizeTxt.Size = new System.Drawing.Size(214, 20);
             this.searchSizeTxt.TabIndex = 26;
@@ -90,7 +92,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(9, 317);
+            this.label3.Location = new System.Drawing.Point(9, 420);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 16);
             this.label3.TabIndex = 25;
@@ -98,7 +100,7 @@
             // 
             // searchColortxt
             // 
-            this.searchColortxt.Location = new System.Drawing.Point(12, 333);
+            this.searchColortxt.Location = new System.Drawing.Point(12, 436);
             this.searchColortxt.Name = "searchColortxt";
             this.searchColortxt.Size = new System.Drawing.Size(214, 20);
             this.searchColortxt.TabIndex = 24;
@@ -107,7 +109,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(9, 229);
+            this.label2.Location = new System.Drawing.Point(9, 332);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 16);
             this.label2.TabIndex = 23;
@@ -115,7 +117,7 @@
             // 
             // searchArticleTxt
             // 
-            this.searchArticleTxt.Location = new System.Drawing.Point(12, 245);
+            this.searchArticleTxt.Location = new System.Drawing.Point(12, 348);
             this.searchArticleTxt.Name = "searchArticleTxt";
             this.searchArticleTxt.Size = new System.Drawing.Size(214, 20);
             this.searchArticleTxt.TabIndex = 22;
@@ -123,7 +125,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(123, 477);
+            this.button1.Location = new System.Drawing.Point(123, 580);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(103, 32);
             this.button1.TabIndex = 21;
@@ -135,7 +137,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 160);
+            this.label1.Location = new System.Drawing.Point(9, 263);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 16);
             this.label1.TabIndex = 20;
@@ -144,14 +146,14 @@
             // DeptCmb
             // 
             this.DeptCmb.FormattingEnabled = true;
-            this.DeptCmb.Location = new System.Drawing.Point(12, 176);
+            this.DeptCmb.Location = new System.Drawing.Point(12, 279);
             this.DeptCmb.Name = "DeptCmb";
             this.DeptCmb.Size = new System.Drawing.Size(214, 21);
             this.DeptCmb.TabIndex = 19;
             // 
             // fromDatePicker
             // 
-            this.fromDatePicker.Location = new System.Drawing.Point(12, 55);
+            this.fromDatePicker.Location = new System.Drawing.Point(12, 158);
             this.fromDatePicker.Name = "fromDatePicker";
             this.fromDatePicker.Size = new System.Drawing.Size(214, 20);
             this.fromDatePicker.TabIndex = 28;
@@ -160,7 +162,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(12, 36);
+            this.label5.Location = new System.Drawing.Point(12, 139);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 16);
             this.label5.TabIndex = 29;
@@ -170,7 +172,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(12, 91);
+            this.label6.Location = new System.Drawing.Point(12, 194);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(27, 16);
             this.label6.TabIndex = 31;
@@ -178,16 +180,40 @@
             // 
             // toDatePicker
             // 
-            this.toDatePicker.Location = new System.Drawing.Point(12, 110);
+            this.toDatePicker.Location = new System.Drawing.Point(12, 213);
             this.toDatePicker.Name = "toDatePicker";
             this.toDatePicker.Size = new System.Drawing.Size(214, 20);
             this.toDatePicker.TabIndex = 30;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(9, 20);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 16);
+            this.label7.TabIndex = 33;
+            this.label7.Text = "Type";
+            // 
+            // typeCmbBox
+            // 
+            this.typeCmbBox.FormattingEnabled = true;
+            this.typeCmbBox.Items.AddRange(new object[] {
+            "Received",
+            "Issued"});
+            this.typeCmbBox.Location = new System.Drawing.Point(12, 36);
+            this.typeCmbBox.Name = "typeCmbBox";
+            this.typeCmbBox.Size = new System.Drawing.Size(214, 21);
+            this.typeCmbBox.TabIndex = 32;
+            this.typeCmbBox.Text = "Choose the report type";
             // 
             // FromToForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1064, 681);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.typeCmbBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.toDatePicker);
             this.Controls.Add(this.label5);
@@ -229,5 +255,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker toDatePicker;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox typeCmbBox;
     }
 }
