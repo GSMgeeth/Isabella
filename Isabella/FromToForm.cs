@@ -359,7 +359,7 @@ namespace Isabella
                 if ((tmpPlaceObj == null) && (color.Equals("")) && (size.Equals("")) && (article.Equals("")))
                 {
                     qry = "select b.issuedDate as Issued, d.deptName as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "department d on b.deptNo=d.deptNo where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' group by d.deptName, i.article, i.color, i.size;";
+                        "issuedto d on b.deptNo=d.deptNo where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' group by d.deptName, i.article, i.color, i.size;";
                 }
                 else if ((tmpPlaceObj != null) && (color.Equals("")) && (size.Equals("")) && (article.Equals("")))
                 {
