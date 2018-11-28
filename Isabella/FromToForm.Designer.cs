@@ -206,6 +206,7 @@
             this.typeCmbBox.Size = new System.Drawing.Size(214, 21);
             this.typeCmbBox.TabIndex = 32;
             this.typeCmbBox.Text = "Choose the report type";
+            this.typeCmbBox.SelectedIndexChanged += new System.EventHandler(this.typeCmbBox_SelectedIndexChanged);
             // 
             // FromToForm
             // 
