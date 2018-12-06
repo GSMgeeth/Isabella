@@ -986,7 +986,7 @@ namespace Isabella
                         {
                             if (isArticle && !isColor && !isSize)
                             {
-                                Report.FromToArticleRcvReport rpt = new Report.FromToArticleRcvReport();
+                                Report.FromToArticleBagNoRcvReport rpt = new Report.FromToArticleBagNoRcvReport();
 
                                 rpt.Database.Tables["Items"].SetDataSource(table);
 
@@ -995,7 +995,7 @@ namespace Isabella
                             }
                             else if (!isArticle && isColor && !isSize)
                             {
-                                Report.FromToColorRcvReport rpt = new Report.FromToColorRcvReport();
+                                Report.FromToColorBagNoRcvReport rpt = new Report.FromToColorBagNoRcvReport();
 
                                 rpt.Database.Tables["Items"].SetDataSource(table);
 
@@ -1004,7 +1004,7 @@ namespace Isabella
                             }
                             else if (!isArticle && !isColor && isSize)
                             {
-                                Report.FromToSizeRcvReport rpt = new Report.FromToSizeRcvReport();
+                                Report.FromToSizeBagNoRcvReport rpt = new Report.FromToSizeBagNoRcvReport();
 
                                 rpt.Database.Tables["Items"].SetDataSource(table);
 
@@ -1013,7 +1013,7 @@ namespace Isabella
                             }
                             else if (isArticle && isColor && !isSize)
                             {
-                                Report.FromToArticleColorRcvReport rpt = new Report.FromToArticleColorRcvReport();
+                                Report.FromToArticleColorBagNoRcvReport rpt = new Report.FromToArticleColorBagNoRcvReport();
 
                                 rpt.Database.Tables["Items"].SetDataSource(table);
 
@@ -1022,7 +1022,7 @@ namespace Isabella
                             }
                             else if (isArticle && !isColor && isSize)
                             {
-                                Report.FromToArticleSizeRcvReport rpt = new Report.FromToArticleSizeRcvReport();
+                                Report.FromToArticleSizeBagNoRcvReport rpt = new Report.FromToArticleSizeBagNoRcvReport();
 
                                 rpt.Database.Tables["Items"].SetDataSource(table);
 
@@ -1031,7 +1031,7 @@ namespace Isabella
                             }
                             else if (!isArticle && isColor && isSize)
                             {
-                                Report.FromToColorSizeRcvReport rpt = new Report.FromToColorSizeRcvReport();
+                                Report.FromToColorSizeBagNoRcvReport rpt = new Report.FromToColorSizeBagNoRcvReport();
 
                                 rpt.Database.Tables["Items"].SetDataSource(table);
 
