@@ -639,247 +639,495 @@ namespace Isabella
             }
             else if (typeItem.ToString().Equals("Issued"))
             {
-                if ((tmpPlaceObj == null) && (color.Equals("")) && (size.Equals("")) && (article.Equals("")))
+                if (isBagNo)
                 {
-                    qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' group by d.place, i.article, i.color, i.size;";
-                }
-                else if ((tmpPlaceObj != null) && (color.Equals("")) && (size.Equals("")) && (article.Equals("")))
-                {
-                    place = DeptCmb.SelectedItem.ToString();
-
-                    if (place.Equals("All"))
+                    if ((tmpPlaceObj == null) && (color.Equals("")) && (size.Equals("")) && (article.Equals("")))
                     {
-                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' group by d.place, i.article, i.color, i.size;";
+                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
                     }
-                    else
+                    else if ((tmpPlaceObj != null) && (color.Equals("")) && (size.Equals("")) && (article.Equals("")))
                     {
-                        int place_id = 1;
-                        MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+                        place = DeptCmb.SelectedItem.ToString();
 
-                        while (reader.Read())
+                        if (place.Equals("All"))
                         {
-                            place_id = reader.GetInt32("place");
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
                         }
-
-                        reader.Close();
-
-                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and d.place_id=" + place_id + " group by d.place, i.article, i.color, i.size;";
-                    }
-                }
-                else if ((tmpPlaceObj == null) && (!color.Equals("")) && (size.Equals("")) && (article.Equals("")))
-                {
-                    qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' group by d.place, i.article, i.color, i.size;";
-                }
-                else if ((tmpPlaceObj == null) && (color.Equals("")) && (!size.Equals("")) && (article.Equals("")))
-                {
-                    qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' group by d.place, i.article, i.color, i.size;";
-                }
-                else if ((tmpPlaceObj == null) && (color.Equals("")) && (size.Equals("")) && (!article.Equals("")))
-                {
-                    qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' group by d.place, i.article, i.color, i.size;";
-                }
-                else if ((tmpPlaceObj == null) && (!color.Equals("")) && (!size.Equals("")) && (article.Equals("")))
-                {
-                    qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.size='" + size + "' group by d.place, i.article, i.color, i.size;";
-                }
-                else if ((tmpPlaceObj == null) && (!color.Equals("")) && (size.Equals("")) && (!article.Equals("")))
-                {
-                    qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.article='" + article + "' group by d.place, i.article, i.color, i.size;";
-                }
-                else if ((tmpPlaceObj == null) && (color.Equals("")) && (!size.Equals("")) && (!article.Equals("")))
-                {
-                    qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' and i.size='" + size + "' group by d.place, i.article, i.color, i.size;";
-                }
-                else if ((tmpPlaceObj == null) && (!color.Equals("")) && (!size.Equals("")) && (!article.Equals("")))
-                {
-                    qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.size='" + size + "' and i.article='" + article + "' group by d.place, i.article, i.color, i.size;";
-                }
-                else if ((tmpPlaceObj != null) && (!color.Equals("")) && (size.Equals("")) && (article.Equals("")))
-                {
-                    place = DeptCmb.SelectedItem.ToString();
-
-                    if (place.Equals("All"))
-                    {
-                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' group by d.place, i.article, i.color, i.size;";
-                    }
-                    else
-                    {
-                        int place_id = 1;
-                        MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
-
-                        while (reader.Read())
+                        else
                         {
-                            place_id = reader.GetInt32("place");
+                            int place_id = 1;
+                            MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+
+                            while (reader.Read())
+                            {
+                                place_id = reader.GetInt32("place_id");
+                            }
+
+                            reader.Close();
+
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and d.place_id=" + place_id + " and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
                         }
-
-                        reader.Close();
-
-                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and d.place_id=" + place_id + " group by d.place, i.article, i.color, i.size;";
                     }
-                }
-                else if ((tmpPlaceObj != null) && (color.Equals("")) && (!size.Equals("")) && (article.Equals("")))
-                {
-                    place = DeptCmb.SelectedItem.ToString();
-
-                    if (place.Equals("All"))
+                    else if ((tmpPlaceObj == null) && (!color.Equals("")) && (size.Equals("")) && (article.Equals("")))
                     {
-                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' group by d.place, i.article, i.color, i.size;";
+                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
                     }
-                    else
+                    else if ((tmpPlaceObj == null) && (color.Equals("")) && (!size.Equals("")) && (article.Equals("")))
                     {
-                        int place_id = 1;
-                        MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                    }
+                    else if ((tmpPlaceObj == null) && (color.Equals("")) && (size.Equals("")) && (!article.Equals("")))
+                    {
+                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                    }
+                    else if ((tmpPlaceObj == null) && (!color.Equals("")) && (!size.Equals("")) && (article.Equals("")))
+                    {
+                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.size='" + size + "' and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                    }
+                    else if ((tmpPlaceObj == null) && (!color.Equals("")) && (size.Equals("")) && (!article.Equals("")))
+                    {
+                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.article='" + article + "' and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                    }
+                    else if ((tmpPlaceObj == null) && (color.Equals("")) && (!size.Equals("")) && (!article.Equals("")))
+                    {
+                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' and i.size='" + size + "' and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                    }
+                    else if ((tmpPlaceObj == null) && (!color.Equals("")) && (!size.Equals("")) && (!article.Equals("")))
+                    {
+                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.size='" + size + "' and i.article='" + article + "' and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                    }
+                    else if ((tmpPlaceObj != null) && (!color.Equals("")) && (size.Equals("")) && (article.Equals("")))
+                    {
+                        place = DeptCmb.SelectedItem.ToString();
 
-                        while (reader.Read())
+                        if (place.Equals("All"))
                         {
-                            place_id = reader.GetInt32("place");
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
                         }
-
-                        reader.Close();
-
-                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' and d.place_id=" + place_id + " group by d.place, i.article, i.color, i.size;";
-                    }
-                }
-                else if ((tmpPlaceObj != null) && (color.Equals("")) && (size.Equals("")) && (!article.Equals("")))
-                {
-                    place = DeptCmb.SelectedItem.ToString();
-
-                    if (place.Equals("All"))
-                    {
-                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' group by d.place, i.article, i.color, i.size;";
-                    }
-                    else
-                    {
-                        int place_id = 1;
-                        MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
-
-                        while (reader.Read())
+                        else
                         {
-                            place_id = reader.GetInt32("place");
+                            int place_id = 1;
+                            MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+
+                            while (reader.Read())
+                            {
+                                place_id = reader.GetInt32("place_id");
+                            }
+
+                            reader.Close();
+
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and d.place_id=" + place_id + " and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
                         }
-
-                        reader.Close();
-
-                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' and d.place_id=" + place_id + " group by d.place, i.article, i.color, i.size;";
                     }
-                }
-                else if ((tmpPlaceObj != null) && (!color.Equals("")) && (!size.Equals("")) && (article.Equals("")))
-                {
-                    place = DeptCmb.SelectedItem.ToString();
-
-                    if (place.Equals("All"))
+                    else if ((tmpPlaceObj != null) && (color.Equals("")) && (!size.Equals("")) && (article.Equals("")))
                     {
-                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.size='" + size + "' group by d.place, i.article, i.color, i.size;";
-                    }
-                    else
-                    {
-                        int place_id = 1;
-                        MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+                        place = DeptCmb.SelectedItem.ToString();
 
-                        while (reader.Read())
+                        if (place.Equals("All"))
                         {
-                            place_id = reader.GetInt32("place");
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
                         }
-
-                        reader.Close();
-
-                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.size='" + size + "' and d.place_id=" + place_id + " group by d.place, i.article, i.color, i.size;";
-                    }
-                }
-                else if ((tmpPlaceObj != null) && (!color.Equals("")) && (size.Equals("")) && (!article.Equals("")))
-                {
-                    place = DeptCmb.SelectedItem.ToString();
-
-                    if (place.Equals("All"))
-                    {
-                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.article='" + article + "' group by d.place, i.article, i.color, i.size;";
-                    }
-                    else
-                    {
-                        int place_id = 1;
-                        MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
-
-                        while (reader.Read())
+                        else
                         {
-                            place_id = reader.GetInt32("place");
+                            int place_id = 1;
+                            MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+
+                            while (reader.Read())
+                            {
+                                place_id = reader.GetInt32("place_id");
+                            }
+
+                            reader.Close();
+
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' and d.place_id=" + place_id + " and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
                         }
-
-                        reader.Close();
-
-                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.article='" + article + "' and d.place_id=" + place_id + " group by d.place, i.article, i.color, i.size;";
                     }
-                }
-                else if ((tmpPlaceObj != null) && (color.Equals("")) && (!size.Equals("")) && (!article.Equals("")))
-                {
-                    place = DeptCmb.SelectedItem.ToString();
-
-                    if (place.Equals("All"))
+                    else if ((tmpPlaceObj != null) && (color.Equals("")) && (size.Equals("")) && (!article.Equals("")))
                     {
-                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' and i.article='" + article + "' group by d.place, i.article, i.color, i.size;";
-                    }
-                    else
-                    {
-                        int place_id = 1;
-                        MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+                        place = DeptCmb.SelectedItem.ToString();
 
-                        while (reader.Read())
+                        if (place.Equals("All"))
                         {
-                            place_id = reader.GetInt32("place");
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
                         }
-
-                        reader.Close();
-
-                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' and i.article='" + article + "' and d.place_id=" + place_id + " group by d.place, i.article, i.color, i.size;";
-                    }
-                }
-                else if ((tmpPlaceObj != null) && (!color.Equals("")) && (!size.Equals("")) && (!article.Equals("")))
-                {
-                    place = DeptCmb.SelectedItem.ToString();
-
-                    if (place.Equals("All"))
-                    {
-                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' and i.article='" + article + "' and i.color='" + color + "' group by d.place, i.article, i.color, i.size;";
-                    }
-                    else
-                    {
-                        int place_id = 1;
-                        MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
-
-                        while (reader.Read())
+                        else
                         {
-                            place_id = reader.GetInt32("place");
+                            int place_id = 1;
+                            MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+
+                            while (reader.Read())
+                            {
+                                place_id = reader.GetInt32("place_id");
+                            }
+
+                            reader.Close();
+
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' and d.place_id=" + place_id + " and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
                         }
+                    }
+                    else if ((tmpPlaceObj != null) && (!color.Equals("")) && (!size.Equals("")) && (article.Equals("")))
+                    {
+                        place = DeptCmb.SelectedItem.ToString();
 
-                        reader.Close();
+                        if (place.Equals("All"))
+                        {
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.size='" + size + "' and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                        else
+                        {
+                            int place_id = 1;
+                            MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
 
-                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                        "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' and i.article='" + article + "' and i.color='" + color + "' and d.place_id=" + place_id + " group by d.place, i.article, i.color, i.size;";
+                            while (reader.Read())
+                            {
+                                place_id = reader.GetInt32("place_id");
+                            }
+
+                            reader.Close();
+
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.size='" + size + "' and d.place_id=" + place_id + " and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                    }
+                    else if ((tmpPlaceObj != null) && (!color.Equals("")) && (size.Equals("")) && (!article.Equals("")))
+                    {
+                        place = DeptCmb.SelectedItem.ToString();
+
+                        if (place.Equals("All"))
+                        {
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.article='" + article + "' and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                        else
+                        {
+                            int place_id = 1;
+                            MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+
+                            while (reader.Read())
+                            {
+                                place_id = reader.GetInt32("place_id");
+                            }
+
+                            reader.Close();
+
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.article='" + article + "' and d.place_id=" + place_id + " and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                    }
+                    else if ((tmpPlaceObj != null) && (color.Equals("")) && (!size.Equals("")) && (!article.Equals("")))
+                    {
+                        place = DeptCmb.SelectedItem.ToString();
+
+                        if (place.Equals("All"))
+                        {
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' and i.article='" + article + "' and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                        else
+                        {
+                            int place_id = 1;
+                            MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+
+                            while (reader.Read())
+                            {
+                                place_id = reader.GetInt32("place_id");
+                            }
+
+                            reader.Close();
+
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' and i.article='" + article + "' and d.place_id=" + place_id + " and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                    }
+                    else if ((tmpPlaceObj != null) && (!color.Equals("")) && (!size.Equals("")) && (!article.Equals("")))
+                    {
+                        place = DeptCmb.SelectedItem.ToString();
+
+                        if (place.Equals("All"))
+                        {
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' and i.article='" + article + "' and i.color='" + color + "' and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                        else
+                        {
+                            int place_id = 1;
+                            MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+
+                            while (reader.Read())
+                            {
+                                place_id = reader.GetInt32("place_id");
+                            }
+
+                            reader.Close();
+
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' and i.article='" + article + "' and i.color='" + color + "' and d.place_id=" + place_id + " and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
                     }
                 }
+                else
+                {
+                    if ((tmpPlaceObj == null) && (color.Equals("")) && (size.Equals("")) && (article.Equals("")))
+                    {
+                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' group by d.place, i.article, i.color, i.size, b.bagNo;";
+                    }
+                    else if ((tmpPlaceObj != null) && (color.Equals("")) && (size.Equals("")) && (article.Equals("")))
+                    {
+                        place = DeptCmb.SelectedItem.ToString();
 
+                        if (place.Equals("All"))
+                        {
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                        else
+                        {
+                            int place_id = 1;
+                            MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+
+                            while (reader.Read())
+                            {
+                                place_id = reader.GetInt32("place_id");
+                            }
+
+                            reader.Close();
+
+                            Console.WriteLine("\nplace : " + place + "      id : " + place_id + "\n");
+
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and d.place_id=" + place_id + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                    }
+                    else if ((tmpPlaceObj == null) && (!color.Equals("")) && (size.Equals("")) && (article.Equals("")))
+                    {
+                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' group by d.place, i.article, i.color, i.size, b.bagNo;";
+                    }
+                    else if ((tmpPlaceObj == null) && (color.Equals("")) && (!size.Equals("")) && (article.Equals("")))
+                    {
+                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' group by d.place, i.article, i.color, i.size, b.bagNo;";
+                    }
+                    else if ((tmpPlaceObj == null) && (color.Equals("")) && (size.Equals("")) && (!article.Equals("")))
+                    {
+                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' group by d.place, i.article, i.color, i.size, b.bagNo;";
+                    }
+                    else if ((tmpPlaceObj == null) && (!color.Equals("")) && (!size.Equals("")) && (article.Equals("")))
+                    {
+                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.size='" + size + "' group by d.place, i.article, i.color, i.size, b.bagNo;";
+                    }
+                    else if ((tmpPlaceObj == null) && (!color.Equals("")) && (size.Equals("")) && (!article.Equals("")))
+                    {
+                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.article='" + article + "' group by d.place, i.article, i.color, i.size, b.bagNo;";
+                    }
+                    else if ((tmpPlaceObj == null) && (color.Equals("")) && (!size.Equals("")) && (!article.Equals("")))
+                    {
+                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' and i.size='" + size + "' group by d.place, i.article, i.color, i.size, b.bagNo;";
+                    }
+                    else if ((tmpPlaceObj == null) && (!color.Equals("")) && (!size.Equals("")) && (!article.Equals("")))
+                    {
+                        qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.size='" + size + "' and i.article='" + article + "' group by d.place, i.article, i.color, i.size, b.bagNo;";
+                    }
+                    else if ((tmpPlaceObj != null) && (!color.Equals("")) && (size.Equals("")) && (article.Equals("")))
+                    {
+                        place = DeptCmb.SelectedItem.ToString();
+
+                        if (place.Equals("All"))
+                        {
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                        else
+                        {
+                            int place_id = 1;
+                            MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+
+                            while (reader.Read())
+                            {
+                                place_id = reader.GetInt32("place_id");
+                            }
+
+                            reader.Close();
+
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and d.place_id=" + place_id + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                    }
+                    else if ((tmpPlaceObj != null) && (color.Equals("")) && (!size.Equals("")) && (article.Equals("")))
+                    {
+                        place = DeptCmb.SelectedItem.ToString();
+
+                        if (place.Equals("All"))
+                        {
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                        else
+                        {
+                            int place_id = 1;
+                            MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+
+                            while (reader.Read())
+                            {
+                                place_id = reader.GetInt32("place_id");
+                            }
+
+                            reader.Close();
+
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' and d.place_id=" + place_id + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                    }
+                    else if ((tmpPlaceObj != null) && (color.Equals("")) && (size.Equals("")) && (!article.Equals("")))
+                    {
+                        place = DeptCmb.SelectedItem.ToString();
+
+                        if (place.Equals("All"))
+                        {
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                        else
+                        {
+                            int place_id = 1;
+                            MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+
+                            while (reader.Read())
+                            {
+                                place_id = reader.GetInt32("place_id");
+                            }
+
+                            reader.Close();
+
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' and d.place_id=" + place_id + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                    }
+                    else if ((tmpPlaceObj != null) && (!color.Equals("")) && (!size.Equals("")) && (article.Equals("")))
+                    {
+                        place = DeptCmb.SelectedItem.ToString();
+
+                        if (place.Equals("All"))
+                        {
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.size='" + size + "' group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                        else
+                        {
+                            int place_id = 1;
+                            MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+
+                            while (reader.Read())
+                            {
+                                place_id = reader.GetInt32("place_id");
+                            }
+
+                            reader.Close();
+
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.size='" + size + "' and d.place_id=" + place_id + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                    }
+                    else if ((tmpPlaceObj != null) && (!color.Equals("")) && (size.Equals("")) && (!article.Equals("")))
+                    {
+                        place = DeptCmb.SelectedItem.ToString();
+
+                        if (place.Equals("All"))
+                        {
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.article='" + article + "' group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                        else
+                        {
+                            int place_id = 1;
+                            MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+
+                            while (reader.Read())
+                            {
+                                place_id = reader.GetInt32("place_id");
+                            }
+
+                            reader.Close();
+
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.color='" + color + "' and i.article='" + article + "' and d.place_id=" + place_id + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                    }
+                    else if ((tmpPlaceObj != null) && (color.Equals("")) && (!size.Equals("")) && (!article.Equals("")))
+                    {
+                        place = DeptCmb.SelectedItem.ToString();
+
+                        if (place.Equals("All"))
+                        {
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' and i.article='" + article + "' group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                        else
+                        {
+                            int place_id = 1;
+                            MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+
+                            while (reader.Read())
+                            {
+                                place_id = reader.GetInt32("place_id");
+                            }
+
+                            reader.Close();
+
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' and i.article='" + article + "' and d.place_id=" + place_id + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                    }
+                    else if ((tmpPlaceObj != null) && (!color.Equals("")) && (!size.Equals("")) && (!article.Equals("")))
+                    {
+                        place = DeptCmb.SelectedItem.ToString();
+
+                        if (place.Equals("All"))
+                        {
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' and i.article='" + article + "' and i.color='" + color + "' group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                        else
+                        {
+                            int place_id = 1;
+                            MySqlDataReader reader = DBConnection.getData("select * from issuedTo where place='" + place + "'");
+
+                            while (reader.Read())
+                            {
+                                place_id = reader.GetInt32("place_id");
+                            }
+
+                            reader.Close();
+
+                            qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.size='" + size + "' and i.article='" + article + "' and i.color='" + color + "' and d.place_id=" + place_id + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                        }
+                    }
+                }
+                
                 previewReport(qry);
             }
         }
@@ -907,7 +1155,7 @@ namespace Isabella
                     while (reader.Read())
                     {
                         if (typeItem.ToString().Equals("Issued"))
-                            table.Rows.Add(reader.GetDateTime("Issued"), reader.GetString("Department"), reader.GetString("Article"), reader.GetString("Color"), reader.GetString("Size"), reader.GetInt32("Qty"), 0);
+                            table.Rows.Add(reader.GetDateTime("Issued"), reader.GetString("Department"), reader.GetString("Article"), reader.GetString("Color"), reader.GetString("Size"), reader.GetInt32("Qty"), reader.GetInt32("BagNo"));
                         else if (typeItem.ToString().Equals("Received"))
                             table.Rows.Add(reader.GetDateTime("Received"), reader.GetString("Department"), reader.GetString("Article"), reader.GetString("Color"), reader.GetString("Size"), reader.GetInt32("Qty"), reader.GetInt32("BagNo"));
                     }
@@ -916,68 +1164,137 @@ namespace Isabella
 
                     if (typeItem.ToString().Equals("Issued"))
                     {
-                        if (isArticle && !isColor && !isSize)
+                        if (isBagNo)
                         {
-                            Report.FromToArticleReport rpt = new Report.FromToArticleReport();
+                            if (isArticle && !isColor && !isSize)
+                            {
+                                Report.FromToArticleBagNoReport rpt = new Report.FromToArticleBagNoReport();
 
-                            rpt.Database.Tables["Items"].SetDataSource(table);
+                                rpt.Database.Tables["Items"].SetDataSource(table);
 
-                            fromToReportViewer.ReportSource = null;
-                            fromToReportViewer.ReportSource = rpt;
+                                fromToReportViewer.ReportSource = null;
+                                fromToReportViewer.ReportSource = rpt;
+                            }
+                            else if (!isArticle && isColor && !isSize)
+                            {
+                                Report.FromToColorBagNoReport rpt = new Report.FromToColorBagNoReport();
+
+                                rpt.Database.Tables["Items"].SetDataSource(table);
+
+                                fromToReportViewer.ReportSource = null;
+                                fromToReportViewer.ReportSource = rpt;
+                            }
+                            else if (!isArticle && !isColor && isSize)
+                            {
+                                Report.FromToSizeBagNoReport rpt = new Report.FromToSizeBagNoReport();
+
+                                rpt.Database.Tables["Items"].SetDataSource(table);
+
+                                fromToReportViewer.ReportSource = null;
+                                fromToReportViewer.ReportSource = rpt;
+                            }
+                            else if (isArticle && isColor && !isSize)
+                            {
+                                Report.FromToArticleColorBagNoReport rpt = new Report.FromToArticleColorBagNoReport();
+
+                                rpt.Database.Tables["Items"].SetDataSource(table);
+
+                                fromToReportViewer.ReportSource = null;
+                                fromToReportViewer.ReportSource = rpt;
+                            }
+                            else if (isArticle && !isColor && isSize)
+                            {
+                                Report.FromToArticleSizeBagNoReport rpt = new Report.FromToArticleSizeBagNoReport();
+
+                                rpt.Database.Tables["Items"].SetDataSource(table);
+
+                                fromToReportViewer.ReportSource = null;
+                                fromToReportViewer.ReportSource = rpt;
+                            }
+                            else if (!isArticle && isColor && isSize)
+                            {
+                                Report.FromToColorSizeBagNoReport rpt = new Report.FromToColorSizeBagNoReport();
+
+                                rpt.Database.Tables["Items"].SetDataSource(table);
+
+                                fromToReportViewer.ReportSource = null;
+                                fromToReportViewer.ReportSource = rpt;
+                            }
+                            else if (isArticle && isColor && isSize)
+                            {
+                                Report.FromToBagNoFormReport rpt = new Report.FromToBagNoFormReport();
+
+                                rpt.Database.Tables["Items"].SetDataSource(table);
+
+                                fromToReportViewer.ReportSource = null;
+                                fromToReportViewer.ReportSource = rpt;
+                            }
                         }
-                        else if (!isArticle && isColor && !isSize)
+                        else
                         {
-                            Report.FromToColorReport rpt = new Report.FromToColorReport();
+                            if (isArticle && !isColor && !isSize)
+                            {
+                                Report.FromToArticleReport rpt = new Report.FromToArticleReport();
 
-                            rpt.Database.Tables["Items"].SetDataSource(table);
+                                rpt.Database.Tables["Items"].SetDataSource(table);
 
-                            fromToReportViewer.ReportSource = null;
-                            fromToReportViewer.ReportSource = rpt;
-                        }
-                        else if (!isArticle && !isColor && isSize)
-                        {
-                            Report.FromToSizeReport rpt = new Report.FromToSizeReport();
+                                fromToReportViewer.ReportSource = null;
+                                fromToReportViewer.ReportSource = rpt;
+                            }
+                            else if (!isArticle && isColor && !isSize)
+                            {
+                                Report.FromToColorReport rpt = new Report.FromToColorReport();
 
-                            rpt.Database.Tables["Items"].SetDataSource(table);
+                                rpt.Database.Tables["Items"].SetDataSource(table);
 
-                            fromToReportViewer.ReportSource = null;
-                            fromToReportViewer.ReportSource = rpt;
-                        }
-                        else if (isArticle && isColor && !isSize)
-                        {
-                            Report.FromToArticleColorReport rpt = new Report.FromToArticleColorReport();
+                                fromToReportViewer.ReportSource = null;
+                                fromToReportViewer.ReportSource = rpt;
+                            }
+                            else if (!isArticle && !isColor && isSize)
+                            {
+                                Report.FromToSizeReport rpt = new Report.FromToSizeReport();
 
-                            rpt.Database.Tables["Items"].SetDataSource(table);
+                                rpt.Database.Tables["Items"].SetDataSource(table);
 
-                            fromToReportViewer.ReportSource = null;
-                            fromToReportViewer.ReportSource = rpt;
-                        }
-                        else if (isArticle && !isColor && isSize)
-                        {
-                            Report.FromToArticleSizeReport rpt = new Report.FromToArticleSizeReport();
+                                fromToReportViewer.ReportSource = null;
+                                fromToReportViewer.ReportSource = rpt;
+                            }
+                            else if (isArticle && isColor && !isSize)
+                            {
+                                Report.FromToArticleColorReport rpt = new Report.FromToArticleColorReport();
 
-                            rpt.Database.Tables["Items"].SetDataSource(table);
+                                rpt.Database.Tables["Items"].SetDataSource(table);
 
-                            fromToReportViewer.ReportSource = null;
-                            fromToReportViewer.ReportSource = rpt;
-                        }
-                        else if (!isArticle && isColor && isSize)
-                        {
-                            Report.FromToColorSizeReport rpt = new Report.FromToColorSizeReport();
+                                fromToReportViewer.ReportSource = null;
+                                fromToReportViewer.ReportSource = rpt;
+                            }
+                            else if (isArticle && !isColor && isSize)
+                            {
+                                Report.FromToArticleSizeReport rpt = new Report.FromToArticleSizeReport();
 
-                            rpt.Database.Tables["Items"].SetDataSource(table);
+                                rpt.Database.Tables["Items"].SetDataSource(table);
 
-                            fromToReportViewer.ReportSource = null;
-                            fromToReportViewer.ReportSource = rpt;
-                        }
-                        else if (isArticle && isColor && isSize)
-                        {
-                            Report.FromToFormReport rpt = new Report.FromToFormReport();
+                                fromToReportViewer.ReportSource = null;
+                                fromToReportViewer.ReportSource = rpt;
+                            }
+                            else if (!isArticle && isColor && isSize)
+                            {
+                                Report.FromToColorSizeReport rpt = new Report.FromToColorSizeReport();
 
-                            rpt.Database.Tables["Items"].SetDataSource(table);
+                                rpt.Database.Tables["Items"].SetDataSource(table);
 
-                            fromToReportViewer.ReportSource = null;
-                            fromToReportViewer.ReportSource = rpt;
+                                fromToReportViewer.ReportSource = null;
+                                fromToReportViewer.ReportSource = rpt;
+                            }
+                            else if (isArticle && isColor && isSize)
+                            {
+                                Report.FromToFormReport rpt = new Report.FromToFormReport();
+
+                                rpt.Database.Tables["Items"].SetDataSource(table);
+
+                                fromToReportViewer.ReportSource = null;
+                                fromToReportViewer.ReportSource = rpt;
+                            }
                         }
                     }
                     else if (typeItem.ToString().Equals("Received"))

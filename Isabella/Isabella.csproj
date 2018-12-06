@@ -192,10 +192,22 @@
       <DependentUpon>FromToArticleBagNoRcvReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Report\FromToArticleBagNoReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FromToArticleBagNoReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\FromToArticleColorBagNoRcvReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FromToArticleColorBagNoRcvReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\FromToArticleColorBagNoReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FromToArticleColorBagNoReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\FromToArticleColorRcvReport.cs">
@@ -228,6 +240,12 @@
       <DependentUpon>FromToArticleSizeBagNoRcvReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Report\FromToArticleSizeBagNoReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FromToArticleSizeBagNoReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\FromToArticleSizeRcvReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -240,10 +258,22 @@
       <DependentUpon>FromToArticleSizeReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Report\FromToBagNoFormReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FromToBagNoFormReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\FromToColorBagNoRcvReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FromToColorBagNoRcvReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\FromToColorBagNoReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FromToColorBagNoReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\FromToColorRcvReport.cs">
@@ -262,6 +292,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FromToColorSizeBagNoRcvReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\FromToColorSizeBagNoReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FromToColorSizeBagNoReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\FromToColorSizeRcvReport.cs">
@@ -303,6 +339,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FromToSizeBagNoRcvReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\FromToSizeBagNoReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FromToSizeBagNoReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\FromToSizeRcvReport.cs">
@@ -406,9 +448,17 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>FromToArticleBagNoRcvReport.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\FromToArticleBagNoReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FromToArticleBagNoReport.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\FromToArticleColorBagNoRcvReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>FromToArticleColorBagNoRcvReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\FromToArticleColorBagNoReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FromToArticleColorBagNoReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\FromToArticleColorRcvReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -430,6 +480,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>FromToArticleSizeBagNoRcvReport.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\FromToArticleSizeBagNoReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FromToArticleSizeBagNoReport.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\FromToArticleSizeRcvReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>FromToArticleSizeRcvReport.cs</LastGenOutput>
@@ -438,9 +492,17 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>FromToArticleSizeReport.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\FromToBagNoFormReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FromToBagNoFormReport.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\FromToColorBagNoRcvReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>FromToColorBagNoRcvReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\FromToColorBagNoReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FromToColorBagNoReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\FromToColorRcvReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -453,6 +515,10 @@
     <EmbeddedResource Include="Report\FromToColorSizeBagNoRcvReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>FromToColorSizeBagNoRcvReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\FromToColorSizeBagNoReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FromToColorSizeBagNoReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\FromToColorSizeRcvReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -477,6 +543,10 @@
     <EmbeddedResource Include="Report\FromToSizeBagNoRcvReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>FromToSizeBagNoRcvReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\FromToSizeBagNoReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FromToSizeBagNoReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\FromToSizeRcvReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
