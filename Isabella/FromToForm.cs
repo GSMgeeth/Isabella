@@ -14,7 +14,7 @@ namespace Isabella
     public partial class FromToForm : Form
     {
         private Object typeItem;
-        private bool isArticle = false, isColor = false, isSize = false;
+        private bool isArticle = false, isColor = false, isSize = false, isBagNo = false;
 
         public FromToForm()
         {
@@ -78,9 +78,15 @@ namespace Isabella
             string color = searchColortxt.Text;
             string size = searchSizeTxt.Text;
             string article = searchArticleTxt.Text;
+            string bagNo = bagNoTxtBox.Text;
             
             DateTime from = fromDatePicker.Value;
             DateTime to = toDatePicker.Value;
+
+            if (!bagNo.Equals(""))
+                isBagNo = true;
+            else
+                isBagNo = false;
 
             if (color.Equals("") && size.Equals("") && article.Equals(""))
             {

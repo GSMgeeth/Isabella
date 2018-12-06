@@ -45,6 +45,8 @@
             this.toDatePicker = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.typeCmbBox = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.bagNoTxtBox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,7 +77,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(9, 508);
+            this.label4.Location = new System.Drawing.Point(9, 430);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 16);
             this.label4.TabIndex = 27;
@@ -83,7 +85,7 @@
             // 
             // searchSizeTxt
             // 
-            this.searchSizeTxt.Location = new System.Drawing.Point(12, 524);
+            this.searchSizeTxt.Location = new System.Drawing.Point(12, 446);
             this.searchSizeTxt.Name = "searchSizeTxt";
             this.searchSizeTxt.Size = new System.Drawing.Size(214, 20);
             this.searchSizeTxt.TabIndex = 26;
@@ -92,7 +94,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(9, 420);
+            this.label3.Location = new System.Drawing.Point(9, 381);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 16);
             this.label3.TabIndex = 25;
@@ -100,7 +102,7 @@
             // 
             // searchColortxt
             // 
-            this.searchColortxt.Location = new System.Drawing.Point(12, 436);
+            this.searchColortxt.Location = new System.Drawing.Point(12, 397);
             this.searchColortxt.Name = "searchColortxt";
             this.searchColortxt.Size = new System.Drawing.Size(214, 20);
             this.searchColortxt.TabIndex = 24;
@@ -208,11 +210,30 @@
             this.typeCmbBox.Text = "Choose the report type";
             this.typeCmbBox.SelectedIndexChanged += new System.EventHandler(this.typeCmbBox_SelectedIndexChanged);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(9, 501);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(60, 16);
+            this.label8.TabIndex = 35;
+            this.label8.Text = "Bag No";
+            // 
+            // bagNoTxtBox
+            // 
+            this.bagNoTxtBox.Location = new System.Drawing.Point(12, 517);
+            this.bagNoTxtBox.Name = "bagNoTxtBox";
+            this.bagNoTxtBox.Size = new System.Drawing.Size(85, 20);
+            this.bagNoTxtBox.TabIndex = 34;
+            // 
             // FromToForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1064, 681);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.bagNoTxtBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.typeCmbBox);
             this.Controls.Add(this.label6);
@@ -258,5 +279,7 @@
         private System.Windows.Forms.DateTimePicker toDatePicker;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox typeCmbBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox bagNoTxtBox;
     }
 }
