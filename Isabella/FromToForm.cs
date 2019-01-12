@@ -193,7 +193,7 @@ namespace Isabella
                     else if ((tmpPlaceObj == null) && (color.Equals("")) && (size.Equals("")) && (!article.Equals("")))
                     {
                         qry = "select b.date as Received, d.deptName as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                            "department d on b.deptNo=d.deptNo where b.date>='" + from.ToString("yyyy/M/d") + "' and b.date<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' and b.bagNo=" + bn + " group by d.deptName, i.article, i.color, i.size, b.bagNo;";
+                            "department d on b.deptNo=d.deptNo where b.date>='" + from.ToString("yyyy/M/d") + "' and b.date<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' and b.bagNo=" + bn + " group by d.deptName, b.date, i.article;";
                     }
                     else if ((tmpPlaceObj == null) && (!color.Equals("")) && (!size.Equals("")) && (article.Equals("")))
                     {
@@ -436,7 +436,7 @@ namespace Isabella
                     else if ((tmpPlaceObj == null) && (color.Equals("")) && (size.Equals("")) && (!article.Equals("")))
                     {
                         qry = "select b.date as Received, d.deptName as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                            "department d on b.deptNo=d.deptNo where b.date>='" + from.ToString("yyyy/M/d") + "' and b.date<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' group by d.deptName, i.article, i.color, i.size, b.bagNo;";
+                            "department d on b.deptNo=d.deptNo where b.date>='" + from.ToString("yyyy/M/d") + "' and b.date<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' group by d.deptName, b.date, i.article;";
                     }
                     else if ((tmpPlaceObj == null) && (!color.Equals("")) && (!size.Equals("")) && (article.Equals("")))
                     {
@@ -684,7 +684,7 @@ namespace Isabella
                     else if ((tmpPlaceObj == null) && (color.Equals("")) && (size.Equals("")) && (!article.Equals("")))
                     {
                         qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' and b.bagNo=" + bn + " group by d.place, i.article, i.color, i.size, b.bagNo;";
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' and b.bagNo=" + bn + " group by d.place, b.date, i.article;";
                     }
                     else if ((tmpPlaceObj == null) && (!color.Equals("")) && (!size.Equals("")) && (article.Equals("")))
                     {
@@ -929,7 +929,7 @@ namespace Isabella
                     else if ((tmpPlaceObj == null) && (color.Equals("")) && (size.Equals("")) && (!article.Equals("")))
                     {
                         qry = "select b.issuedDate as Issued, d.place as Department, i.article as Article, i.color as Color, i.size as Size, IFNULL(COUNT(i.item_id), 0) as Qty, b.bagNo as BagNo from item i inner join bag b on i.bag_id=b.bag_id inner join " +
-                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' group by d.place, i.article, i.color, i.size, b.bagNo;";
+                            "issuedto d on b.place_id=d.place_id where b.Issued = 1 and b.issuedDate>='" + from.ToString("yyyy/M/d") + "' and b.issuedDate<='" + to.ToString("yyyy/M/d") + "' and i.article='" + article + "' group by d.place, b.date, i.article;";
                     }
                     else if ((tmpPlaceObj == null) && (!color.Equals("")) && (!size.Equals("")) && (article.Equals("")))
                     {
