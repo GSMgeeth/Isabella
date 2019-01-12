@@ -10,7 +10,7 @@ namespace Isabella
 {
     class DBConnection
     {
-        private static string connString = string.Format("Server=localhost; database=Isabella; UID=root; password=; SSLMode=none");
+        private static string connString = string.Format("Server=localhost; database=isabella; UID=root; password=; SSLMode=none");
         private static MySqlConnection conn = new MySqlConnection(connString);
         private static MySqlConnection tmpConn = null;
 
