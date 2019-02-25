@@ -92,8 +92,8 @@ namespace Isabella
             if (color.Equals("") && size.Equals("") && article.Equals(""))
             {
                 isArticle = true;
-                isColor = true;
-                isSize = true;
+                isColor = false;
+                isSize = false;
             }
             else if (!color.Equals("") && size.Equals("") && article.Equals(""))
             {
